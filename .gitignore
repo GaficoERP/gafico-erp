@@ -1,2 +1,7 @@
 .project
 .settings/
+budget/target/
+common/target/
+erp-viewer/target/
+war/target/
+target/
