@@ -2,14 +2,19 @@ package sn.smart.eco.common.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Entity
 @Table(name = "common_leveltype")
 public class LevelType {
   @Id
   private String name;
+  @Column
   private int depth;
+  @Column
   private PlanType plan;
 
   public LevelType() {}

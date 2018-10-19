@@ -1,7 +1,6 @@
 package sn.smart.eco.common.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -20,9 +19,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "sn.smart.eco.common")
+@EnableJpaRepositories("sn.smart.eco.common")
 @EnableTransactionManagement
-@ComponentScan({"sn.smart.eco.common"})
+// @ComponentScan("sn.smart.eco.common")
 public class CommonConfigTest {
 
   @Bean
@@ -44,10 +43,11 @@ public class CommonConfigTest {
 
     Properties props = new Properties();
     props.setProperty("hibernate.format_sql", "true");
+    props.setProperty("hibernate.hbm2ddl.auto", "create");
 
     LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
     emfb.setDataSource(dataSource());
-    emfb.setPackagesToScan("rewards.internal");
+    emfb.setPackagesToScan("sn.smart.eco.common.model");
     emfb.setJpaProperties(props);
     emfb.setJpaVendorAdapter(adapter);
 
