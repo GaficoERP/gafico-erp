@@ -2,31 +2,18 @@ package sn.smart.eco.common.model;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-import sn.smart.eco.common.utils.GaficoCommonUtils;
-
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "common_leveltype")
-@IdClass(value = LevelTypeId.class)
-public class LevelType implements Serializable {
+public class LevelTypeId implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  @Id
   private String name;
-  @Id
   private Integer depth;
-  @Id
   private PlanType plan;
 
-  public LevelType() {}
+  public LevelTypeId() {}
 
-  public LevelType(String name, Integer depth, PlanType plan) {
+  public LevelTypeId(String name, Integer depth, PlanType plan) {
     super();
     this.name = name;
     this.depth = depth;
@@ -58,11 +45,6 @@ public class LevelType implements Serializable {
   }
 
   @Override
-  public String toString() {
-    return GaficoCommonUtils.toJsonString(this);
-  }
-
-  @Override
   public boolean equals(Object obj) {
     if (obj == null) {
       return false;
@@ -72,7 +54,7 @@ public class LevelType implements Serializable {
       return false;
     }
 
-    LevelType ltype = (LevelType) obj;
+    LevelTypeId ltype = (LevelTypeId) obj;
     if (this == ltype) {
       return true;
     }
