@@ -7,4 +7,44 @@
   </parent>
   <artifactId>war</artifactId>
   <packaging>war</packaging>
+  <name>gafico</name>
+  
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>javax</groupId>
+         <artifactId>javaee-web-api</artifactId>
+         <version>7.0</version>
+         <scope>provided</scope>
+      </dependency>
+   </dependencies>
+   <build>
+      <resources>
+         <resource>
+            <directory>src/main/resources</directory>
+         </resource>
+      </resources>
+      <finalName>${project.name}-${project.version}</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+            <configuration>
+               <failOnMissingWebXml>false</failOnMissingWebXml>
+               <webResources>
+                  <resource>
+                     <!-- this is relative to the pom.xml directory -->
+                     <directory>../erp-viewer/dist/</directory>
+                  </resource>
+               </webResources>
+            </configuration>
+         </plugin>
+      </plugins>
+   </build>
 </project>
