@@ -10,8 +10,8 @@
 	<modules>
 		<module>budget</module>
 		<module>common</module>
-		<module>war</module>
 		<module>erp-viewer</module>
+		<module>war</module>
 	</modules>
 
 	<properties>
@@ -51,6 +51,21 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>3.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
 			</dependency>
 
 
