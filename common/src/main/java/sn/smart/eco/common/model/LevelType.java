@@ -1,7 +1,5 @@
 package sn.smart.eco.common.model;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import java.io.Serializable;
@@ -12,7 +10,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "common_leveltype")
+@Table(name = "common_level_type")
 @IdClass(value = LevelTypeId.class)
 public class LevelType implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -68,7 +66,7 @@ public class LevelType implements Serializable {
       return false;
     }
 
-    if (!instanceOf(obj.getClass()).equals(getClass())) {
+    if (!obj.getClass().equals(getClass())) {
       return false;
     }
 

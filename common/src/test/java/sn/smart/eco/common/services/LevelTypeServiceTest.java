@@ -50,12 +50,21 @@ public class LevelTypeServiceTest extends AbstractCommonTest {
   }
 
   @Test
-  public void findByPlanType() throws Exception {
+  public void findByPlanTypeTest() throws Exception {
+    // has result
     mockMvc
         .perform(get("/rest/common/findByPlan/{plan}", PlanType.ACCOUNTING)
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$[0].name").value("LevelType0"));
+
+    // Empty result
+    mockMvc
+        .perform(get("/rest/common/findByPlan/{plan}", PlanType.BUDGET)
+            .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())//
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
+        .andExpect(content().string("[]"));
   }
 }
