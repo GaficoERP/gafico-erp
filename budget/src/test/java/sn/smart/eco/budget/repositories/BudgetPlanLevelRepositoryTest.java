@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @ContextConfiguration(classes = {BudgetConfigTest.class})
 @FixMethodOrder(MethodSorters.DEFAULT)
@@ -29,7 +30,6 @@ public class BudgetPlanLevelRepositoryTest extends AbstractBudgetTest {
     pLevel.setLevel(new LevelType("Chapitre", 0, PlanType.ANALYTICAL));
     pLevel.setCode("11");
     pLevel.setLabel("Reserve");
-    pLevel.setPrevious(null); // no previous
 
     BudgetPlanLevel savedPLevel = repository.insert(pLevel);
     Assert.assertNotNull(savedPLevel);
@@ -44,17 +44,13 @@ public class BudgetPlanLevelRepositoryTest extends AbstractBudgetTest {
     root.setLevel(new LevelType("Chapitre", 0, PlanType.BUDGET));
     root.setCode("12");
     root.setLabel("REPORT À NOUVEAU");
-    root.setPrevious(null); // no previous
     BudgetPlanLevel savedRoot = repository.insert(root);
     Assert.assertNotNull(savedRoot);
     Assert.assertEquals(root.getCode(), savedRoot.getCode());
     Assert.assertEquals(root.getLevel(), savedRoot.getLevel());
 
-    BudgetPlanLevel pLevel = new BudgetPlanLevel();
-    pLevel.setLevel(new LevelType("Article", 1, PlanType.BUDGET));
-    pLevel.setCode("121");
-    pLevel.setLabel("REPORT À NOUVEAU CRÉDITEUR");
-    pLevel.setPrevious(savedRoot);
+    BudgetPlanLevel pLevel = new BudgetPlanLevel(UUID.randomUUID().toString(), "121",
+        "REPORT À NOUVEAU CRÉDITEUR", new LevelType("Article", 1, PlanType.BUDGET), savedRoot);
 
     BudgetPlanLevel savedPLevel = repository.insert(pLevel);
     Assert.assertNotNull(savedPLevel);

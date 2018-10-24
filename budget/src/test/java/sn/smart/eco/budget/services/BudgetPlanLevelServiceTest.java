@@ -49,7 +49,6 @@ public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
     pLevel.setLevel(new LevelType("Chapitre", 0, PlanType.ANALYTICAL));
     pLevel.setCode("11");
     pLevel.setLabel("Reserve");
-    pLevel.setPrevious(null); // no previous
 
     mockMvc
         .perform(post("/rest/budget/add").contentType(MediaType.APPLICATION_JSON)
