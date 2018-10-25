@@ -2,24 +2,29 @@ package sn.smart.eco.common.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "common_leveltype")
-public class LevelType {
+@Table(name = "common_level_type")
+@IdClass(value = LevelTypeId.class)
+public class LevelType implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @Id
   private String name;
-  @Column
-  private int depth;
-  @Column
+  @Id
+  private Integer depth;
+  @Id
   private PlanType plan;
 
   public LevelType() {}
 
-  public LevelType(String name, int depth, PlanType plan) {
+  public LevelType(String name, Integer depth, PlanType plan) {
     super();
     this.name = name;
     this.depth = depth;
@@ -34,11 +39,11 @@ public class LevelType {
     this.name = name;
   }
 
-  public int getDepth() {
+  public Integer getDepth() {
     return depth;
   }
 
-  public void setDepth(int depth) {
+  public void setDepth(Integer depth) {
     this.depth = depth;
   }
 
@@ -53,5 +58,36 @@ public class LevelType {
   @Override
   public String toString() {
     return GaficoCommonUtils.toJsonString(this);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+
+    if (!obj.getClass().equals(getClass())) {
+      return false;
+    }
+
+    LevelType ltype = (LevelType) obj;
+    if (this == ltype) {
+      return true;
+    }
+
+    if (hashCode() == ltype.hashCode()) {
+      return true;
+    }
+
+    if (name.equals(ltype.name) && depth.equals(ltype.depth) && plan.equals(ltype.plan)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode() + depth + plan.hashCode();
   }
 }

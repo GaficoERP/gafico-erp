@@ -21,15 +21,16 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories("sn.smart.eco.common")
 @EnableTransactionManagement
-// @ComponentScan("sn.smart.eco.common")
 public class CommonConfigTest {
 
   @Bean
   public DataSource dataSource() {
     // no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
     EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-    EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL)
-        /* .addScript("sql/create-db-test.sql").addScript("sql/insert-data-test.sql") */.build();
+    EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL)//
+        // .addScript("sql/create-db-test.sql")//
+        // .addScript("sql/insert-data-test.sql")//
+        .build();
     return db;
   }
 
