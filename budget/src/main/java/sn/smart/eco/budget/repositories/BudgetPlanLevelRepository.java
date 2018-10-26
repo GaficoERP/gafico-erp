@@ -10,8 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BudgetPlanLevelRepository extends MongoRepository<BudgetPlanLevel, String> {
-  Optional<BudgetPlanLevel> findByCode(String code);
+public interface BudgetPlanLevelRepository
+    extends MongoRepository<BudgetPlanLevel, String>, BudgetPlanLevelRepositoryCustom {
+  Optional<BudgetPlanLevel> findByCode(Long code);
 
   Optional<List<BudgetPlanLevel>> findByPrevious(BudgetPlanLevel previous);
 

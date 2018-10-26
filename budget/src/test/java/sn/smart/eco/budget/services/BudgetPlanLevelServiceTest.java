@@ -11,9 +11,10 @@ import sn.smart.eco.budget.AbstractBudgetTest;
 import sn.smart.eco.budget.config.BudgetConfigRestTest;
 import sn.smart.eco.budget.model.BudgetPlanLevel;
 import sn.smart.eco.budget.utils.BudgetUtils;
-import sn.smart.eco.common.model.LevelType;
+import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -47,7 +48,7 @@ public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
   public void addBudgetPlanLevelTest() throws Exception {
     BudgetPlanLevel pLevel = new BudgetPlanLevel();
     pLevel.setLevel(new LevelType("Chapitre", 0, PlanType.ANALYTICAL));
-    pLevel.setCode("11");
+    pLevel.setCode(11L);
     pLevel.setLabel("Reserve");
 
     mockMvc
@@ -68,8 +69,6 @@ public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$[0].label").value("REPORT À NOUVEAU"));
-
-    template.getDb().drop();
   }
 
   @Test
@@ -78,13 +77,11 @@ public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
         "src/test/resources/budget_embedded_data.json");
 
     String root =
-        mockMvc.perform(get("/rest/budget/find/{code}", "12").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/rest/budget/find/{code}", 12L).accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())//
             .andDo(print())//
             .andExpect(jsonPath("label").value("REPORT À NOUVEAU"))//
             .andReturn().getResponse().getContentAsString();
-
-    System.out.println(root);
 
     mockMvc
         .perform(get("/rest/budget/findByPrevious").content(root)
@@ -92,5 +89,10 @@ public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
         .andExpect(status().isOk())//
         .andDo(print());//
     // .andExpect(jsonPath("$[0].label").value("REPORT À NOUVEAU CRÉDITEUR"));
+  }
+
+  @After
+  public void cleanUp() {
+    template.getDb().drop();
   }
 }

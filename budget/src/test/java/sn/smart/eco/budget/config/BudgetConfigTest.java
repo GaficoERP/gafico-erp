@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,6 +21,7 @@ import java.io.IOException;
 @ComponentScan(basePackages = {"sn.smart.eco.budget"},
     excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
         value = BudgetConfigRestTest.class))
+@PropertySource("classpath:config.properties")
 public class BudgetConfigTest {
   private static final String MONGO_DB_URL = "localhost";
   private static final String MONGO_DB_NAME = "embeded_db";

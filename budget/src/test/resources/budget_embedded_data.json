@@ -1,2 +1,2 @@
-{"_id" : { "$oid" : "5bce441febe480421fa22fg1" }, "code":"12","label":"REPORT À NOUVEAU","level":{"name":"Chapitre","depth":0,"plan":"BUDGET"},"previous":null}
-{"_id" : { "$oid" : "5bce441febe480421fa22fg2" }, "code":"121","label":"REPORT À NOUVEAU CRÉDITEUR","level":{"name":"Article","depth":1,"plan":"BUDGET"},"previous":{"_id" : { "$oid" : "5bce441febe480421fa22fg1" }, "code":"12","label":"REPORT À NOUVEAU","level":{"name":"Chapitre","depth":0,"plan":"BUDGET"},"previous":null}}
+{"_id" : { "$oid" : "5bce441febe480421fa22ed6" }, "code":12,"label":"REPORT À NOUVEAU","level":{"name":"Chapitre","depth":0,"plan":"BUDGET"},"previous":null}
+{"_id" : { "$oid" : "5bce441febe480421fa22ed7" }, "code":121,"label":"REPORT À NOUVEAU CRÉDITEUR","level":{"name":"Article","depth":1,"plan":"BUDGET"},"previous":{"_id" : { "$oid" : "5bce441febe480421fa22ed6" }, "code":12,"label":"REPORT À NOUVEAU","level":{"name":"Chapitre","depth":0,"plan":"BUDGET"},"previous":null}}

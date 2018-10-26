@@ -6,12 +6,15 @@
 		<artifactId>gafico-erp</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>gafico-user</artifactId>
+	<artifactId>common-jpa</artifactId>
+
 	<dependencies>
-		<dependency>
-			<groupId>sn.smart.eco</groupId>
-			<artifactId>common-jpa</artifactId>
-		</dependency>
+	<!-- GaFiCo Projects -->
+			<dependency>
+				<groupId>sn.smart.eco</groupId>
+				<artifactId>common</artifactId>
+			</dependency>
+			
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -33,12 +36,30 @@
 			<artifactId>spring-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
 		</dependency>
 	</dependencies>
 </project>

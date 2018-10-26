@@ -25,7 +25,7 @@ public class BudgetPlanLevelService {
   private BudgetPlanLevelRepository repository;
 
   @GetMapping("/find/{code}")
-  public BudgetPlanLevel findBudgetPlanLevel(@PathVariable @NonNull String code) {
+  public BudgetPlanLevel findBudgetPlanLevel(@PathVariable @NonNull Long code) {
     Optional<BudgetPlanLevel> pl = repository.findByCode(code);
     if (pl.isPresent()) {
       return pl.get();
