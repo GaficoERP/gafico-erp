@@ -1,4 +1,4 @@
-package sn.smart.eco.budget.services;
+package sn.smart.eco.budget.rest;
 
 import sn.smart.eco.budget.model.BudgetPlanLevel;
 import sn.smart.eco.budget.repositories.BudgetPlanLevelRepository;

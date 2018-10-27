@@ -1,4 +1,4 @@
-package sn.smart.eco.budget.services;
+package sn.smart.eco.budget.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

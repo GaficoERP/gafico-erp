@@ -1,4 +1,4 @@
-package sn.smart.eco.common.jpa.services;
+package sn.smart.eco.common.jpa.rest;
 
 import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.jpa.repositories.LevelTypeRepository;
@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest/common")
-public class LevelTypeService {
+@RequestMapping("/rest/common/level")
+public class LevelTypeRestService {
 
   @Autowired
   private LevelTypeRepository repository;

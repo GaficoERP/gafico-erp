@@ -1,9 +1,8 @@
-package sn.smart.eco.common.repositories;
+package sn.smart.eco.common.jpa.repositories;
 
-import sn.smart.eco.common.AbstractCommonTest;
-import sn.smart.eco.common.config.CommonConfigTest;
+import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
+import sn.smart.eco.common.jpa.config.CommonConfigTest;
 import sn.smart.eco.common.jpa.model.LevelType;
-import sn.smart.eco.common.jpa.repositories.LevelTypeRepository;
 import sn.smart.eco.common.model.PlanType;
 
 import org.junit.Assert;
@@ -16,14 +15,14 @@ import java.util.List;
 import java.util.Optional;
 
 @ContextConfiguration(classes = {CommonConfigTest.class})
-public class LevelTypeRepositoryTest extends AbstractCommonTest {
+public class LevelTypeRepositoryTest extends AbstractJpaCommonTest {
 
   @Autowired
   private LevelTypeRepository repository;
 
   @Test
   public void saveLevelTypeTest() {
-    LevelType ltype = new LevelType("LevelType0", 0, PlanType.ACCOUNTING);
+    LevelType ltype = new LevelType("LevelType0", 0, PlanType.ACCOUNTANCY);
     LevelType savedType = repository.save(ltype);
     Assert.assertNotNull(savedType);
     Assert.assertEquals(ltype.toString(), savedType.toString());
@@ -34,7 +33,7 @@ public class LevelTypeRepositoryTest extends AbstractCommonTest {
   public void findLevelTypeByPlan() {
     populateDb();
 
-    Optional<List<LevelType>> lTypes = repository.findByPlan(PlanType.ACCOUNTING);
+    Optional<List<LevelType>> lTypes = repository.findByPlan(PlanType.ACCOUNTANCY);
     Assert.assertTrue(lTypes.isPresent());
     Assert.assertFalse(lTypes.get().isEmpty());
     Assert.assertTrue(lTypes.get().size() >= 2);
@@ -49,10 +48,10 @@ public class LevelTypeRepositoryTest extends AbstractCommonTest {
 
   private void populateDb() {
     List<LevelType> ltypes = Arrays.asList(//
-        new LevelType("LevelType3", 0, PlanType.ACCOUNTING), //
+        new LevelType("LevelType3", 0, PlanType.ACCOUNTANCY), //
         new LevelType("LevelType1", 0, PlanType.BUDGET), //
         new LevelType("LevelType2", 0, PlanType.ANALYTICAL), //
-        new LevelType("LevelType31", 31, PlanType.ACCOUNTING));
+        new LevelType("LevelType31", 31, PlanType.ACCOUNTANCY));
 
     repository.saveAll(ltypes);
   }
