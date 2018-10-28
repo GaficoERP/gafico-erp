@@ -19,13 +19,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/budget")
-public class BudgetPlanLevelService {
+public class BudgetPlanLevelRestService {
 
   @Autowired
   private BudgetPlanLevelRepository repository;
 
   @GetMapping("/find/{code}")
-  public BudgetPlanLevel findBudgetPlanLevel(@PathVariable @NonNull Long code) {
+  public BudgetPlanLevel findBudgetByPlanLevel(@PathVariable @NonNull Long code) {
     Optional<BudgetPlanLevel> pl = repository.findByCode(code);
     if (pl.isPresent()) {
       return pl.get();

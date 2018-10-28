@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "config_param")
+@Table(name = "common_config_param")
 @SuppressWarnings("rawtypes")
 public class ConfigParameter {
 

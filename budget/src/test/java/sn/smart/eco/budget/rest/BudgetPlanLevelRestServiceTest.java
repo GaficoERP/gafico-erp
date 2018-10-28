@@ -29,7 +29,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 @ContextConfiguration(classes = {BudgetConfigRestTest.class})
 @WebAppConfiguration
-public class BudgetPlanLevelServiceTest extends AbstractBudgetTest {
+public class BudgetPlanLevelRestServiceTest extends AbstractBudgetTest {
   private MockMvc mockMvc;
 
   @Autowired
