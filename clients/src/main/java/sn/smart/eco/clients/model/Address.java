@@ -2,7 +2,10 @@ package sn.smart.eco.clients.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -23,10 +26,25 @@ public class Address {
   private String city;
   private String country;
   private String zipCode;
-  private boolean isActual;
+  private boolean actual;
   private Date creationDate;
   @OneToMany(mappedBy = "addresses")
   private Set<ClientInfo> clients;
+
+  public Address() {}
+
+  public Address(String address, String city, String country, String zipCode, boolean isActual,
+      Date creationDate, Set<ClientInfo> clients) {
+    this.address = address;
+    this.city = city;
+    this.country = country;
+    this.zipCode = zipCode;
+    this.actual = isActual;
+    this.creationDate = creationDate;
+    this.clients = clients;
+  }
+
+
 
   public Long getId() {
     return id;
@@ -69,11 +87,11 @@ public class Address {
   }
 
   public boolean isActual() {
-    return isActual;
+    return actual;
   }
 
   public void setActual(boolean isActual) {
-    this.isActual = isActual;
+    this.actual = isActual;
   }
 
   public Date getCreationDate() {
@@ -90,6 +108,14 @@ public class Address {
 
   public void setClients(Set<ClientInfo> clients) {
     this.clients = clients;
+  }
+
+  public void addClientInfo(ClientInfo client) {
+    if (CollectionUtils.isEmpty(clients)) {
+      clients = new HashSet<>();
+    }
+
+    clients.add(client);
   }
 
   @Override

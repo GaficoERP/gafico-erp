@@ -1,0 +1,16 @@
+package sn.smart.eco.clients.repositories;
+
+import sn.smart.eco.clients.model.Address;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface AddressRepository extends JpaRepository<Address, Long> {
+  Optional<List<Address>> findByClientsNameAndActual(String clientName, boolean isActual);
+
+  Optional<List<Address>> findByClientsName(String clientName);
+}

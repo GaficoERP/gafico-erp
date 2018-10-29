@@ -2,6 +2,7 @@ package sn.smart.eco.clients.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -13,7 +14,6 @@ import sn.smart.eco.clients.model.LegalStatus;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.mockito.MockitoAnnotations;
@@ -43,22 +43,22 @@ public class ClientInfoRestServiceTest extends AbstractClientTest {
   @Test
   public void addClientInfoTest() throws Exception {
     ClientInfo client =
-        new ClientInfo("Sonatel SA", "338280000", "sonatel-sa@sonatel.sn", LegalStatus.SA);
+        new ClientInfo("Sonatel", "338280000", "sonatel-sa@sonatel.sn", LegalStatus.SA);
     mockMvc
-        .perform(post("/rest/clients/add").contentType(MediaType.APPLICATION_JSON)
+        .perform(post("/rest/client/add").contentType(MediaType.APPLICATION_JSON)
             .content(client.toString()))
         .andExpect(status().isOk())//
-        .andExpect(jsonPath("email").value("sonatel-sa@sonatel.sn"));
+        .andExpect(jsonPath("email").value(client.getEmail()));
   }
 
   @Test
-  @Ignore
   public void findClientInfoTest() throws Exception {
     // has result
-    String clName = "Sonatel SA";
+    String clName = "Sonatel";
     mockMvc
-        .perform(get("/rest/clients/find/{name}", clName).contentType(MediaType.APPLICATION_JSON)//
-            .accept(MediaType.APPLICATION_JSON))//
+        .perform(get("/rest/client/find/{name}", clName).contentType(MediaType.APPLICATION_JSON)//
+            .accept(MediaType.APPLICATION_JSON_UTF8))//
+        .andDo(print())//
         .andExpect(status().isOk())//
         // .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("name").value(clName));
@@ -66,7 +66,7 @@ public class ClientInfoRestServiceTest extends AbstractClientTest {
     // Empty result
     mockMvc
         .perform(
-            get("/rest/clients/find/{name}", "ClientName").contentType(MediaType.APPLICATION_JSON)//
+            get("/rest/client/find/{name}", "ClientName").contentType(MediaType.APPLICATION_JSON)//
                 .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
         // .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//

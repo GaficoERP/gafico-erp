@@ -2,6 +2,9 @@ package sn.smart.eco.clients.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -100,6 +103,22 @@ public class ClientInfo {
 
   public void setLicenses(Set<GaficoLicense> licenses) {
     this.licenses = licenses;
+  }
+
+  public void addAddress(Address address) {
+    if (CollectionUtils.isEmpty(addresses)) {
+      addresses = new HashSet<>();
+    }
+
+    addresses.add(address);
+  }
+
+  public void addLicense(GaficoLicense license) {
+    if (CollectionUtils.isEmpty(licenses)) {
+      licenses = new HashSet<>();
+    }
+
+    licenses.add(license);
   }
 
   @Override

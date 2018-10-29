@@ -18,10 +18,10 @@
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>common-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>sn.smart.eco</groupId>
-			<artifactId>common-mongo</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>sn.smart.eco</groupId> -->
+<!-- 			<artifactId>common-mongo</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

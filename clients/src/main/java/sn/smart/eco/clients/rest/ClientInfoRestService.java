@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rest/clients")
+@RequestMapping("/rest/client")
 public class ClientInfoRestService {
   @Autowired
   private ClientInfoRepository repository;
