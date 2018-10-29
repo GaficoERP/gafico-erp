@@ -3,7 +3,7 @@ package sn.smart.eco.common.jpa.utils;
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigTest;
 import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.model.GaficoComponent;
+import sn.smart.eco.common.model.GaficoComponent;
 
 import org.junit.Assert;
 import org.junit.Before;
