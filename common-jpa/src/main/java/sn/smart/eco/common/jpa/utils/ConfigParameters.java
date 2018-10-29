@@ -1,8 +1,8 @@
 package sn.smart.eco.common.jpa.utils;
 
 import sn.smart.eco.common.jpa.model.ConfigParameter;
+import sn.smart.eco.common.jpa.model.GaficoComponent;
 import sn.smart.eco.common.jpa.repositories.ConfigParameterRepository;
-import sn.smart.eco.common.model.GaficoComponent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;

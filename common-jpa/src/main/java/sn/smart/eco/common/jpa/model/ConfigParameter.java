@@ -1,12 +1,14 @@
 package sn.smart.eco.common.jpa.model;
 
-import sn.smart.eco.common.model.GaficoComponent;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +19,9 @@ public class ConfigParameter {
   @Id
   private String name;
   private String value;
+  @OneToOne
+  @JoinTable(name = "common_config_param_component", joinColumns = @JoinColumn(name = "name"),
+      inverseJoinColumns = @JoinColumn(name = "comp_id"))
   private GaficoComponent component;
   private Boolean isActive;
   private Class valueClass;

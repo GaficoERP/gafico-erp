@@ -2,13 +2,13 @@ package sn.smart.eco.common.jpa.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigRestTest;
-import sn.smart.eco.common.jpa.model.ConfigParameter;
 import sn.smart.eco.common.jpa.model.GaficoComponent;
 
 import org.junit.Before;
@@ -27,7 +27,7 @@ import org.springframework.web.context.WebApplicationContext;
 @ContextConfiguration(classes = {CommonConfigRestTest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ConfigParameterRestServiceTest extends AbstractJpaCommonTest {
+public class GaficoComponentRestServiceTest extends AbstractJpaCommonTest {
   private MockMvc mockMvc;
 
   @Autowired
@@ -40,34 +40,31 @@ public class ConfigParameterRestServiceTest extends AbstractJpaCommonTest {
   }
 
   @Test
-  public void addConfigParameterTest() throws Exception {
-    ConfigParameter conf = new ConfigParameter("ConfigParameter1", new Integer(0).toString(),
-        GaficoComponent.ACCOUNTANCY, true, Integer.class);
+  public void addGaficoComponentTest() throws Exception {
     mockMvc
-        .perform(post("/rest/common/config/add").contentType(MediaType.APPLICATION_JSON)
-            .content(conf.toString()))
+        .perform(post("/rest/common/component/add").contentType(MediaType.APPLICATION_JSON)
+            .content(GaficoComponent.PAY.toString()))
         .andExpect(status().isOk())//
-        .andExpect(jsonPath("name").value("ConfigParameter1"));
+        .andExpect(jsonPath("name").value("Pay"));
+
+
+    mockMvc
+        .perform(post("/rest/common/component/add").contentType(MediaType.APPLICATION_JSON)
+            .content(GaficoComponent.DEFAULT.toString()))
+        .andExpect(status().isOk())//
+        .andExpect(jsonPath("name").value("Default"));
   }
 
   @Test
-  public void findConfigParameterTest() throws Exception {
+  public void findByInDefaultPackTest() throws Exception {
     // has result
     mockMvc
-        .perform(get("/rest/common/config/find/{confName}", "ConfigParameter1")
+        .perform(get("/rest/common/component/find/{inDefaultPack}", true)
             .contentType(MediaType.APPLICATION_JSON)//
             .accept(MediaType.APPLICATION_JSON))//
+        .andDo(print())//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(jsonPath("name").value("ConfigParameter1"));
-
-    // Empty result
-    mockMvc
-        .perform(get("/rest/common/config/find/{confName}", "ConfigParameter0")
-            .contentType(MediaType.APPLICATION_JSON)//
-            .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())//
-        // .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(content().string(""));
+        .andExpect(jsonPath("$[0].name").value("Default"));
   }
 }
