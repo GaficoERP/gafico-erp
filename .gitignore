@@ -2,3 +2,8 @@
 .settings/
 target/
 .classpath
+budget/.classpath
+common/.classpath
+commonJpa/.classpath
+gafico-user/.classpath
+war/.classpath
