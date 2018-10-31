@@ -19,6 +19,7 @@ public class GaficoLicense {
   @Id
   @Column(name = "license_id")
   private String licenseId;
+  @Column(nullable = false)
   private Date startDate;
   private Date endDate;
   @ElementCollection(targetClass = GaficoComponent.class)

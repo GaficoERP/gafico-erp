@@ -21,7 +21,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("sn.smart.eco.clients.repositories")
+@EnableJpaRepositories("sn.smart.eco")
 @EnableTransactionManagement
 @ComponentScan(basePackages = {"sn.smart.eco.clients"},
     excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
@@ -53,7 +53,7 @@ public class ClientInfoConfigTest {
 
     LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
     emfb.setDataSource(dataSource());
-    emfb.setPackagesToScan("sn.smart.eco.clients.model");
+    emfb.setPackagesToScan("sn.smart.eco");
     emfb.setJpaProperties(props);
     emfb.setJpaVendorAdapter(adapter);
 
