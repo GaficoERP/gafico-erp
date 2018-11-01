@@ -5,7 +5,7 @@
 	<persistence-unit name="GAFICO_ERP">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/gafico-erp"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/gafico_erp"/>
 			<property name="hibernate.connection.username" value="gafico"/>
 			<property name="hibernate.connection.username" value="gafico"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
