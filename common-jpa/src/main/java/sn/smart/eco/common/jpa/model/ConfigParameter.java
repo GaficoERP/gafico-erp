@@ -1,6 +1,5 @@
 package sn.smart.eco.common.jpa.model;
 
-import sn.smart.eco.common.model.GaficoComponent;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import org.springframework.lang.NonNull;
