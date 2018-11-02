@@ -16,6 +16,7 @@ public class GaficoInitializer extends AbstractAnnotationConfigDispatcherServlet
 
   @Override
   protected String[] getServletMappings() {
+	  System.out.println("##########here#############");
     return new String[] {"/"};
   }
 }

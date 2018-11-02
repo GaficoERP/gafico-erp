@@ -2,8 +2,9 @@ package sn.smart.eco.common.jpa.repositories;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigTest;
-import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.model.GaficoComponent;
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.model.GaficoComponent;
+import sn.smart.eco.commonjpa.repositories.ConfigParameterRepository;
 
 import org.junit.Assert;
 import org.junit.Test;

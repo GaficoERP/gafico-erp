@@ -2,8 +2,9 @@ package sn.smart.eco.common.jpa.repositories;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigTest;
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.commonjpa.repositories.LevelTypeRepository;
 
 import org.junit.Assert;
 import org.junit.Test;

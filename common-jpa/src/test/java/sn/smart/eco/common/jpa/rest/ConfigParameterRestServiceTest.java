@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
-import sn.smart.eco.common.jpa.config.CommonConfigRest;
-import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.model.GaficoComponent;
+import sn.smart.eco.commonjpa.config.CommonConfigRest;
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.model.GaficoComponent;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;

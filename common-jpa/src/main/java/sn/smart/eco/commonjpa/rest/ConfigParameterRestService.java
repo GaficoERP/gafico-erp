@@ -1,7 +1,4 @@
-package sn.smart.eco.common.jpa.rest;
-
-import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.utils.ConfigParameters;
+package sn.smart.eco.commonjpa.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -12,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.utils.ConfigParameters;
 
 @RestController
 @RequestMapping("/rest/common/config")

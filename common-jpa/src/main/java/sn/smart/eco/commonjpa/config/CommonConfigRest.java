@@ -1,36 +1,29 @@
-package sn.smart.eco.common.jpa.config;
-
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+package sn.smart.eco.commonjpa.config;
 
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-@Configuration
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+/*@Configuration
 @EnableWebMvc
 @ComponentScan("sn.smart.eco.common.jpa")
 @EnableJpaRepositories("sn.smart.eco.common.jpa")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-// @Profile("prod")
+// @Profile("prod")*/
 public class CommonConfigRest {
-  @Bean
+  //@Bean
   public DataSource dataSource(@Value("${spring.datasource.driver}") String driver, //
       @Value("${spring.datasource.url}") String url, //
       @Value("${spring.datasource.username}") String user, //
@@ -48,7 +41,7 @@ public class CommonConfigRest {
     return source;
   }
 
-  @Bean
+  //@Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 
     HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
@@ -69,7 +62,7 @@ public class CommonConfigRest {
     return emfb;
   }
 
-  @Bean
+  //@Bean
   public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
     return new JpaTransactionManager(emf);
   }

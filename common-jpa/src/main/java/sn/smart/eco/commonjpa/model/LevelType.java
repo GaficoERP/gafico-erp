@@ -1,4 +1,4 @@
-package sn.smart.eco.common.jpa.model;
+package sn.smart.eco.commonjpa.model;
 
 import sn.smart.eco.common.model.PlanType;
 import sn.smart.eco.common.utils.GaficoCommonUtils;

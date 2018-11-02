@@ -1,11 +1,11 @@
-package sn.smart.eco.common.jpa.utils;
-
-import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.repositories.ConfigParameterRepository;
+package sn.smart.eco.commonjpa.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.repositories.ConfigParameterRepository;
 
 import java.util.HashMap;
 import java.util.List;

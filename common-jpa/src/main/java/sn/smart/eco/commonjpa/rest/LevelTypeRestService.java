@@ -1,8 +1,8 @@
-package sn.smart.eco.common.jpa.rest;
+package sn.smart.eco.commonjpa.rest;
 
-import sn.smart.eco.common.jpa.model.LevelType;
-import sn.smart.eco.common.jpa.repositories.LevelTypeRepository;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.commonjpa.repositories.LevelTypeRepository;
 
 import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;

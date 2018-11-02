@@ -1,7 +1,7 @@
-package sn.smart.eco.common.jpa.repositories;
+package sn.smart.eco.commonjpa.repositories;
 
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

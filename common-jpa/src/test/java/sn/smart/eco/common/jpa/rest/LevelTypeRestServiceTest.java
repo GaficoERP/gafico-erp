@@ -7,9 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
-import sn.smart.eco.common.jpa.config.CommonConfigRest;
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.config.CommonConfigRest;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;

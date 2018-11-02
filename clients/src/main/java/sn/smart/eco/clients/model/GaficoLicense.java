@@ -1,7 +1,7 @@
 package sn.smart.eco.clients.model;
 
-import sn.smart.eco.common.jpa.model.GaficoComponent;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
+import sn.smart.eco.commonjpa.model.GaficoComponent;
 
 import java.util.Date;
 import java.util.Set;
