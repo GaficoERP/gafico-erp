@@ -14,6 +14,7 @@ public class BudgetLine {
   private String label;
   private double amount;
   private Map<String, Double> distributions;
+private Budget budget;
 
   public Date getStartDate() {
     return startDate;
@@ -62,4 +63,35 @@ public class BudgetLine {
   public void setDistributions(Map<String, Double> distributions) {
     this.distributions = distributions;
   }
+
+public Budget getBudget() {
+	return budget;
+}
+public void setBudget(Budget budget) {
+	this.budget = budget;
+}
+  
+public enum typeLigneBudgtaire {
+	recette_fonctionnement,
+	depense_fonctionnement,
+	recette_investissement,
+	depense_investissement;	
+	}
+
+public BudgetLine(Date startDate, Date endDate, String account, String label, double amount,
+		Map<String, Double> distributions, Budget budget) {
+	super();
+	this.startDate = startDate;
+	this.endDate = endDate;
+	this.account = account;
+	this.label = label;
+	this.amount = amount;
+	this.distributions = distributions;
+	this.budget = budget;
+}
+public BudgetLine() {
+	super();
+	
+}
+
 }
