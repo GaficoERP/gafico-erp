@@ -1,20 +1,21 @@
 package sn.smart.eco.common.jpa.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Properties;
 
@@ -22,46 +23,51 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableWebMvc
+@ComponentScan("sn.smart.eco.common.jpa")
 @EnableJpaRepositories("sn.smart.eco.common.jpa")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"sn.smart.eco.common.jpa"},
-    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-        value = CommonConfigRestTest.class))
-@Profile("test")
-public class CommonConfigTest {
-
+@PropertySource("classpath:application.properties")
+// @Profile("prod")
+public class CommonConfigRest {
   @Bean
-  public DataSource dataSource() {
-    // no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
-    EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-    EmbeddedDatabase db = builder.setType(EmbeddedDatabaseType.HSQL)//
-        // .addScript("sql/create-db-test.sql")//
-        // .addScript("sql/insert-data-test.sql")//
-        .build();
-    return db;
+  public DataSource dataSource(@Value("${spring.datasource.driver}") String driver, //
+      @Value("${spring.datasource.url}") String url, //
+      @Value("${spring.datasource.username}") String user, //
+      @Value("${spring.datasource.password}") String pwd) {
+    HikariConfig config = new HikariConfig();
+    config.setJdbcUrl(url);
+    config.setUsername(user);
+    config.setPassword(pwd);
+    config.setDriverClassName(driver);
+    config.addDataSourceProperty("cachePrepStmts", "true");
+    config.addDataSourceProperty("prepStmtCacheSize", "250");
+    config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+    HikariDataSource source = new HikariDataSource(config);
+
+    return source;
   }
 
   @Bean
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 
     HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
     adapter.setShowSql(true);
     adapter.setGenerateDdl(true);
-    adapter.setDatabase(Database.HSQL);
+    adapter.setDatabase(Database.POSTGRESQL);
 
     Properties props = new Properties();
     props.setProperty("hibernate.format_sql", "true");
-    props.setProperty("hibernate.hbm2ddl.auto", "create");
+    props.setProperty("hibernate.hbm2ddl.auto", "update");
 
     LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-    emfb.setDataSource(dataSource());
+    emfb.setDataSource(dataSource);
     emfb.setPackagesToScan("sn.smart.eco.common.jpa.model");
     emfb.setJpaProperties(props);
     emfb.setJpaVendorAdapter(adapter);
 
     return emfb;
   }
-
 
   @Bean
   public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {

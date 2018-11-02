@@ -6,6 +6,8 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,8 @@ public class ConfigParameter {
   @Id
   private String name;
   private String value;
+  @OneToOne
+  @JoinColumn(name = "comp_id")
   private GaficoComponent component;
   private Boolean isActive;
   private Class valueClass;
