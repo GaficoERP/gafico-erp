@@ -1,9 +1,7 @@
 package sn.smart.eco.budget.services;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.apache.commons.collections4.ListUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import sn.smart.eco.budget.model.BudgetLine;
 import sn.smart.eco.budget.repositories.BudgetLineRepository;
-import sn.smart.eco.budget.repositories.BudgetPlanLevelRepository;
-import sn.smart.eco.common.model.PlanType;
 
 @RestController
 @RequestMapping("/rest/budgetLine")
@@ -42,14 +38,5 @@ public class BudgetLineService {
 
 	 
 
-	  @GetMapping("/findByLevelPlan/{level}")
-	  public List<BudgetLine> findByLevelPlan(@PathVariable @NonNull PlanType level) {
-	    Optional<List<BudgetLine>> planLevels = repository.BudgetLine(level);
-	    if (planLevels.isPresent()) {
-	      return planLevels.get();
-	    }
-
-	    return ListUtils.emptyIfNull(null);
-	  }
-
+	  
 }
