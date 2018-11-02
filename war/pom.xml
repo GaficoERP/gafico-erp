@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -17,6 +16,42 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 
+	<dependencies>
+		<!-- GaFiCo Projects -->
+		<dependency>
+			<groupId>sn.smart.eco</groupId>
+			<artifactId>common-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>angular</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+							<webResources>
+								<resource>
+									<!-- this is relative to the pom.xml directory -->
+									<directory>../erp-viewer/dist/</directory>
+								</resource>
+							</webResources>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 	<build>
 		<resources>
 			<resource>
@@ -30,12 +65,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<webResources>
-						<resource>
-							<!-- this is relative to the pom.xml directory -->
-							<directory>../erp-viewer/dist/</directory>
-						</resource>
-					</webResources>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
 			<plugin>

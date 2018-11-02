@@ -34,7 +34,7 @@ public class ConfigParameterRepositoryTest extends AbstractJpaCommonTest {
     populateDb();
 
     Optional<List<ConfigParameter>> configs =
-        repository.findByComponent(GaficoComponent.ACCOUNTANCY);
+        repository.findByComponentId(GaficoComponent.ACCOUNTANCY.getId());
     Assert.assertTrue(configs.isPresent());
     Assert.assertFalse(configs.get().isEmpty());
     Assert.assertTrue(configs.get().size() >= 2);

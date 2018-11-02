@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
-import sn.smart.eco.common.jpa.config.CommonConfigRestTest;
+import sn.smart.eco.common.jpa.config.CommonConfigRest;
 import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
 
@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@ContextConfiguration(classes = {CommonConfigRestTest.class})
+@ContextConfiguration(classes = {CommonConfigRest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LevelTypeRestServiceTest extends AbstractJpaCommonTest {

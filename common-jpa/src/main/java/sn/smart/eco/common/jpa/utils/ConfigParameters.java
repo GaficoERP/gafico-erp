@@ -1,7 +1,6 @@
 package sn.smart.eco.common.jpa.utils;
 
 import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.jpa.model.GaficoComponent;
 import sn.smart.eco.common.jpa.repositories.ConfigParameterRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public final class ConfigParameters {
 
   @PostConstruct
   public void loadParameters() {
-    Optional<List<ConfigParameter>> params = repository.findByComponent(GaficoComponent.DEFAULT);
+    Optional<List<ConfigParameter>> params = repository.findByComponentInDefaultPack(true);
     if (params.isPresent()) {
       saveAll(params.get());
     }
