@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import * as Chartist from 'chartist';
-import { ChartType, ChartEvent } from "ng-chartist/dist/chartist.component";
+import { LevelType } from "../../models/levelType"
 
 declare var require: any;
 
@@ -14,6 +13,7 @@ const data: any = require('../../shared/data/chartist.json');
 })
 
 export class LevelTypeComponent {
+    levelForm: LevelType=new LevelType();
 
   
 

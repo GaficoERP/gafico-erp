@@ -1,112 +1,100 @@
 <!-- Basic form layout section start -->
 <section id="horizontal-form-layouts">
 	<div class="row">
-        <div class="col-sm-12">
-            <div class="content-header">Ajouter un Niveau</div>
-        </div>
-    </div>
+		<div class="col-sm-12">
+			<div class="content-header">Ajouter un Niveau</div>
+		</div>
+	</div>
 	<div class="row">
-	    <div class="col-md-12">
-	        <div class="card">
-	            <div class="card-body">
-	                <div class="px-3">
-	                    <form class="form form-horizontal">
-	                    	<div class="form-body">
-	                    		<h4 class="form-section"><i class="ft-user"></i> Personal Info</h4>
-			                    <div class="form-group row">
-	                            	<label class="col-md-3 label-control" for="projectinput1">First Name: </label>
-		                            <div class="col-md-9">
-		                            	<input type="text" id="projectinput1" class="form-control"  name="fname">
-		                            </div>
-		                        </div>
-		                        <div class="form-group row">
-	                            	<label class="col-md-3 label-control" for="projectinput2">Last Name: </label>
-									<div class="col-md-9">
-	                            		<input type="text" id="projectinput2" class="form-control"  name="lname">
-	                            	</div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                            <label class="col-md-3 label-control" for="projectinput3">E-mail: </label>
-		                            <div class="col-md-9">
-		                            	<input type="text" id="projectinput3" class="form-control"  name="email">
-		                            </div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                            <label class="col-md-3 label-control" for="projectinput4">Contact Number: </label>
-		                            <div class="col-md-9">
-		                            	<input type="text" id="projectinput4" class="form-control"  name="phone">
-		                            </div>
-		                        </div>
-
-								<h4 class="form-section"><i class="ft-file-text"></i> Requirements</h4>
-
-		                        <div class="form-group row">
-									<label class="col-md-3 label-control" for="projectinput5">Company: </label>
-									<div class="col-md-9">
-		                            	<input type="text" id="projectinput5" class="form-control"  name="company">
-		                            </div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                        	<label class="col-md-3 label-control" for="projectinput6">Interested in: </label>
-		                        	<div class="col-md-9">
-			                            <select id="projectinput6" name="interested" class="form-control">
-			                                <option value="none" selected="" disabled="">Interested in</option>
-			                                <option value="design">design</option>
-			                                <option value="development">development</option>
-			                                <option value="illustration">illustration</option>
-			                                <option value="branding">branding</option>
-			                                <option value="video">video</option>
-			                            </select>
-		                            </div>
-		                        </div>
-
-		                        <div class="form-group row">
-		                        	<label class="col-md-3 label-control" for="projectinput7">Budget: </label>
-		                        	<div class="col-md-9">
-			                            <select id="projectinput7" name="budget" class="form-control">
-			                                <option value="0" selected="" disabled="">Budget</option>
-			                                <option value="less than 5000$">less than 5000$</option>
-			                                <option value="5000$ - 10000$">5000$ - 10000$</option>
-			                                <option value="10000$ - 20000$">10000$ - 20000$</option>
-			                                <option value="more than 20000$">more than 20000$</option>
-			                            </select>
-		                            </div>
-		                        </div>
-
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="px-3">
+						<form class="form form-horizontal">
+							<div class="form-body">
+								<h4 class="form-section"><i class="ft-user"></i> Remplir tous les champs</h4>
 								<div class="form-group row">
-									<label class="col-md-3 label-control">Select File: </label>
+									<label class="col-md-3 label-control" for="code">Code: </label>
 									<div class="col-md-9">
-										<label id="projectinput8" class="file center-block">
-											<input type="file" id="file">
-											<span class="file-custom"></span>
-										: </label>
+										<input type="text"  class="form-control" name="fname" [(ngModel)]="levelForm.code">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-md-3 label-control" for="nom">Nom: </label>
+									<div class="col-md-9">
+										<input type="text"  class="form-control" name="libelle" [(ngModel)]="levelForm.libelle">
 									</div>
 								</div>
 
 								<div class="form-group row">
-									<label class="col-md-3 label-control" for="projectinput9">About Project: </label>
+									<label class="col-md-3 label-control" for="typeNiveau">Type de niveau: </label>
 									<div class="col-md-9">
-										<textarea id="projectinput9" rows="5" class="form-control" name="comment" ></textarea>
+										<input type="text"  class="form-control" name="typeNiveau" [(ngModel)]="levelForm.typeNiveau">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label class="col-md-3 label-control" for="parent">Parent: </label>
+									<div class="col-md-9">
+										<select name="interested" class="form-control" [(ngModel)]="levelForm.parent">
+											<option *ngFor="let level of levels" [ngValue]="level">{{level.code}}-{{level.libelle}}</option>
+										</select>
 									</div>
 								</div>
 							</div>
-
-	                        <div class="form-actions">
-	                            <button type="button" class="btn btn-raised btn-warning mr-1">
-	                            	<i class="ft-x"></i> Cancel
-	                            </button>
-	                            <button type="button" class="btn btn-raised btn-primary">
-	                                <i class="fa fa-check-square-o"></i> Save
-	                            </button>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+							<div class="form-actions">
+								<button type="button" class="btn btn-raised btn-danger mr-1">
+									<i class="ft-x"></i> Annuler
+								</button>
+								<button type="button" class="btn btn-raised btn-info">
+									<i class="fa fa-check-square-o"></i> Enregistrer
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	<div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Les différents types de niveau</h4>                   
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Nom</th>
+									<th>Type de Niveau</th>
+									<th>Parent</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+									<td>the Bird</td>
+									<td>the Bird</td>
+                                    <td>
+                                        <a class="success p-0" data-original-title="" title="MPodifier">
+                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="danger p-0" data-original-title="" title="Supprimer">
+                                            <i class="ft-x font-medium-3 mr-2"></i>
+                                        </a>
+									</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 <!-- // Basic form layout section end -->

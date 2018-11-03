@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from "./shared/shared.module";
@@ -26,6 +26,7 @@ import * as $ from 'jquery';
     imports: [
         BrowserAnimationsModule,
         AppRoutingModule,
+        FormsModule,
         SharedModule,
         ToastModule.forRoot(),
         NgbModule.forRoot(),
