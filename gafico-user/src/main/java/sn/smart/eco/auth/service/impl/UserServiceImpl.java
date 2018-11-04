@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sn.smart.eco.auth.model.User;
-import sn.smart.eco.auth.repository.UserRepository;
+import sn.smart.eco.auth.repositories.UserRepository;
 import sn.smart.eco.auth.service.UserService;
 
 @Service

@@ -1,4 +1,4 @@
-package sn.smart.eco.auth.repository;
+package sn.smart.eco.auth.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

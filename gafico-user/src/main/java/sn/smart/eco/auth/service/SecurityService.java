@@ -1,8 +1,10 @@
 package sn.smart.eco.auth.service;
 
-public interface SecurityService {
-	String findLoggedInUsername();
+import sn.smart.eco.auth.model.User;
 
-	void autologin(String username, String password);
+public interface SecurityService {
+	User currentUser();
+
+	String login(String username, String password);
 
 }

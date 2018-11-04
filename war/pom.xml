@@ -27,35 +27,22 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
-		<!-- dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.197</version>
-		</dependency-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<!-- dependency> <groupId>com.h2database</groupId> <artifactId>h2</artifactId> 
+			<version>1.4.197</version> </dependency -->
+		<dependency>
+			<groupId>sn.smart.eco</groupId>
+			<artifactId>gafico-user</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
-
-	<profiles>
-		<profile>
-			<id>angular</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<configuration>
-							<failOnMissingWebXml>false</failOnMissingWebXml>
-							<webResources>
-								<resource>
-									<!-- this is relative to the pom.xml directory -->
-									<directory>../erp-viewer/dist/</directory>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 	<build>
 		<resources>
@@ -70,7 +57,12 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>../erp-viewer/dist/</directory>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -78,6 +70,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 			</plugin>
+			
 		</plugins>
 	</build>
 </project>

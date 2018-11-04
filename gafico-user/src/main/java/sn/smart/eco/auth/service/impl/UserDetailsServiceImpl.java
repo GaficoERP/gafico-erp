@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import sn.smart.eco.auth.model.Role;
 import sn.smart.eco.auth.model.User;
-import sn.smart.eco.auth.repository.UserRepository;
+import sn.smart.eco.auth.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -24,6 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
+		if(user==null) {
+			throw new UsernameNotFoundException("user not found.");
+			
+		}
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         for (Role role : user.getRoles()){
