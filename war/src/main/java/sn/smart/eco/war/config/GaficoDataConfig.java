@@ -30,7 +30,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @PropertySource("classpath:application.properties")
 @ComponentScan("sn.smart.eco")
 //@Profile("prod")
-public class GaficoConfig {
+public class GaficoDataConfig {
 	@Bean
 	  public DataSource dataSource(@Value("${spring.datasource.driver}") String driver, //
 	      @Value("${spring.datasource.url}") String url, //
@@ -56,7 +56,7 @@ public class GaficoConfig {
 	    HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 	    adapter.setShowSql(true);
 	    adapter.setGenerateDdl(true);
-	    adapter.setDatabase(Database.H2);
+	    adapter.setDatabase(Database.POSTGRESQL);
 
 	    Properties props = new Properties();
 	    props.setProperty("hibernate.format_sql", "true");

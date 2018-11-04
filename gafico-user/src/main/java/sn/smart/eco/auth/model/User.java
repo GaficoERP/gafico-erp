@@ -19,7 +19,7 @@ public class User {
   private Long id;
   private String username;
   private String password;
-  private String passwordConfirm;
+  private Boolean enabled;
   private Set<Role> roles;
 
   @Id
@@ -48,14 +48,7 @@ public class User {
     this.password = password;
   }
 
-  @Transient
-  public String getPasswordConfirm() {
-    return passwordConfirm;
-  }
-
-  public void setPasswordConfirm(String passwordConfirm) {
-    this.passwordConfirm = passwordConfirm;
-  }
+ 
 
   @ManyToMany
   @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
@@ -67,5 +60,13 @@ public class User {
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
   }
+
+public Boolean getEnabled() {
+	return enabled;
+}
+
+public void setEnabled(Boolean enabled) {
+	this.enabled = enabled;
+}
 
 }

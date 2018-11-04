@@ -6,7 +6,7 @@ public class GaficoInitializer extends AbstractAnnotationConfigDispatcherServlet
 
   @Override
   protected Class<?>[] getRootConfigClasses() {
-    return new Class[] {GaficoConfig.class};
+    return new Class[] {GaficoDataConfig.class};
   }
 
   @Override
