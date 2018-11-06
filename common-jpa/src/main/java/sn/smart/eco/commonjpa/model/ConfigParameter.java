@@ -27,8 +27,7 @@ public class ConfigParameter {
   public ConfigParameter() {}
 
   public ConfigParameter(@NonNull String name, @NonNull String value,
-      @NonNull GaficoComponent component, Boolean isActive, Class valueClass) {
-    super();
+      @NonNull GaficoComponent component, @NonNull Boolean isActive, @NonNull Class valueClass) {
     this.name = name;
     this.value = value;
     this.component = component;

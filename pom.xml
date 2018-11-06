@@ -49,6 +49,11 @@
 				<artifactId>clients</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>sn.smart.eco</groupId>
+				<artifactId>gafico-user</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- Spring dependencies -->
 			<dependency>
