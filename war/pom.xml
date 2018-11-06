@@ -20,11 +20,11 @@
 		<!-- GaFiCo Projects -->
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
-			<artifactId>common-jpa</artifactId>
+			<artifactId>gafico-user</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
-			<artifactId>gafico-user</artifactId>
+			<artifactId>clients</artifactId>
 		</dependency>
 
 		<dependency>
@@ -95,7 +95,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 </project>

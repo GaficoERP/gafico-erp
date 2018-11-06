@@ -1,12 +1,12 @@
-package sn.smart.eco.clients.rest;
+package sn.smart.eco.war.client;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import sn.smart.eco.clients.AbstractClientTest;
-import sn.smart.eco.clients.config.ClientInfoConfigRestTest;
 import sn.smart.eco.clients.model.Address;
+import sn.smart.eco.war.AbstractRestTest;
+import sn.smart.eco.war.GaficoRestConfigTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,9 +21,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 
-@ContextConfiguration(classes = {ClientInfoConfigRestTest.class})
+@ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
-public class AddressRestServiceTest extends AbstractClientTest {
+public class AddressRestServiceTest extends AbstractRestTest {
   private MockMvc mockMvc;
 
   @Autowired

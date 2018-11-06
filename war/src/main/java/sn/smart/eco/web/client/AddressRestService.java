@@ -1,7 +1,7 @@
-package sn.smart.eco.clients.rest;
+package sn.smart.eco.web.client;
 
 import sn.smart.eco.clients.model.Address;
-import sn.smart.eco.clients.repositories.AddressRepository;
+import sn.smart.eco.clients.service.AddressService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -12,39 +12,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/rest/client/address")
 public class AddressRestService {
   @Autowired
-  private AddressRepository repository;
+  private AddressService service;
 
   @PostMapping("/add")
   public Address add(@RequestBody @NonNull Address address) {
-    return repository.save(address);
+    return service.addAddress(address);
   }
 
   @GetMapping("/find/{clientName}/{actual}")
   public List<Address> findByClientsNameAndActual(@PathVariable @NonNull String clientName,
       @PathVariable @NonNull boolean actual) {
-    Optional<List<Address>> addresses = repository.findByClientsNameAndActual(clientName, actual);
-    if (addresses.isPresent()) {
-      return addresses.get();
-    }
-
-    return new ArrayList<>();
+    return service.findAddressesByClientsNameAndActual(clientName, actual);
   }
 
   @GetMapping("/find/{clientName}")
   public List<Address> findByClientsName(@PathVariable @NonNull String clientName) {
-    Optional<List<Address>> addresses = repository.findByClientsName(clientName);
-    if (addresses.isPresent()) {
-      return addresses.get();
-    }
-
-    return new ArrayList<>();
+    return service.findAddressesByClientsName(clientName);
   }
 }

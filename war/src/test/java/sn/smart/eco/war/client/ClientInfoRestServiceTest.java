@@ -1,4 +1,4 @@
-package sn.smart.eco.clients.rest;
+package sn.smart.eco.war.client;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -7,10 +7,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import sn.smart.eco.clients.AbstractClientTest;
-import sn.smart.eco.clients.config.ClientInfoConfigRestTest;
 import sn.smart.eco.clients.model.ClientInfo;
 import sn.smart.eco.clients.model.LegalStatus;
+import sn.smart.eco.war.AbstractRestTest;
+import sn.smart.eco.war.GaficoRestConfigTest;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -25,10 +25,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@ContextConfiguration(classes = {ClientInfoConfigRestTest.class})
+@ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ClientInfoRestServiceTest extends AbstractClientTest {
+public class ClientInfoRestServiceTest extends AbstractRestTest {
   private MockMvc mockMvc;
 
   @Autowired

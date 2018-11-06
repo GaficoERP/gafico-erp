@@ -23,7 +23,6 @@ public class AddressRepositoryTest extends AbstractClientTest {
 
     Address savedAdd = repository.save(add);
     Assert.assertNotNull(savedAdd);
-    Assert.assertNotNull(savedAdd.getClients());
-    Assert.assertFalse(savedAdd.getClients().isEmpty());
+    Assert.assertNotNull(savedAdd.getId());
   }
 }

@@ -1,4 +1,4 @@
-package sn.smart.eco.clients.rest;
+package sn.smart.eco.web.client;
 
 import sn.smart.eco.clients.model.ClientInfo;
 import sn.smart.eco.clients.repositories.ClientInfoRepository;

@@ -3,7 +3,6 @@ package sn.smart.eco.clients.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -23,9 +22,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories("sn.smart.eco")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"sn.smart.eco.clients"},
-    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-        value = ClientInfoConfigRestTest.class))
+@ComponentScan("sn.smart.eco.clients")
 public class ClientInfoConfigTest {
 
   @Bean
