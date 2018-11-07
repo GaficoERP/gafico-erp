@@ -6,6 +6,7 @@ import sn.smart.eco.clients.repositories.ClientInfoRepository;
 import sn.smart.eco.clients.repositories.GaficoLicenseRepository;
 import sn.smart.eco.clients.service.ClientInfoService;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,11 @@ public class ClientInfoServiceImpl implements ClientInfoService {
   @Override
   public ClientInfo addClientInfo(@NonNull ClientInfo client) {
     // ajout les addresses a la BD si elles existent pas encore
-    if (client.getAddresses() != null) {
+    if (CollectionUtils.isNotEmpty(client.getAddresses())) {
       client.getAddresses().forEach(add -> addRepository.save(add));
     }
     // ajout les licences a la BD si elles existent pas encore
-    if (client.getLicenses() != null) {
+    if (CollectionUtils.isNotEmpty(client.getLicenses())) {
       client.getLicenses().forEach(lic -> licenseRepository.save(lic));
     }
     return ciRepository.save(client);
