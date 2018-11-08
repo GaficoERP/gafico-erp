@@ -31,7 +31,7 @@
         "../node_modules/dragula/dist/dragula.css",
         "../node_modules/videogular2/fonts/videogular.css",
         "../node_modules/@swimlane/ngx-datatable/release/index.css",
-        "../node_modules/@swimlane/ngx-datatable/release/assets/icons.css",     
+        "../node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
         "assets/css/demo.css",
         "assets/sass/app.scss",
         "styles.css"
@@ -73,6 +73,10 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "component": {
+    }
+  },
+  "warnings": {
+    "typescriptMismatch": false
   }
 }

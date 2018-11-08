@@ -11,9 +11,9 @@
 	<dependencies>
 		<!-- GaFiCo Projects -->
 		<dependency>
-			<groupId>sn.smart.eco</groupId>
-			<artifactId>common-jpa</artifactId>
-		</dependency>
+				<groupId>sn.smart.eco</groupId>
+				<artifactId>clients</artifactId>
+			</dependency>
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>common-mongo</artifactId>

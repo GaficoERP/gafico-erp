@@ -3,7 +3,7 @@ package sn.smart.eco.common.jpa.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -21,11 +21,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories("sn.smart.eco.common.jpa")
+@EnableJpaRepositories("sn.smart.eco.commonjpa")
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"sn.smart.eco.common.jpa"},
-    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
-        value = CommonConfigRestTest.class))
+@ComponentScan("sn.smart.eco.commonjpa")
+@Profile("test")
 public class CommonConfigTest {
 
   @Bean
@@ -53,7 +52,7 @@ public class CommonConfigTest {
 
     LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
     emfb.setDataSource(dataSource());
-    emfb.setPackagesToScan("sn.smart.eco.common.jpa.model");
+    emfb.setPackagesToScan("sn.smart.eco.commonjpa.model");
     emfb.setJpaProperties(props);
     emfb.setJpaVendorAdapter(adapter);
 

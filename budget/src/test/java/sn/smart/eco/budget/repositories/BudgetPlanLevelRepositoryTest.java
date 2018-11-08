@@ -4,8 +4,8 @@ import sn.smart.eco.budget.AbstractBudgetTest;
 import sn.smart.eco.budget.config.BudgetConfigTest;
 import sn.smart.eco.budget.model.BudgetPlanLevel;
 import sn.smart.eco.budget.utils.BudgetUtils;
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 import org.junit.Assert;
 import org.junit.FixMethodOrder;

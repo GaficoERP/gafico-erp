@@ -1,6 +1,6 @@
 package sn.smart.eco.budget.repositories;
 
-import sn.smart.eco.common.jpa.model.LevelType;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 public interface BudgetPlanLevelRepositoryCustom {
 

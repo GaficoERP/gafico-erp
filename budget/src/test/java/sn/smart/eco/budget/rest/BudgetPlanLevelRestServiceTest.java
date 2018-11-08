@@ -11,8 +11,8 @@ import sn.smart.eco.budget.AbstractBudgetTest;
 import sn.smart.eco.budget.config.BudgetConfigRestTest;
 import sn.smart.eco.budget.model.BudgetPlanLevel;
 import sn.smart.eco.budget.utils.BudgetUtils;
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 import org.junit.After;
 import org.junit.Before;

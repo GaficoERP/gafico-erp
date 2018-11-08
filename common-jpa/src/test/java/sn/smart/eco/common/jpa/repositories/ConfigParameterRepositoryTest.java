@@ -2,8 +2,9 @@ package sn.smart.eco.common.jpa.repositories;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigTest;
-import sn.smart.eco.common.jpa.model.ConfigParameter;
-import sn.smart.eco.common.model.GaficoComponent;
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.model.GaficoComponent;
+import sn.smart.eco.commonjpa.repositories.ConfigParameterRepository;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class ConfigParameterRepositoryTest extends AbstractJpaCommonTest {
     populateDb();
 
     Optional<List<ConfigParameter>> configs =
-        repository.findByComponent(GaficoComponent.ACCOUNTANCY);
+        repository.findByComponentId(GaficoComponent.ACCOUNTANCY.getId());
     Assert.assertTrue(configs.isPresent());
     Assert.assertFalse(configs.get().isEmpty());
     Assert.assertTrue(configs.get().size() >= 2);

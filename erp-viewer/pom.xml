@@ -36,8 +36,9 @@
                             <executable>ng.cmd</executable>
                             <arguments>
                                 <argument>build</argument>
+                                <arguments>--prod</arguments>
                                 <argument>--base-href</argument>
-                                <argument>"/gafico/"</argument>
+                                <argument>"./"</argument>
                             </arguments>
                         </configuration>
                         <phase>generate-resources</phase>

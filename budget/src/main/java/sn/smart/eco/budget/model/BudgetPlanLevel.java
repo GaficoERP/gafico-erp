@@ -1,8 +1,8 @@
 package sn.smart.eco.budget.model;
 
-import sn.smart.eco.common.jpa.model.AbstractPlanLevel;
-import sn.smart.eco.common.jpa.model.LevelType;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
+import sn.smart.eco.commonjpa.model.AbstractPlanLevel;
+import sn.smart.eco.commonjpa.model.LevelType;
 
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
