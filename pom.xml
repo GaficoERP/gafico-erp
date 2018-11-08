@@ -9,13 +9,13 @@
 
 	<modules>
 		<module>common</module>
-		<module>budget</module>
-		<module>erp-viewer</module>
-		<module>war</module>
 		<module>common-jpa</module>
-		<module>gafico-user</module>
 		<module>common-mongo</module>
+		<module>budget</module>
+		<module>gafico-user</module>
 		<module>clients</module>
+		<!-- module>erp-viewer</module-->
+		<module>war</module>
 	</modules>
 
 	<properties>

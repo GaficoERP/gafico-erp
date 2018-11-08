@@ -20,7 +20,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Se
 	@Override
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {
-		response.setHeader("WWW-Authenticate", "'Bearer token_type=\"JWT\"'");
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
 
 	}
