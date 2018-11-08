@@ -14,6 +14,13 @@ const data: any = require('../../shared/data/chartist.json');
 
 export class LevelTypeComponent {
     levelForm: LevelType=new LevelType();
+    view = 'compta';
+
+
+
+    type(valeur){
+        
+    }
 
   
 

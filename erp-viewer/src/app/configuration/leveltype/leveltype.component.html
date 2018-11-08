@@ -2,7 +2,7 @@
 <section id="horizontal-form-layouts">
 	<div class="row">
 		<div class="col-sm-12">
-			<div class="content-header">Nouveau type de niveau</div>
+			<div class="content-header">Structuration </div>
 		</div>
 	</div>
 	<div class="row">
@@ -12,83 +12,75 @@
 					<div class="px-3">
 						<form class="form form-horizontal">
 							<div class="form-body">
-								<h4 class="form-section"><i class="ft-user"></i> Remplir tous les champs</h4>
-								<div class="form-group row">
-									<label class="col-md-3 label-control" for="name">Nom: </label>
-									<div class="col-md-9">
-										<input type="text"  class="form-control" name="name" [(ngModel)]="levelForm.name">
+								<div class="card-block">
+									<div class="d-flex flex-wrap justify-content-md-between mb-3 no-gutters">
+										<div class="col ">
+											<div class="btn-group d-none d-sm-none d-md-none d-lg-block">
+												<a class="btn btn-raised btn-primary" (click)="view = 'compta'" [class.active]="view === 'compta'">
+													Comptabilité générale
+												</a>
+												<a class="btn btn-raised btn-primary" (click)="view = 'bud'" [class.active]="view === 'bud'">
+													Budget
+												</a>
+												<a class="btn btn-raised btn-primary" (click)="view = 'ana'" [class.active]="view === 'ana'">
+													Comptabilité analytique
+												</a>
+											</div>
+											<div class="btn-group d-block d-sm-block d-md-block d-lg-none">
+												<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'compta'" [class.active]="view === 'compta'">
+													<i class="fa fa-th"></i>
+												</a>
+												<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'bud'" [class.active]="view === 'bud'">
+													<i class="fa fa-columns"></i>
+												</a>
+												<a class="btn btn-raised btn-primary btn-icon-icon" (click)="view = 'ana'" [class.active]="view === 'ana'">
+													<i class="fa fa-th-list"></i>
+												</a>
+											</div>
+
+
+										</div>
+
 									</div>
+
 								</div>
-								<div class="form-group row">
-									<label class="col-md-3 label-control" for="nom">Profondeur: </label>
-									<div class="col-md-9">
-										<input type="number"  class="form-control" name="depht" [(ngModel)]="levelForm.depht">
+
+								<div *ngIf="view ==='compta'">
+									<h4 class="form-section"><i class="ft-user"></i> Structuration de la comptabilité générale</h4>
+									<div class="form-group row">
+										<label class="col-md-3 label-control" for="name">Nom: </label>
+										<div class="col-md-9">
+											<input type="text" class="form-control" name="name" [(ngModel)]="levelForm.name">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-md-3 label-control" for="nom">Profondeur: </label>
+										<div class="col-md-9">
+											<input type="number" class="form-control" name="depht" [(ngModel)]="levelForm.depht">
+										</div>
+									</div>
+
+									<div class="form-group row">
+										<label class="col-md-3 label-control" for="planType">Type de plan: </label>
+										
+									</div>
+									<div class="form-actions">
+										<button type="button" class="btn btn-raised btn-danger mr-1">
+											<i class="ft-x"></i> Annuler
+										</button>
+										<button type="button" class="btn btn-raised btn-info">
+											<i class="fa fa-check-square-o"></i> Enregistrer
+										</button>
 									</div>
 								</div>
 
-								<div class="form-group row">
-									<label class="col-md-3 label-control" for="planType">Type de plan: </label>
-									<div class="col-md-9">
-										<select name="planType" class="form-control" [(ngModel)]="levelForm.planType" >
-											<option  [ngValue]='ACCOUNTANCY'>ACCOUNTANCY</option>
-											<option  [ngValue]='BUDGET'>BUDGET</option>
-											<option  [ngValue]='ANALYTICAL'>ANALYTICAL</option>
-										</select>
-									</div>
-								</div>
 							</div>
-							<div class="form-actions">
-								<button type="button" class="btn btn-raised btn-danger mr-1">
-									<i class="ft-x"></i> Annuler
-								</button>
-								<button type="button" class="btn btn-raised btn-info">
-									<i class="fa fa-check-square-o"></i> Enregistrer
-								</button>
-							</div>
+
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Les différents types de niveau</h4>                   
-                </div>
-                <div class="card-body">
-                    <div class="card-block">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Profondeur</th>
-                                    <th>Type</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>
-                                        <a class="success p-0" data-original-title="" title="MPodifier">
-                                            <i class="ft-edit-2 font-medium-3 mr-2"></i>
-                                        </a>
-                                        <a class="danger p-0" data-original-title="" title="Supprimer">
-                                            <i class="ft-x font-medium-3 mr-2"></i>
-                                        </a>
-									</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 <!-- // Basic form layout section end -->

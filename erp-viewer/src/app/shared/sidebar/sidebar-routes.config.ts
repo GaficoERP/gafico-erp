@@ -5,7 +5,7 @@ export const ROUTES: RouteInfo[] = [
 
     {
         path: '/configuration', title: 'Configuration', icon: 'ft-settings', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
-            { path: '/configuration/leveltype', title: 'Level Type', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/configuration/leveltype', title: 'Struturation', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
             { path: '/configuration/level', title: 'Level', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
