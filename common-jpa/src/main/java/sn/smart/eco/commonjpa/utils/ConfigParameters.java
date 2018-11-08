@@ -1,11 +1,12 @@
 package sn.smart.eco.commonjpa.utils;
 
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.repositories.ConfigParameterRepository;
+import sn.smart.eco.commonjpa.repositories.GaficoComponentRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-
-import sn.smart.eco.commonjpa.model.ConfigParameter;
-import sn.smart.eco.commonjpa.repositories.ConfigParameterRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,13 @@ public final class ConfigParameters {
 
   private final Map<String, ConfigParameter> parameters = new HashMap<>();
   @Autowired
-  private ConfigParameterRepository repository;
+  private ConfigParameterRepository configRepository;
+  @Autowired
+  private GaficoComponentRepository componentRepository;
 
   @PostConstruct
   public void loadParameters() {
-    Optional<List<ConfigParameter>> params = repository.findByComponentInDefaultPack(true);
+    Optional<List<ConfigParameter>> params = configRepository.findByComponentInDefaultPack(true);
     if (params.isPresent()) {
       saveAll(params.get());
     }
@@ -35,8 +38,11 @@ public final class ConfigParameters {
   }
 
   public ConfigParameter addParameter(@NonNull ConfigParameter param) {
+    if (!componentRepository.existsById(param.getComponent().getName())) {
+      componentRepository.save(param.getComponent());
+    }
     parameters.put(param.getName(), param);
-    return repository.save(param);
+    return configRepository.save(param);
   }
 
   public boolean isValueTrue(@NonNull String name) {
@@ -50,7 +56,7 @@ public final class ConfigParameters {
 
   public void saveAll(@NonNull List<ConfigParameter> confParams) {
     parameters.putAll(confParams.stream().collect(Collectors.toMap(x -> x.getName(), x -> x)));
-    repository.saveAll(confParams);
+    configRepository.saveAll(confParams);
   }
 
   public ConfigParameter removeParameter(@NonNull String param) {

@@ -4,19 +4,18 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 public class GaficoInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-  @Override
-  protected Class<?>[] getRootConfigClasses() {
-    return new Class[] {GaficoDataConfig.class};
-  }
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return new Class[] { GaficoDataConfig.class };
+	}
 
-  @Override
-  protected Class<?>[] getServletConfigClasses() {
-    return null;
-  }
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return null;
+	}
 
-  @Override
-  protected String[] getServletMappings() {
-	  System.out.println("##########here#############");
-    return new String[] {"/"};
-  }
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/" };
+	}
 }

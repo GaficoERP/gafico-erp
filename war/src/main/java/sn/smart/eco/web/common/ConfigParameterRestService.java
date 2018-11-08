@@ -1,4 +1,4 @@
-package sn.smart.eco.commonjpa.rest;
+package sn.smart.eco.web.common;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;

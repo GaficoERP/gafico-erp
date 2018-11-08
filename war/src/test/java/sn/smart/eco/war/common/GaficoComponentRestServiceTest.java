@@ -1,15 +1,15 @@
-package sn.smart.eco.common.jpa.rest;
+package sn.smart.eco.war.common;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
-import sn.smart.eco.common.model.PlanType;
-import sn.smart.eco.commonjpa.config.CommonConfigRest;
-import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.commonjpa.model.GaficoComponent;
+import sn.smart.eco.war.AbstractRestTest;
+import sn.smart.eco.war.GaficoRestConfigTest;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -24,10 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@ContextConfiguration(classes = {CommonConfigRest.class})
+@ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LevelTypeRestServiceTest extends AbstractJpaCommonTest {
+public class GaficoComponentRestServiceTest extends AbstractRestTest {
   private MockMvc mockMvc;
 
   @Autowired
@@ -40,31 +40,31 @@ public class LevelTypeRestServiceTest extends AbstractJpaCommonTest {
   }
 
   @Test
-  public void addLevelTypeTest() throws Exception {
-    LevelType ltype = new LevelType("LevelType0", 0, PlanType.ACCOUNTANCY);
+  public void addGaficoComponentTest() throws Exception {
     mockMvc
-        .perform(post("/rest/common/level/add").contentType(MediaType.APPLICATION_JSON)
-            .content(ltype.toString()))
+        .perform(post("/rest/common/component/add").contentType(MediaType.APPLICATION_JSON)
+            .content(GaficoComponent.PAY.toString()))
         .andExpect(status().isOk())//
-        .andExpect(jsonPath("name").value("LevelType0"));
+        .andExpect(jsonPath("name").value("Pay"));
+
+
+    mockMvc
+        .perform(post("/rest/common/component/add").contentType(MediaType.APPLICATION_JSON)
+            .content(GaficoComponent.DEFAULT.toString()))
+        .andExpect(status().isOk())//
+        .andExpect(jsonPath("name").value("Default"));
   }
 
   @Test
-  public void findByPlanTypeTest() throws Exception {
+  public void findByInDefaultPackTest() throws Exception {
     // has result
     mockMvc
-        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.ACCOUNTANCY)
-            .accept(MediaType.APPLICATION_JSON))
+        .perform(get("/rest/common/component/find/{inDefaultPack}", true)
+            .contentType(MediaType.APPLICATION_JSON)//
+            .accept(MediaType.APPLICATION_JSON))//
+        .andDo(print())//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(jsonPath("$[0].name").value("LevelType0"));
-
-    // Empty result
-    mockMvc
-        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.BUDGET)
-            .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())//
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(content().string("[]"));
+        .andExpect(jsonPath("$[0].name").value("Default"));
   }
 }

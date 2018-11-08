@@ -1,16 +1,15 @@
-package sn.smart.eco.clients.rest;
+package sn.smart.eco.war.common;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import sn.smart.eco.clients.AbstractClientTest;
-import sn.smart.eco.clients.config.ClientInfoConfigRestTest;
-import sn.smart.eco.clients.model.ClientInfo;
-import sn.smart.eco.clients.model.LegalStatus;
+import sn.smart.eco.common.model.PlanType;
+import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.war.AbstractRestTest;
+import sn.smart.eco.war.GaficoRestConfigTest;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -25,10 +24,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-@ContextConfiguration(classes = {ClientInfoConfigRestTest.class})
+@ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ClientInfoRestServiceTest extends AbstractClientTest {
+public class LevelTypeRestServiceTest extends AbstractRestTest {
   private MockMvc mockMvc;
 
   @Autowired
@@ -41,35 +40,31 @@ public class ClientInfoRestServiceTest extends AbstractClientTest {
   }
 
   @Test
-  public void addClientInfoTest() throws Exception {
-    ClientInfo client =
-        new ClientInfo("Sonatel", "338280000", "sonatel-sa@sonatel.sn", LegalStatus.SA);
+  public void addLevelTypeTest() throws Exception {
+    LevelType ltype = new LevelType("LevelType0", 0, PlanType.ACCOUNTANCY);
     mockMvc
-        .perform(post("/rest/client/add").contentType(MediaType.APPLICATION_JSON)
-            .content(client.toString()))
+        .perform(post("/rest/common/level/add").contentType(MediaType.APPLICATION_JSON)
+            .content(ltype.toString()))
         .andExpect(status().isOk())//
-        .andExpect(jsonPath("email").value(client.getEmail()));
+        .andExpect(jsonPath("name").value("LevelType0"));
   }
 
   @Test
-  public void findClientInfoTest() throws Exception {
+  public void findByPlanTypeTest() throws Exception {
     // has result
-    String clName = "Sonatel";
     mockMvc
-        .perform(get("/rest/client/find/{name}", clName).contentType(MediaType.APPLICATION_JSON)//
-            .accept(MediaType.APPLICATION_JSON_UTF8))//
-        .andDo(print())//
+        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.ACCOUNTANCY)
+            .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
-        // .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(jsonPath("name").value(clName));
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
+        .andExpect(jsonPath("$[0].name").value("LevelType0"));
 
     // Empty result
     mockMvc
-        .perform(
-            get("/rest/client/find/{name}", "ClientName").contentType(MediaType.APPLICATION_JSON)//
-                .accept(MediaType.APPLICATION_JSON))
+        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.BUDGET)
+            .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
-        // .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(content().string(""));
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
+        .andExpect(content().string("[]"));
   }
 }

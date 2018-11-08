@@ -1,9 +1,13 @@
-package sn.smart.eco.common.jpa.config;
+package sn.smart.eco.war;
+
+import sn.smart.eco.war.config.GaficoDataConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
@@ -14,19 +18,23 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
-@Configuration
-@EnableJpaRepositories("sn.smart.eco.commonjpa")
-@EnableTransactionManagement
-@ComponentScan("sn.smart.eco.commonjpa")
 @Profile("test")
-public class CommonConfigTest {
-
+@Configuration
+@EnableWebMvc
+@EnableJpaRepositories("sn.smart.eco.*.repositories")
+@EnableTransactionManagement
+@PropertySource("classpath:application.properties")
+@ComponentScan(basePackages = {"sn.smart.eco"},
+    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+        value = GaficoDataConfig.class))
+public class GaficoRestConfigTest {
   @Bean
   public DataSource dataSource() {
     // no need shutdown, EmbeddedDatabaseFactoryBean will take care of this
@@ -52,7 +60,7 @@ public class CommonConfigTest {
 
     LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
     emfb.setDataSource(dataSource());
-    emfb.setPackagesToScan("sn.smart.eco.commonjpa.model");
+    emfb.setPackagesToScan("sn.smart.eco.*.model");
     emfb.setJpaProperties(props);
     emfb.setJpaVendorAdapter(adapter);
 

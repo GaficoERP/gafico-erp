@@ -1,5 +1,9 @@
 package sn.smart.eco.war.config;
 
+import sn.smart.eco.auth.service.impl.JwtAuthenticationEntryPoint;
+import sn.smart.eco.auth.service.impl.StatelessAuthenticationFilter;
+import sn.smart.eco.auth.service.impl.UserDetailsServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import sn.smart.eco.auth.service.TokenHandler;
 import sn.smart.eco.auth.service.impl.JwtAuthenticationEntryPoint;
 import sn.smart.eco.auth.service.impl.StatelessAuthenticationFilter;
@@ -39,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
+		// le mot de passe sera crypté 12fois (cryptage du cryptage du cryptage ...)
+	    return new BCryptPasswordEncoder(12);
 	}
 
 	@Autowired
