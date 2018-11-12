@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import sn.smart.eco.auth.service.TokenHandler;
 
 
@@ -44,25 +46,40 @@ public class StatelessAuthenticationFilter extends OncePerRequestFilter  {
             authToken = requestHeader.substring(7);
             try {
             	userDetails = tokenHandler.parseUserFromToken(authToken).orElse(null);
+            	logger.debug("checking authentication for user '{}'", userDetails);
+                if (userDetails != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    logger.debug("security context was null, so authorizating user");
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    logger.info("authorizated user '{}', setting security context", userDetails);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+
+                filterChain.doFilter(request, response);
             } catch (IllegalArgumentException e) {
                 logger.error("an error occured during getting username from token", e);
+                response.setContentType("application/json");
+        		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        		response.getOutputStream().println("{ \"error\": \"" + e.getMessage() + "\" }");
             } catch (ExpiredJwtException e) {
                 logger.warn("the token is expired and not valid anymore", e);
-            }
+                response.setContentType("application/json");
+        		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        		response.getOutputStream().println("{ \"error\": \"the token is expired and not valid anymore\" }");
+            } catch (MalformedJwtException e) {
+            	logger.error("an error occured during getting username from token", e);
+            	response.setContentType("application/json");
+        		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        		response.getOutputStream().println("{ \"error\": \"the token is  not valid \" }");
+			}
         } else {
             logger.warn("couldn't find bearer string, will ignore the header");
+            response.setContentType("application/json");
+    		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+    		response.getOutputStream().println("{ \"error\": \"couldn't find bearer string, will ignore the header\" }");
         }
 
-        logger.debug("checking authentication for user '{}'", userDetails);
-        if (userDetails != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            logger.debug("security context was null, so authorizating user");
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            logger.info("authorizated user '{}', setting security context", userDetails);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-
-        filterChain.doFilter(request, response);
+        
 	}
 
 }

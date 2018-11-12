@@ -1,9 +1,5 @@
 package sn.smart.eco.war.config;
 
-import sn.smart.eco.auth.service.impl.JwtAuthenticationEntryPoint;
-import sn.smart.eco.auth.service.impl.StatelessAuthenticationFilter;
-import sn.smart.eco.auth.service.impl.UserDetailsServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 import sn.smart.eco.auth.service.TokenHandler;
 import sn.smart.eco.auth.service.impl.JwtAuthenticationEntryPoint;
 import sn.smart.eco.auth.service.impl.StatelessAuthenticationFilter;
@@ -62,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.exceptionHandling().and().anonymous().and().servletApi().and().headers().cacheControl();
 		http.authorizeRequests().antMatchers("/api/auth/**").anonymous().antMatchers("/rest/**").authenticated()
-				.anyRequest().permitAll().and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+				.anyRequest().permitAll().and().exceptionHandling().accessDeniedHandler(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(new StatelessAuthenticationFilter(tokenHeader, tokenHandler ), UsernamePasswordAuthenticationFilter.class);
 	}

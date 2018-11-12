@@ -17,13 +17,11 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableWebMvc
 @EnableJpaRepositories("sn.smart.eco.*.repositories")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
@@ -59,6 +57,7 @@ public class GaficoDataConfig {
 		Properties props = new Properties();
 		props.setProperty("hibernate.format_sql", "true");
 		props.setProperty("hibernate.hbm2ddl.auto", "update");
+		props.setProperty("hibernate.enable_lazy_load_no_trans", "true");
 
 		LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
 		emfb.setDataSource(dataSource);

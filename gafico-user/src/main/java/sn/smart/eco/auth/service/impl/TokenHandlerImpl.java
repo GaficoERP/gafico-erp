@@ -39,11 +39,16 @@ public class TokenHandlerImpl implements TokenHandler {
                 .getSubject();
         final User user = userRepository.getOne(Long.valueOf(subject));
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        if(user!=null) {
+        	for (Role role : user.getRoles()){
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
+        	return Optional.ofNullable(new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities));
         }
+        return null;
+        
 
-        return Optional.ofNullable(new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities));
+        
 	}
 
 	@Override

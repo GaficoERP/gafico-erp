@@ -1,27 +1,27 @@
 package sn.smart.eco.auth.service.impl;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable  {
+public class JwtAuthenticationEntryPoint implements AccessDeniedHandler  {
 
-	
-	private static final long serialVersionUID = -1344119153529964442L;
 
 	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException authException) throws IOException, ServletException {
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
-
+	public void handle(HttpServletRequest request, HttpServletResponse response,
+			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+		response.getOutputStream().println("{ \"error\": \"" + accessDeniedException.getMessage() + "\" }");
+	  
+		
 	}
 
 }
