@@ -1,7 +1,9 @@
 package sn.smart.eco.auth.model;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ public class Role {
 	private Long id;
 	private String name;
 
-	private List<User> users;
+	private Set<User> users;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,13 +40,13 @@ public class Role {
 		this.name = name;
 	}
 
-	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JsonIgnore
-	public List<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 
