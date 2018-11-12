@@ -1,8 +1,10 @@
 package sn.smart.eco.commonjpa.model;
 
-import sn.smart.eco.common.model.PlanType;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -18,14 +20,13 @@ public class Structuration {
   @Column(name = "struct_name")
   private String name;
   @OneToMany
-  private Set<LevelType> levels;
-  private PlanType type;
+  private Set<Level> levels;
+  // private PlanType type;
 
-  public Structuration(String name, Set<LevelType> levels, PlanType type) {
+  public Structuration(String name, Set<Level> levels) {
     super();
     this.name = name;
     this.levels = levels;
-    this.type = type;
   }
 
   public Structuration() {}
@@ -38,20 +39,19 @@ public class Structuration {
     this.name = name;
   }
 
-  public Set<LevelType> getLevels() {
+  public Set<Level> getLevels() {
+    if (CollectionUtils.isEmpty(levels)) {
+      levels = new HashSet<>();
+    }
     return levels;
   }
 
-  public void setLevels(Set<LevelType> levels) {
+  public void setLevels(Set<Level> levels) {
     this.levels = levels;
   }
 
-  public PlanType getType() {
-    return type;
-  }
-
-  public void setType(PlanType type) {
-    this.type = type;
+  public void addLevel(Level level) {
+    getLevels().add(level);
   }
 
   @Override
