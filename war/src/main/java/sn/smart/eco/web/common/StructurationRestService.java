@@ -26,7 +26,7 @@ public class StructurationRestService {
 
   @GetMapping("/find/{name}")
   public Structuration find(@PathVariable("name") @NonNull String name) {
-    return service.findStructurationByName(name);
+    return service.findStructuration(name);
   }
 
   @GetMapping("/findByType/{type}")

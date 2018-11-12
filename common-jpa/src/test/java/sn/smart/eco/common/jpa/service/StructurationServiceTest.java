@@ -2,8 +2,7 @@ package sn.smart.eco.common.jpa.service;
 
 import sn.smart.eco.common.jpa.AbstractJpaCommonTest;
 import sn.smart.eco.common.jpa.config.CommonConfigTest;
-import sn.smart.eco.common.model.PlanType;
-import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.commonjpa.model.Level;
 import sn.smart.eco.commonjpa.model.Structuration;
 import sn.smart.eco.commonjpa.service.StructurationService;
 
@@ -13,9 +12,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.util.Arrays;
-import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -27,39 +23,41 @@ public class StructurationServiceTest extends AbstractJpaCommonTest {
   private StructurationService structService;
 
   @Test
-  public void addStructurationTest() {
+  public void a_addStructurationTest() {
     Structuration savedStruct = createStructuration();
     Assert.assertNotNull(savedStruct);
-    Assert.assertTrue(savedStruct.getLevels().size() == 2);
-    Assert.assertEquals(PlanType.ACCOUNTANCY, savedStruct.getType());
+    Assert.assertEquals("Structuration", savedStruct.getName());
   }
 
   @Test
-  public void findStructurationByNameTest() {
+  public void b_findStructurationByNameTest() {
     createStructuration();
 
-    Structuration struct = structService.findStructurationByName("Structuration");
+    Structuration struct = structService.findStructuration("Structuration");
     Assert.assertNotNull(struct);
-    Assert.assertTrue(struct.getLevels().size() == 2);
-    Assert.assertEquals(PlanType.ACCOUNTANCY, struct.getType());
   }
 
   @Test
-  public void findStructurationByTypeTest() {
+  public void c_addLevelToStructurationTest() {
     createStructuration();
 
-    Structuration struct = structService.findStructurationByType(PlanType.ACCOUNTANCY);
-    Assert.assertNotNull(struct);
-    Assert.assertTrue(struct.getLevels().size() == 2);
-    Assert.assertEquals(PlanType.ACCOUNTANCY, struct.getType());
+    Structuration struct = structService.findStructuration("Structuration");
+    Structuration updatedStruct = structService.addLevel(struct, new Level("Chapitre", 2, null));
+    Assert.assertTrue(updatedStruct.getLevels().size() == 1);
+  }
+
+  @Test
+  public void d_addPreviousToLevelTest() {
+    createStructuration();
+
+    Structuration struct = structService.findStructuration("Structuration");
+    Structuration updatedStruct = structService.addLevel(struct,
+        new Level("Article", 1, struct.getLevels().iterator().next()));
+    Assert.assertTrue(updatedStruct.getLevels().size() == 2);
   }
 
   private Structuration createStructuration() {
-    Structuration struct = new Structuration("Structuration",
-        new HashSet<>(Arrays.asList(new LevelType("Level0", 0, PlanType.ACCOUNTANCY),
-            new LevelType("Level1", 1, PlanType.ACCOUNTANCY))),
-        PlanType.ACCOUNTANCY);
+    Structuration struct = new Structuration("Structuration", null);
     return structService.addStructuration(struct);
   }
-
 }
