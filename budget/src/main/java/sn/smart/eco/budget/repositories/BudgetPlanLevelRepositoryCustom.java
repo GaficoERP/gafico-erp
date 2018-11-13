@@ -1,8 +1,7 @@
 package sn.smart.eco.budget.repositories;
 
-import sn.smart.eco.commonjpa.model.LevelType;
-
+@Deprecated
 public interface BudgetPlanLevelRepositoryCustom {
 
-  public Long calculateNextCode(LevelType level);
+  // public Long calculateNextCode(LevelType level);
 }

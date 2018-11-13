@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +16,8 @@ public class Level {
   @Column(name = "lv_name")
   private String name;
   private Integer codeLength;
-  @JoinColumn(referencedColumnName = "name")
+  @OneToOne(targetEntity = Level.class)
+  @JoinColumn(name = "previous")
   private Level previous;
 
   public Level() {}
