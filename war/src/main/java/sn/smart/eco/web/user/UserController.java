@@ -3,6 +3,7 @@ package sn.smart.eco.web.user;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,19 +23,19 @@ public class UserController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
-    public List<User> listUser(){
+    public List<User> listUser() throws AccessDeniedException{
         return userService.findAll();
     }
 	
 	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getOne(@PathVariable(value = "id") Long id){
+    public User getOne(@PathVariable(value = "id") Long id) throws AccessDeniedException{
         return userService.findById(id);
     }
 	
 	@RequestMapping(value="/create",method = RequestMethod.POST)
-    public User saveUser(@RequestBody User user){
+    public User saveUser(@RequestBody User user) throws AccessDeniedException{
         return userService.create(user);
     }
-
+	
 }

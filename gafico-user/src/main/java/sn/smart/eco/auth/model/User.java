@@ -3,6 +3,7 @@ package sn.smart.eco.auth.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user_info")
@@ -33,6 +36,7 @@ public class User {
     this.id = id;
   }
 
+  @Column(length = 50, unique = true)
   public String getUsername() {
     return username;
   }
@@ -41,6 +45,7 @@ public class User {
     this.username = username;
   }
 
+  @JsonIgnore
   public String getPassword() {
     return password;
   }

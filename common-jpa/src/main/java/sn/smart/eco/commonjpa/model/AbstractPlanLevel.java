@@ -4,6 +4,7 @@ import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import org.springframework.data.annotation.Id;
 
+@Deprecated
 public abstract class AbstractPlanLevel {
   @Id
   private String id;

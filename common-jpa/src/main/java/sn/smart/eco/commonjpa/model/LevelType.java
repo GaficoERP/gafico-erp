@@ -6,14 +6,12 @@ import sn.smart.eco.common.utils.GaficoCommonUtils;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "common_level_type")
-@IdClass(value = LevelTypeId.class)
+// @Entity
+// @Table(name = "common_level_type")
+// @IdClass(value = LevelTypeId.class)
+@Deprecated
 public class LevelType implements Serializable {
   private static final long serialVersionUID = 1L;
 
