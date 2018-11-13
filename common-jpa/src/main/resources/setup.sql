@@ -1,3 +1,7 @@
+-- Database: gafico_erp
+
+-- DROP DATABASE gafico_erp;
+
 CREATE DATABASE gafico_erp
     WITH 
     OWNER = postgres
