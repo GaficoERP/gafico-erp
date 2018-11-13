@@ -1,5 +1,7 @@
 package sn.smart.eco.commonjpa.model;
 
+import sn.smart.eco.common.utils.GaficoCommonUtils;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -46,6 +48,11 @@ public class Level {
 
   public void setPrevious(Level previous) {
     this.previous = previous;
+  }
+
+  @Override
+  public String toString() {
+    return GaficoCommonUtils.toJsonString(this);
   }
 
 }
