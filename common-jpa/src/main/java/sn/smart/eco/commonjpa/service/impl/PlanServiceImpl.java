@@ -1,6 +1,7 @@
 package sn.smart.eco.commonjpa.service.impl;
 
 import sn.smart.eco.commonjpa.model.Plan;
+import sn.smart.eco.commonjpa.repositories.PlanRepository;
 import sn.smart.eco.commonjpa.service.PlanService;
 
 import org.springframework.lang.NonNull;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PlanServiceImpl implements PlanService {
+  private PlanRepository planRepository;
 
   @Override
   public Plan addPlan(@NonNull Plan plan) {
-    // TODO Auto-generated method stub
     return null;
   }
 

@@ -1,5 +1,7 @@
 package sn.smart.eco.commonjpa.model;
 
+import sn.smart.eco.common.utils.GaficoCommonUtils;
+
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Entity;
@@ -18,6 +20,7 @@ public class Plan {
   @OneToOne
   private Structuration structuration;
   private String planLineIds;
+  private boolean isActive;
 
   public Plan() {}
 
@@ -46,5 +49,22 @@ public class Plan {
       this.planLineIds = planLineId;
     }
     this.planLineIds += PLAN_LINEID_SEPARATOR + planLineId;
+  }
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
+  }
+
+  public void setPlanLineIds(String planLineIds) {
+    this.planLineIds = planLineIds;
+  }
+
+  @Override
+  public String toString() {
+    return GaficoCommonUtils.toJsonString(this);
   }
 }
