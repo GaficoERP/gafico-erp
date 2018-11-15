@@ -16,5 +16,5 @@ INSERT INTO public.user_info (id, enabled, password, username) VALUES (1, NULL, 
 INSERT INTO public.user_role (id, name) VALUES (1, 'USER');
 INSERT INTO public.user_role (id, name) VALUES (2, 'ADMIN');
 
-INSERT INTO public.users_roles (id, name) VALUES (1, 1);
-INSERT INTO public.users_roles (id, name) VALUES (1, 2);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO public.users_roles (user_id, role_id) VALUES (1, 2);
