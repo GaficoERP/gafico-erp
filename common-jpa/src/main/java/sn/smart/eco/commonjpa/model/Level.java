@@ -4,8 +4,10 @@ import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +17,9 @@ public class Level {
   @Column(name = "lv_name")
   private String name;
   private Integer codeLength;
-  @JoinColumn(referencedColumnName = "name")
+  
+  @OneToOne(fetch=FetchType.LAZY)
+  @JoinColumn(name="parent")
   private Level previous;
 
   public Level() {}

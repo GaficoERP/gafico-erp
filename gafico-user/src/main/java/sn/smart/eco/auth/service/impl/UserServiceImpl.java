@@ -2,6 +2,7 @@ package sn.smart.eco.auth.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User create(User user) {
+		System.out.println("user: " + user.getPassword());
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
 
@@ -42,7 +44,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findAll() {
-		return userRepository.findAll();
+		List<User> users = userRepository.findAll();
+		return users.stream().map(user -> { user.setPassword(""); return user;}).collect(Collectors.toList());
 	}
 
 	@Override
