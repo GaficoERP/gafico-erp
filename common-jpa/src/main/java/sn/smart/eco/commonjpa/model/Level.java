@@ -4,7 +4,6 @@ import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -18,8 +17,8 @@ public class Level {
   private String name;
   private Integer codeLength;
   
-  @OneToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="parent")
+  @OneToOne(targetEntity = Level.class)
+  @JoinColumn(name = "previous")
   private Level previous;
 
   public Level() {}

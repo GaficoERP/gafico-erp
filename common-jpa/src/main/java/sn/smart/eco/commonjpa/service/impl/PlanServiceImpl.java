@@ -4,11 +4,13 @@ import sn.smart.eco.commonjpa.model.Plan;
 import sn.smart.eco.commonjpa.repositories.PlanRepository;
 import sn.smart.eco.commonjpa.service.PlanService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PlanServiceImpl implements PlanService {
+  @Autowired
   private PlanRepository planRepository;
 
   @Override
