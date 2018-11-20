@@ -14,21 +14,17 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 
 import { CustomOption } from "./shared/toastr/custom-option";
 
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 
 import * as $ from 'jquery';
-import { AuthenticationService } from './services/authentication.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         FullLayoutComponent,
-        ContentLayoutComponent,
-        LoginComponent
+        ContentLayoutComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -43,8 +39,6 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
         FormsModule
     ],
     providers: [
-        AuthenticationService,
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         //Toastr providers
         { provide: ToastOptions, useClass: CustomOption }
     ],
