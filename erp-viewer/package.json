@@ -29,6 +29,7 @@
     "@types/chartist": "^0.9.36",
     "@types/d3-shape": "^1.2.1",
     "@types/jquery": "^3.2.13",
+    "angular-archwizard": "^3.0.0",
     "angular-calendar": "^0.21.3",
     "bootstrap": "4.0.0-beta",
     "bourbon": "^4.3.4",
