@@ -14,8 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "user_info")
 public class User {
@@ -45,7 +43,6 @@ public class User {
     this.username = username;
   }
 
-  @JsonIgnore
   public String getPassword() {
     return password;
   }
@@ -56,7 +53,7 @@ public class User {
 
  
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+  @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
   @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")},
       inverseJoinColumns = {@JoinColumn(name = "role_id")})
   public Set<Role> getRoles() {

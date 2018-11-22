@@ -7,7 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import sn.smart.eco.common.model.PlanType;
-import sn.smart.eco.commonjpa.model.LevelType;
+import sn.smart.eco.common.utils.GaficoCommonUtils;
+import sn.smart.eco.commonjpa.model.Level;
 import sn.smart.eco.war.AbstractRestTest;
 import sn.smart.eco.war.GaficoRestConfigTest;
 
@@ -24,10 +25,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 @ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LevelTypeRestServiceTest extends AbstractRestTest {
+public class LevelRestServiceTest extends AbstractRestTest {
   private MockMvc mockMvc;
 
   @Autowired
@@ -41,27 +45,29 @@ public class LevelTypeRestServiceTest extends AbstractRestTest {
 
   @Test
   public void addLevelTypeTest() throws Exception {
-    LevelType ltype = new LevelType("LevelType0", 0, PlanType.ACCOUNTANCY);
+    Level level0 = new Level("level0", 1, null);
+    Level level1 = new Level("level1", 3, level0);
     mockMvc
-        .perform(post("/rest/common/level/add").contentType(MediaType.APPLICATION_JSON)
-            .content(ltype.toString()))
+        .perform(post("/rest/common/level/addAll").contentType(MediaType.APPLICATION_JSON)
+            .content(GaficoCommonUtils.toJsonString(new HashSet<>(Arrays.asList(level0, level1)))))
         .andExpect(status().isOk())//
-        .andExpect(jsonPath("name").value("LevelType0"));
+        .andExpect(jsonPath("$[0].name").value(level0.getName()));
   }
 
   @Test
-  public void findByPlanTypeTest() throws Exception {
+  public void findByPreviousTest() throws Exception {
+    Level level0 = new Level("level0", 1, null);
     // has result
     mockMvc
-        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.ACCOUNTANCY)
-            .accept(MediaType.APPLICATION_JSON))
+        .perform(get("/rest/common/level/findByPrevious").contentType(MediaType.APPLICATION_JSON)
+            .content(level0.toString()).accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
         .andExpect(jsonPath("$[0].name").value("LevelType0"));
 
     // Empty result
     mockMvc
-        .perform(get("/rest/common/level/findByPlan/{plan}", PlanType.BUDGET)
+        .perform(get("/rest/common/level/findByPrevious", PlanType.BUDGET)
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//

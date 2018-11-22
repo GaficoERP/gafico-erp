@@ -14,7 +14,10 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 
 import { CustomOption } from "./shared/toastr/custom-option";
 
+import { FormsModule } from '@angular/forms';
+
 import * as $ from 'jquery';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -28,11 +31,13 @@ import * as $ from 'jquery';
         AppRoutingModule,
         FormsModule,
         SharedModule,
+        HttpClientModule,
         ToastModule.forRoot(),
         NgbModule.forRoot(),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
-        })
+        }),
+        FormsModule
     ],
     providers: [
         //Toastr providers

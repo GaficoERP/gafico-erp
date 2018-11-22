@@ -14,4 +14,6 @@ public interface LevelService {
   public List<Level> addAllLevels(Set<Level> levels);
 
   public void deleteLevel(String levelName);
+
+  public List<Level> findLevelsByPrevious(Level previous);
 }

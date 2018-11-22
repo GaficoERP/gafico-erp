@@ -21,13 +21,14 @@ public class UserController {
 	@Autowired
     private UserService userService;
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<User> listUser() throws AccessDeniedException{
         return userService.findAll();
     }
 	
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getOne(@PathVariable(value = "id") Long id) throws AccessDeniedException{
         return userService.findById(id);

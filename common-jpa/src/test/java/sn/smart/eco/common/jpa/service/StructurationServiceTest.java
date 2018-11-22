@@ -51,7 +51,8 @@ public class StructurationServiceTest extends AbstractJpaCommonTest {
     createStructuration();
 
     Structuration struct = structService.findStructuration("Structuration");
-    Structuration updatedStruct = structService.addLevel(struct,
+    Structuration updatedStruct = structService.addLevel(struct, new Level("Chapitre", 2, null));
+    updatedStruct = structService.addLevel(struct,
         new Level("Article", 1, struct.getLevels().iterator().next()));
     Assert.assertTrue(updatedStruct.getLevels().size() == 2);
   }
