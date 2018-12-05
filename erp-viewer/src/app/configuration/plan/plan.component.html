@@ -1,0 +1,151 @@
+<div class="row ">
+    <div class="col-sm-12">
+        <div class="card">
+
+            <button type="button" *ngIf="form===''" class="btn btn-success btn-raised col-sm-2" (click)="form='un'">Nouveau
+                Plan</button>
+
+
+            <div class="card-body " *ngIf="form==='un'">
+                <div class="card-block">
+                    <div class="col-sm-12">
+                        <div class="content-header">Nouveau plan</div>
+                    </div>
+                    <form >
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+
+                            <input type="text" class="form-control" required>
+                            <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="structure">Structure</label>
+                            <select id="projectinput5" name="interested" class="form-control">
+                                <option value="none" selected="" disabled="">Choisir structure</option>
+                                <option value="none">A définir</option>
+                                <option value="development">development</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group text-right">
+                            <button type="button" class="btn btn-danger btn-raised" (click)="form=''">Annuler</button>
+                            <button type="button" class="btn btn-success btn-raised" (click)="form='deux'">Suivant</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="card-body " *ngIf="form==='deux'">
+
+                <div class="card-block">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="content-header">Structuration du nouveau plan</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6 col-lg 6 col-md-6">
+                            <form novalidate>
+                                <div class="form-group">
+                                    <label for="nom">Nom de la structure</label>
+
+                                    <input type="text" class="form-control" placeholder="nom structure">
+                                    <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Niveau 1</label>
+
+                                    <input type="text" class="form-control" placeholder="nom du l'element">
+                                    <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Code size</label>
+
+                                    <input type="number" class="form-control" placeholder="nombre de chiffre du code">
+                                    <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success btn-raised" (click)="form='trois'">Enregistrer</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6 col-lg 6 col-md-6">
+                            <div class="content-header">Structuration</div>
+                            <label>Nom: budget</label>
+                            <li>article<ul>
+                                    <li>champitre</li>
+                                </ul>
+                            </li>
+                        </div>
+
+                    </div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-danger btn-raised" (click)="form='un'">Precedent</button>
+                        <button type="button" class="btn btn-success btn-raised" (click)="form='trois'">Suivant</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card-body " *ngIf="form==='trois'">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <form>
+                                <div class="form-group">
+                                    <label for="structure">Niveau</label>
+                                    <select id="projectinput5" name="interested" class="form-control">
+                                        <option value="none" selected="" disabled="">Choisir structure</option>
+                                        <option value="none">article</option>
+                                        <option value="development">chapitre</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Code</label>
+
+                                    <input type="number" class="form-control">
+                                    <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Libellé</label>
+
+                                    <input type="text" placeholder="Veillez saisir le titre" class="form-control">
+                                    <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+
+
+
+                                <div class="form-group">
+                                   
+                                    <button type="button" class="btn btn-success btn-raised">Ajouter</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-lg-8">
+                                <table class="table">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Libellé</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                            </tr>
+                                         
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                        <button type="button" class="btn btn-danger btn-raised" (click)="form='deux'">Precedent</button>
+                        <button type="button" class="btn btn-success btn-raised">Terminer</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
