@@ -1,5 +1,5 @@
 import {Level} from './level';
-export class Structuration{
+export class Structuration {
 name:string;
 levels:Set<Level>;
 
