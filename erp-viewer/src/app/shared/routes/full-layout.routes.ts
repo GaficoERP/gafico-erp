@@ -12,6 +12,10 @@ export const Full_ROUTES: Routes = [
     loadChildren: './configuration/configuration.module#ConfigurationModule'
   },
   {
+    path: 'budget',
+    loadChildren: './budget/budget.module#BudgetModule'
+  },
+  {
     path: 'calendar',
     loadChildren: './calendar/calendar.module#CalendarsModule'
   },
