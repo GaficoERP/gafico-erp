@@ -1,4 +1,4 @@
-package sn.smart.eco.budget.utils;
+package sn.smart.eco.common.mongo.utils;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import java.io.File;
 import java.io.IOException;
 
-public class BudgetUtils {
+public class CommonMongoUtils {
 
   public static void importJSON(MongoTemplate mongoTemplate, String collection, String file) {
     try {

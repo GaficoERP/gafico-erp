@@ -2,25 +2,20 @@ package sn.smart.eco.commonjpa.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "common_plan")
 public class Plan {
-  @Transient
-  public static final String PLAN_LINEID_SEPARATOR = ",";
   @Id
   private String name;
   @OneToOne
   private Structuration structuration;
-  private String planLineIds;
   private boolean isActive;
+  private boolean isValidated;
 
   public Plan() {}
 
@@ -40,17 +35,6 @@ public class Plan {
     this.structuration = structuration;
   }
 
-  public String getPlanLineIds() {
-    return planLineIds;
-  }
-
-  public void addPlanLineId(String planLineId) {
-    if (StringUtils.isEmpty(planLineIds)) {
-      this.planLineIds = planLineId;
-    }
-    this.planLineIds += PLAN_LINEID_SEPARATOR + planLineId;
-  }
-
   public boolean isActive() {
     return isActive;
   }
@@ -59,8 +43,12 @@ public class Plan {
     this.isActive = isActive;
   }
 
-  public void setPlanLineIds(String planLineIds) {
-    this.planLineIds = planLineIds;
+  public boolean isValidated() {
+    return isValidated;
+  }
+
+  public void setValidated(boolean isValidated) {
+    this.isValidated = isValidated;
   }
 
   @Override

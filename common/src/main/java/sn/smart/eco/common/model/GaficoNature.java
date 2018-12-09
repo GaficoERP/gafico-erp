@@ -1,0 +1,5 @@
+package sn.smart.eco.common.model;
+
+public enum GaficoNature {
+  RECETTE_INVESTISSEMENT, RECETTE_FONCTIONNEMENT, DEPENSE_INVESTISSEMENT, DEPENSE_FONCTIONNEMENT
+}
