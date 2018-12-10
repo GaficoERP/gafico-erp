@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlanServiceImpl implements PlanService {
   @Autowired
@@ -15,25 +17,22 @@ public class PlanServiceImpl implements PlanService {
 
   @Override
   public Plan addPlan(@NonNull Plan plan) {
-    return null;
+    return planRepository.save(plan);
   }
 
   @Override
   public Plan findPlan(@NonNull String name) {
-    // TODO Auto-generated method stub
-    return null;
+    return planRepository.getOne(name);
   }
 
   @Override
   public Plan updatePlan(@NonNull Plan plan) {
-    // TODO Auto-generated method stub
-    return null;
+    return planRepository.save(plan);
   }
 
   @Override
-  public Plan addPlanId(String planId) {
-    // TODO Auto-generated method stub
-    return null;
+  public List<Plan> findAll() {
+    return planRepository.findAll();
   }
 
 }

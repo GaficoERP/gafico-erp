@@ -2,6 +2,8 @@ package sn.smart.eco.commonjpa.service;
 
 import sn.smart.eco.commonjpa.model.Plan;
 
+import java.util.List;
+
 public interface PlanService {
 
   public Plan addPlan(Plan plan);
@@ -10,5 +12,5 @@ public interface PlanService {
 
   public Plan updatePlan(Plan plan);
 
-  public Plan addPlanId(String planId);
+  public List<Plan> findAll();
 }
