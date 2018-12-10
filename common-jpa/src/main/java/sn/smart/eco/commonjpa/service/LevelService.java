@@ -16,4 +16,6 @@ public interface LevelService {
   public void deleteLevel(String levelName);
 
   public List<Level> findLevelsByPrevious(Level previous);
+
+  public Integer findCodeLengthByLevel(Level level);
 }

@@ -41,7 +41,8 @@ public class PlanLineRepositoryTest extends AbstractCommonMongoTest {
 
   @Test
   public void findByLevelNameTest() {
-    Optional<List<PlanLine>> plines = repository.findByLevelName("Article");
+    Optional<List<PlanLine>> plines =
+        repository.findByLevelNameAndPlanOrderByCodeDesc("Article", "Plan Budgetaire 2018");
     Assert.assertTrue(plines.isPresent());
     Assert.assertTrue(CollectionUtils.isNotEmpty(plines.get()));
     Assert.assertTrue(plines.get().size() == 2);
@@ -55,6 +56,15 @@ public class PlanLineRepositoryTest extends AbstractCommonMongoTest {
     Optional<PlanLine> pl = repository.findByCodeAndPlan(1, plan);
     Assert.assertTrue(pl.isPresent());
     Assert.assertEquals(plan, pl.get().getPlan());
+  }
+
+  @Test
+  public void findByPreviousCodeAndPlanTest() {
+    String plan = "Plan Budgetaire 2018";
+    Optional<List<PlanLine>> pls = repository.findByPreviousCodeAndPlanOrderByCodeDesc(1, plan);
+    Assert.assertTrue(pls.isPresent());
+    Assert.assertEquals(plan, pls.get().get(0).getPlan());
+    pls.get().forEach(pl -> System.out.println(pl));
   }
 
   @Before

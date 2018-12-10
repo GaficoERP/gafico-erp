@@ -5,6 +5,7 @@ import com.mongodb.MongoClient;
 import cz.jirutka.spring.embedmongo.EmbeddedMongoFactoryBean;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -15,6 +16,7 @@ import java.io.IOException;
 @Configuration
 @EnableMongoRepositories("sn.smart.eco.common.mongo.repositories")
 @EnableTransactionManagement
+@ComponentScan("sn.smart.eco.common.mongo")
 // @PropertySource("classpath:config.properties")
 public class CommonMongoConfigTest {
   private static final String MONGO_DB_URL = "localhost";

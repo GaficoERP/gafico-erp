@@ -52,4 +52,13 @@ public class LevelServiceImpl implements LevelService {
     return new ArrayList<>();
   }
 
+  @Override
+  public Integer findCodeLengthByLevel(Level level) {
+    Optional<Integer> code = lvRepository.findCodeLengthByLevel(level);
+    if (code.isPresent()) {
+      return code.get();
+    }
+
+    return 1;
+  }
 }
