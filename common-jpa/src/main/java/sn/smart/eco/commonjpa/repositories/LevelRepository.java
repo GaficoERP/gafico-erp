@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface LevelRepository extends JpaRepository<Level, String> {
   Optional<List<Level>> findByPrevious(Level previous);
 
-  Optional<Integer> findCodeLengthByLevel(Level level);
 }

@@ -103,4 +103,9 @@ public class PlanLineServiceImpl implements PlanLineService {
     }
   }
 
+  @Override
+  public PlanLine addPlanLine(PlanLine pl) {
+    return plRepository.save(pl);
+  }
+
 }

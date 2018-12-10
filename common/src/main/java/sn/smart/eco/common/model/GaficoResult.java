@@ -5,7 +5,7 @@ public class GaficoResult {
   private String error;
   private String warning;
   private String info;
-  private GaficoState state;
+  private GaficoStatus status;
 
   public String getError() {
     return error;
@@ -31,11 +31,11 @@ public class GaficoResult {
     this.info = info;
   }
 
-  public GaficoState getState() {
-    return state;
+  public GaficoStatus getStatus() {
+    return status;
   }
 
-  public void setState(GaficoState state) {
-    this.state = state;
+  public void setStatus(GaficoStatus state) {
+    this.status = state;
   }
 }

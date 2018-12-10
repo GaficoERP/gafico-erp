@@ -20,6 +20,10 @@
 		<!-- GaFiCo Projects -->
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
+			<artifactId>common-mongo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>sn.smart.eco</groupId>
 			<artifactId>gafico-user</artifactId>
 		</dependency>
 		<dependency>
@@ -82,7 +86,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<!-- warSourceDirectory>../erp-viewer/dist/</warSourceDirectory-->
+					<!-- warSourceDirectory>../erp-viewer/dist/</warSourceDirectory -->
 					<webResources>
 						<resource>
 							<directory>src/main/webapp</directory>

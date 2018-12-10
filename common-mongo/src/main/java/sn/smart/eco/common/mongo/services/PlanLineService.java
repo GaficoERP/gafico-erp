@@ -6,6 +6,8 @@ import sn.smart.eco.common.mongo.model.PlanLine;
 import java.util.List;
 
 public interface PlanLineService {
+  public PlanLine addPlanLine(PlanLine pl);
+
   public PlanLine findByCodeAndLabel(int code, String label);
 
   public PlanLine findByCodeAndPlan(int code, String plan);

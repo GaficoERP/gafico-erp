@@ -17,5 +17,4 @@ public interface LevelService {
 
   public List<Level> findLevelsByPrevious(Level previous);
 
-  public Integer findCodeLengthByLevel(Level level);
 }
