@@ -1,5 +1,7 @@
 package sn.smart.eco.auth.model;
 
+import sn.smart.eco.common.utils.GaficoCommonUtils;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -51,9 +53,9 @@ public class User {
     this.password = password;
   }
 
- 
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+
+  @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
   @JoinTable(name = "users_roles", joinColumns = {@JoinColumn(name = "user_id")},
       inverseJoinColumns = {@JoinColumn(name = "role_id")})
   public Set<Role> getRoles() {
@@ -64,12 +66,16 @@ public class User {
     this.roles = roles;
   }
 
-public Boolean getEnabled() {
-	return enabled;
-}
+  public Boolean getEnabled() {
+    return enabled;
+  }
 
-public void setEnabled(Boolean enabled) {
-	this.enabled = enabled;
-}
+  public void setEnabled(Boolean enabled) {
+    this.enabled = enabled;
+  }
 
+  @Override
+  public String toString() {
+    return GaficoCommonUtils.toJsonString(this);
+  }
 }
