@@ -13,7 +13,7 @@
                             <form novalidate="" (ngSubmit)="onSubmit()" #f="ngForm">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Email" ngModel required email>
+                                        <input type="text" class="form-control" name="inputUser" id="inputUser" placeholder="Username" ngModel required>
                                     </div>
                                 </div>
 
@@ -37,7 +37,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-pink btn-block btn-raised">Submit</button>
+                                        <button type="button" class="btn btn-pink btn-block btn-raised" (click)="onSubmit()">Submit</button>
                                         <button type="button" class="btn btn-secondary btn-block btn-raised">Cancel</button>
                                     </div>
                                 </div>

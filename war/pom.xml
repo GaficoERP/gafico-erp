@@ -22,10 +22,10 @@
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>common-mongo</artifactId>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>gafico-user</artifactId>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>clients</artifactId>
