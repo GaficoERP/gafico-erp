@@ -2,6 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
     selector: 'app-login-page',
@@ -17,7 +18,8 @@ export class LoginPageComponent implements OnInit {
 
     constructor(private router: Router,
         private route: ActivatedRoute,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) { }
 
     ngOnInit() {
         // reset login status
@@ -39,7 +41,7 @@ export class LoginPageComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-//                    this.alertService.error(error);
+                    this.alertService.error(error);
 //                    this.loading = false;
                     console.log(error);
                 });

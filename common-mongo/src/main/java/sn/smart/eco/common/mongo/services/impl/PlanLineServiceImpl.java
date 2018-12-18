@@ -108,4 +108,9 @@ public class PlanLineServiceImpl implements PlanLineService {
     return plRepository.save(pl);
   }
 
+  @Override
+  public List<PlanLine> addAll(@NonNull List<PlanLine> lines) {
+    return plRepository.saveAll(lines);
+  }
+
 }

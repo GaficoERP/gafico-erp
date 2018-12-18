@@ -12,7 +12,10 @@ import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { CustomOption } from "./shared/toastr/custom-option";
 import { FormsModule } from '@angular/forms';
 
+import {AlertComponent} from './directives/alert/alert.component';
+
 import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
 
 import * as $ from 'jquery';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -22,7 +25,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     declarations: [
         AppComponent,
         FullLayoutComponent,
-        ContentLayoutComponent
+        ContentLayoutComponent,
+        AlertComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -38,6 +42,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     ],
     providers: [
         AuthenticationService,
+        AlertService,
         //Toastr providers
         { provide: ToastOptions, useClass: CustomOption }
     ],
