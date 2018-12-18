@@ -11,8 +11,9 @@ import { ContentLayoutComponent } from "./layouts/content/content-layout.compone
 import { FullLayoutComponent } from "./layouts/full/full-layout.component";
 import { CustomOption } from "./shared/toastr/custom-option";
 import { FormsModule } from '@angular/forms';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
 
-import { AuthenticationService } from './services/authentication.service';
+
 
 import * as $ from 'jquery';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -37,9 +38,13 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
         FormsModule
     ],
     providers: [
-        AuthenticationService,
+      
         //Toastr providers
-        { provide: ToastOptions, useClass: CustomOption }
+        { provide: ToastOptions, useClass: CustomOption },{
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+          }
     ],
     bootstrap: [AppComponent]
 })

@@ -1,14 +1,47 @@
 <div class="row ">
     <div class="col-sm-12">
         <div class="card">
+            <div class="card-body" *ngIf="form===''">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4 col-xs-12">
+                        <ul class="list-group">
+                            <li *ngFor="let plan of plans" class="list-group-item" (click)="planLink(plan)">{{plan.name}}</li>
 
-            <button type="button" *ngIf="form===''" class="btn btn-success btn-raised col-sm-2" (click)="form='un'">Nouveau
-                Plan</button>
+                        </ul>
+                        <button type="button" class="btn btn-success btn-raised col-lg-12" (click)="addPlan() ">Nouveau
+                            Plan</button>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12 text-right">
+                        <button type="button" class="btn btn-success btn-raised col-lg-2 " (click)="updatePlan() ">M-à-J</button>
+                        <table class="table text-center">
+                            <thead class="thead-default">
+                                <tr>
+                                    <th *ngFor="let level of levels">{{level.name}}</th>
+                                    <!-- <th>code</th> -->
+                                    <th>Libellé</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let l of lines">
+                                    <ng-container *ngFor="let level of levels">
+                                        <td *ngIf="l.levelName===level.name">{{l.code}}</td>
+                                        <td *ngIf="l.levelName!==level.name"></td>
+                                    </ng-container>
+                                    <!-- <td>{{l.code}}</td> -->
+                                    <td>{{l.label}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
 
             <div class="card-body " *ngIf="form==='un'">
                 <div class="card-block">
                     <div class="col-sm-12">
+
                         <div class="content-header">Nouveau plan</div>
                     </div>
                     <form>
@@ -39,14 +72,14 @@
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
                                 <div class="form-group">
-                                    <label for="nom">Niveau 1</label>
+                                    <label for="nom">Niveau</label>
 
                                     <input type="text" class="form-control" name="niveau" placeholder="nom du l'element"
                                         [(ngModel)]="levelForm.name">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
                                 <div class="form-group">
-                                    <label for="nom">Code size</label>
+                                    <label for="nom">Taille du code</label>
 
                                     <input type="number" class="form-control" name="codeLength" placeholder="nombre de chiffre du code"
                                         [(ngModel)]="levelForm.codeLength">
@@ -60,9 +93,9 @@
                         <div class="col-sm-6 col-lg 6 col-md-6">
                             <div class="content-header">Structuration</div>
                             <label>Nom: {{strForm.name}}</label><br>
-                            <label>Elements: </label>
+                            <label>Niveaux: </label>
                             <ol>
-                                <li *ngFor="let level of levels">{{level.name}} </li>
+                                <li *ngFor="let level of levels">{{level.name}}&nbsp;&nbsp;({{level.codeLength}})</li>
                             </ol>
 
                         </div>
@@ -70,7 +103,7 @@
                     </div>
                     <div class="text-right">
                         <button type="button" class="btn btn-danger btn-raised" (click)="form='un'">Precedent</button>
-                        <button type="button" class="btn btn-success btn-raised" (click)="form='trois'">Suivant</button>
+                        <button type="button" class="btn btn-success btn-raised" (click)="page2()">Suivant</button>
                     </div>
                 </div>
             </div>
@@ -78,75 +111,109 @@
 
             <div class="card-body " *ngIf="form==='trois'">
                 <div class="card-block">
-                    
-                            <form>
-                                    <div class="row">
-                                            <div class="col-md-4 col-sm-4 col-lg-4">
 
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+
+                                <div class="form-group" *ngIf="levelsForm.length>0">
+                                    <label for="levelName">Niveau</label>
+                                    <select name="levelName" class="form-control" (change)="getParent()" [(ngModel)]="lineForm.levelName">
+                                        <option *ngFor="let level of levelsForm" [value]="level.name">{{level.name}}</option>
+                                    </select>
+                                    <!-- <input type="text" (input)="getParent()" name="levelName" placeholder="Veillez saisir le titre"
+                                        class="form-control" [(ngModel)]="lineForm.levelName"> -->
+                                </div>
                                 <div class="form-group">
-                                    <label for="structure">Niveau</label>
-                                    <select name="level" class="form-control" [(ngModel)]="levelForm.levelName">
-                                        <option value="none" selected="" disabled="">Choisir structure</option>
-
-                                        <ng-container *ngFor="let level of levels">
-                                            <option value="level" >{{level.name}}</option>
-                                        </ng-container>
+                                    <label for="previous">Parent</label>
+                                    <select name="previous" class="form-control" [disabled]="hasParent" [(ngModel)]="lineForm.previous">
+                                        <option *ngFor="let line of parent" [ngValue]="line">{{line.label}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group" *ngIf="lev.previous">
-                                    <label for="structure">Parent</label>
-                                    <select name="previous" class="form-control" [(ngModel)]="lineForm.previous">
-                                            <ng-container *ngFor="let line of line">
-                                                    <option value="lline" >{{level.name}}</option>
-                                                </ng-container>
-
-                                    </select>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success btn-raised" (click)="addLine()">Ajouter</button>
                                 </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+
+
                                 <div class="form-group">
                                     <label for="code">Code</label>
-
-                                    <input type="number" class="form-control">
+                                    <input name="code" type="number" class="form-control" [(ngModel)]="lineForm.code">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
                                 <div class="form-group">
-                                    <label for="nom">Libellé</label>
+                                    <label for="label">Libellé</label>
 
-                                    <input type="text" placeholder="Veillez saisir le titre" class="form-control">
+                                    <input type="text" name="label" placeholder="Veillez saisir le titre" class="form-control"
+                                        [(ngModel)]="lineForm.label">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
 
-
-
-                                <div class="form-group">
-
-                                    <button type="button" class="btn btn-success btn-raised">Ajouter</button>
-                                </div>
                             </div>
 
                         </div>
-                            </form>
-                        
+                    </form>
+
                 </div>
                 <div class="form-group text-right">
                     <button type="button" class="btn btn-danger btn-raised" (click)="form='deux'">Precedent</button>
-                    <button type="button" class="btn btn-success btn-raised">Terminer</button>
+                    <button type="button" (click)="save()" class="btn btn-success btn-raised">Terminer</button>
                 </div>
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <table class="table">
                         <thead class="thead-default">
                             <tr>
-                                <th>#</th>
+                                <th *ngFor="let level of levels">{{level.name}}</th>
+                                <!-- <th>code</th> -->
                                 <th>Libellé</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
+                            <tr *ngFor="let l of lines">
+                                <ng-container *ngFor="let level of levels">
+                                    <td *ngIf="l.levelName===level.name">{{l.code}}</td>
+                                    <td *ngIf="l.levelName!==level.name"></td>
+                                </ng-container>
+                                <!-- <td>{{l.code}}</td> -->
+                                <td>{{l.label}}</td>
                             </tr>
 
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div class="card-body " *ngIf="form==='deux'">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-lg-4">
+                            <li *ngFor="let plan of plans" (click)="fixPlan(plan)">{{plan.name}}</li>
+
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-lg-8">
+                            <table class="table">
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th *ngFor="let level of levels">{{level.name}}</th>
+                                        <!-- <th>code</th> -->
+                                        <th>Libellé</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let l of lines">
+                                        <ng-container *ngFor="let level of levels">
+                                            <td *ngIf="l.levelName===level.name">{{l.code}}</td>
+                                            <td *ngIf="l.levelName!==level.name"></td>
+                                        </ng-container>
+                                        <!-- <td>{{l.code}}</td> -->
+                                        <td>{{l.label}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { PlanComponent } from "./plan/plan.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfigurationService } from './configuation.service';
 
 
 
@@ -24,6 +25,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         PlanComponent,
      
     ],
-    providers: [],
+    providers: [ConfigurationService],
 })
 export class ConfigurationModule { }

@@ -10,12 +10,14 @@ export const ROUTES: RouteInfo[] = [
         ]
     },
     {
-        path: '', title: 'Configuration', icon: 'ft-home', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
-            { path: '/configuration/plan', title: 'Plan', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        path: '', title: 'Configuration', icon: 'ft-settings', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
+            { path: '/configuration/plan', title: 'Plan', icon: 'fa fa-th', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
         ]
     },
     {
-        path: '/budget', title: 'Budget', icon: 'icon-wallet', class: '', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: []
+        path: '', title: 'Budget', icon: 'icon-wallet', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
+            { path: '/budget/saisie', title: 'Saisie Budget', icon: 'fa fa-th', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+        ]
     },
     { path: '/colorpalettes', title: 'Color Palette', icon: 'ft-droplet', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
     { path: '/inbox', title: 'Inbox', icon: 'ft-mail', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

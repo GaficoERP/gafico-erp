@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BudgetComponent } from "./main/budget.component";
+import { BudgetComponent } from "./saisie/budget.component";
 
 
 const routes: Routes = [
   {
-    path: 'budget',
-    component: BudgetComponent,
-    data: {
-      title: 'Budget'
-    },
+    path: '',
+    children: [
+      {
+        path: 'saisie',
+        component: BudgetComponent,
+        data: {
+          title: 'saisie'
+        }
+      },
+    
+    ]
   }
 ];
 

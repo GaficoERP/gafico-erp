@@ -5,7 +5,7 @@ import { ChartistModule } from 'ng-chartist';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BudgetComponent } from './main/budget.component';
+import { BudgetComponent } from './saisie/budget.component';
 
 
 @NgModule({
