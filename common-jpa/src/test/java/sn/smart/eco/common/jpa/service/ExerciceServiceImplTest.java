@@ -12,8 +12,6 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Date;
-
 import javax.transaction.Transactional;
 
 @ContextConfiguration(classes = {CommonConfigTest.class})
@@ -26,8 +24,8 @@ public class ExerciceServiceImplTest extends AbstractJpaCommonTest {
   @Test
   public void addExerciceTest() {
     Exercice exo = new Exercice();
-    exo.setStart(new Date());
-    exo.setEnd(new Date());
+    exo.setStart("2018-01-01");
+    exo.setEnd("2018-12-31");
     exo.setYear(2018);
 
     Exercice savedExo = service.addExercice(exo);

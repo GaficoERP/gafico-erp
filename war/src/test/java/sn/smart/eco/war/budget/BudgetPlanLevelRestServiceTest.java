@@ -1,12 +1,12 @@
-package sn.smart.eco.budget.rest;
+package sn.smart.eco.war.budget;
 
 import sn.smart.eco.budget.AbstractBudgetTest;
-import sn.smart.eco.budget.config.BudgetConfigRestTest;
+import sn.smart.eco.war.GaficoRestConfigTest;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-@ContextConfiguration(classes = {BudgetConfigRestTest.class})
+@ContextConfiguration(classes = {GaficoRestConfigTest.class})
 @WebAppConfiguration
 public class BudgetPlanLevelRestServiceTest extends AbstractBudgetTest {
   // private MockMvc mockMvc;

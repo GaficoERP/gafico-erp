@@ -1,17 +1,17 @@
 package sn.smart.eco.budget.repositories;
 
-
+import sn.smart.eco.budget.model.Budget;
+import sn.smart.eco.commonjpa.model.Exercice;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import sn.smart.eco.budget.model.Budget;
-import sn.smart.eco.clients.model.ClientEntity;
+import java.util.Optional;
 
 @Repository
-public interface BudgetRepository extends JpaRepository<Budget, Long>
- {
+public interface BudgetRepository extends JpaRepository<Budget, Long> {
 
-	Budget findByClient(ClientEntity client);
-	
+  Optional<Budget> findByExercice(Exercice exercice);
+
+  Optional<Budget> findByName(String name);
 }

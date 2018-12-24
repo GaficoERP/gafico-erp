@@ -68,7 +68,7 @@
                                     <label for="nom">Nom de la structure</label>
 
                                     <input type="text" class="form-control" name="nameStr" placeholder="nom structure"
-                                        [(ngModel)]="strForm.name">
+                                        [(ngModel)]="structName">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
                                 <div class="form-group">
@@ -92,7 +92,7 @@
                         </div>
                         <div class="col-sm-6 col-lg 6 col-md-6">
                             <div class="content-header">Structuration</div>
-                            <label>Nom: {{strForm.name}}</label><br>
+                            <label>Nom: {{structName}}</label><br>
                             <label>Niveaux: </label>
                             <ol>
                                 <li *ngFor="let level of levels">{{level.name}}&nbsp;&nbsp;({{level.codeLength}})</li>
@@ -130,16 +130,11 @@
                                         <option *ngFor="let line of parent" [ngValue]="line">{{line.label}}</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-success btn-raised" (click)="addLine()">Ajouter</button>
-                                </div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-lg-6">
-
-
                                 <div class="form-group">
                                     <label for="code">Code</label>
-                                    <input name="code" type="number" class="form-control" [(ngModel)]="lineForm.code">
+                                    <input name="code" type="text" class="form-control" [(ngModel)]="lineForm.code">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
                                 </div>
                                 <div class="form-group">
@@ -151,14 +146,27 @@
                                 </div>
 
                             </div>
-
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="code">Nature</label>
+                                    <select name="nature" class="form-control" [(ngModel)]="lineForm.nature">
+                                        <option value="RECETTE_INVESTISSEMENT">Recette d'investissement</option>
+                                        <option value="RECETTE_FONCTIONNEMENT">Recette de fonctionnement</option>
+                                        <option value="DEPENSE_INVESTISSEMENT">Dépense d'investissement</option>
+                                        <option value="DEPENSE_FONCTIONNEMENT">Dépense de fonctionnement</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-success btn-raised" (click)="addLine()">Ajouter</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
 
                 </div>
                 <div class="form-group text-right">
                     <button type="button" class="btn btn-danger btn-raised" (click)="form='deux'">Precedent</button>
-                    <button type="button" (click)="save()" class="btn btn-success btn-raised">Terminer</button>
+                    <button type="button" (click)="savePlan()" class="btn btn-success btn-raised">Terminer</button>
                 </div>
                 <div class="col-md-12 col-sm-12 col-lg-12">
                     <table class="table">

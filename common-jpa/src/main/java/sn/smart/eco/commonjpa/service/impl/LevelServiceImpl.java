@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,8 +32,8 @@ public class LevelServiceImpl implements LevelService {
   }
 
   @Override
-  public void deleteLevel(@NonNull String levelName) {
-    lvRepository.deleteById(levelName);
+  public void deleteLevel(@NonNull Long id) {
+    lvRepository.deleteById(id);
   }
 
   @Override
@@ -42,14 +41,25 @@ public class LevelServiceImpl implements LevelService {
     return lvRepository.save(level);
   }
 
+  // @Override
+  // public List<Level> findLevelsByPrevious(Level previous) {
+  // Optional<List<Level>> levels = lvRepository.findByPrevious(previous);
+  // if (levels.isPresent()) {
+  // return levels.get();
+  // }
+  //
+  // return new ArrayList<>();
+  // }
+
   @Override
-  public List<Level> findLevelsByPrevious(Level previous) {
-    Optional<List<Level>> levels = lvRepository.findByPrevious(previous);
-    if (levels.isPresent()) {
-      return levels.get();
+  public Level findByPositionAndIdentifierStructuration(Integer position, String structuration) {
+    Optional<Level> level =
+        lvRepository.findByPositionAndStructuration(position, structuration);
+    if (level.isPresent()) {
+      return level.get();
     }
 
-    return new ArrayList<>();
+    return null;
   }
 
 }

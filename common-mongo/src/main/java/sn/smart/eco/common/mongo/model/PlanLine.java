@@ -4,7 +4,7 @@ import sn.smart.eco.common.model.GaficoNature;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("plan_line")
@@ -12,11 +12,12 @@ public class PlanLine {
   @Id
   private String id;
   private String label;
-  private Integer code;
+  @Indexed(unique = true)
+  private String code;
   private String levelName;
   private GaficoNature nature;
-  @DBRef(lazy = false)
-  private PlanLine previous;
+  // @DBRef(lazy = false)
+  // private PlanLine previous;
   private String plan;
 
   public PlanLine() {}
@@ -37,11 +38,11 @@ public class PlanLine {
     this.label = label;
   }
 
-  public Integer getCode() {
+  public String getCode() {
     return code;
   }
 
-  public void setCode(Integer code) {
+  public void setCode(String code) {
     this.code = code;
   }
 
@@ -61,13 +62,13 @@ public class PlanLine {
     this.nature = nature;
   }
 
-  public PlanLine getPrevious() {
-    return previous;
-  }
-
-  public void setPrevious(PlanLine previous) {
-    this.previous = previous;
-  }
+  // public PlanLine getPrevious() {
+  // return previous;
+  // }
+  //
+  // public void setPrevious(PlanLine previous) {
+  // this.previous = previous;
+  // }
 
   public String getPlan() {
     return plan;

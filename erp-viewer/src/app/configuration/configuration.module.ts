@@ -7,6 +7,7 @@ import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { PlanComponent } from "./plan/plan.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from './configuation.service';
+import { ExerciceComponent } from './exercice/exercice.component';
 
 
 
@@ -23,6 +24,7 @@ import { ConfigurationService } from './configuation.service';
     exports: [],
     declarations: [
         PlanComponent,
+        ExerciceComponent,
      
     ],
     providers: [ConfigurationService],

@@ -28,13 +28,13 @@ public class PlanLineRestService {
   }
 
   @GetMapping("/findByCodeAndLabel/{code}/{label}")
-  public PlanLine findByCodeAndLabel(@PathVariable @NonNull int code,
+  public PlanLine findByCodeAndLabel(@PathVariable @NonNull String code,
       @PathVariable @NonNull String label) {
     return plService.findByCodeAndLabel(code, label);
   }
 
   @GetMapping("/findByCodeAndPlan/{code}/{plan}")
-  public PlanLine findByCodeAndPlan(@PathVariable @NonNull int code,
+  public PlanLine findByCodeAndPlan(@PathVariable @NonNull String code,
       @PathVariable @NonNull String plan) {
     return plService.findByCodeAndPlan(code, plan);
   }
@@ -51,7 +51,7 @@ public class PlanLineRestService {
   }
 
   @GetMapping("/findByPreviousCodeAndPlan/{previousCode}/{plan}")
-  public List<PlanLine> findByPreviousCodeAndPlan(@PathVariable @NonNull Integer previousCode,
+  public List<PlanLine> findByPreviousCodeAndPlan(@PathVariable @NonNull String previousCode,
       @PathVariable @NonNull String plan) {
     return plService.findByPreviousCodeAndPlan(previousCode, plan);
   }

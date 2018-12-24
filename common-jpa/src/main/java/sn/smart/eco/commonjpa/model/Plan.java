@@ -1,60 +1,73 @@
 package sn.smart.eco.commonjpa.model;
 
+import sn.smart.eco.common.utils.GaficoCommonUtils;
+
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import sn.smart.eco.common.utils.GaficoCommonUtils;
 
 @Entity
 @Table(name = "common_plan")
 public class Plan {
-	@Id
-	private String name;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Structuration structuration;
-	private boolean isActive;
-	private boolean isValidated;
+  @Id
+  private String name;
+  // @OneToOne // (cascade = CascadeType.ALL)
+  // private Structuration structuration;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Level> structuration;
+  private boolean isActive;
+  private boolean isValidated;
 
-	public Plan() {
-	}
+  public Plan() {}
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public Structuration getStructuration() {
-		return structuration;
-	}
+  public List<Level> getStructuration() {
+    if (CollectionUtils.isEmpty(structuration)) {
+      structuration = new ArrayList<>();
+    }
+    return structuration;
+  }
 
-	public void setStructuration(Structuration structuration) {
-		this.structuration = structuration;
-	}
+  public void setStructuration(List<Level> structuration) {
+    this.structuration = structuration;
+  }
 
-	public boolean isActive() {
-		return isActive;
-	}
+  public void addLevel(Level level) {
+    getStructuration().add(level);
+  }
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+  public boolean isActive() {
+    return isActive;
+  }
 
-	public boolean isValidated() {
-		return isValidated;
-	}
+  public void setActive(boolean isActive) {
+    this.isActive = isActive;
+  }
 
-	public void setValidated(boolean isValidated) {
-		this.isValidated = isValidated;
-	}
+  public boolean isValidated() {
+    return isValidated;
+  }
 
-	@Override
-	public String toString() {
-		return GaficoCommonUtils.toJsonString(this);
-	}
+  public void setValidated(boolean isValidated) {
+    this.isValidated = isValidated;
+  }
+
+  @Override
+  public String toString() {
+    return GaficoCommonUtils.toJsonString(this);
+  }
 }

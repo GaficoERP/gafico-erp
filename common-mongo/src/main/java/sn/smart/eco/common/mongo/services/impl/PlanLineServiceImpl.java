@@ -20,7 +20,7 @@ public class PlanLineServiceImpl implements PlanLineService {
   private PlanLineRepository plRepository;
 
   @Override
-  public PlanLine findByCodeAndLabel(int code, @NonNull String label) {
+  public PlanLine findByCodeAndLabel(String code, @NonNull String label) {
     Optional<PlanLine> pLine = plRepository.findByCodeAndLabel(code, label);
     if (pLine.isPresent()) {
       return pLine.get();
@@ -30,7 +30,7 @@ public class PlanLineServiceImpl implements PlanLineService {
   }
 
   @Override
-  public PlanLine findByCodeAndPlan(int code, @NonNull String plan) {
+  public PlanLine findByCodeAndPlan(String code, @NonNull String plan) {
     Optional<PlanLine> pLine = plRepository.findByCodeAndPlan(code, plan);
     if (pLine.isPresent()) {
       return pLine.get();
@@ -61,13 +61,14 @@ public class PlanLineServiceImpl implements PlanLineService {
   }
 
   @Override
-  public List<PlanLine> findByPreviousCodeAndPlan(@NonNull Integer previous, @NonNull String plan) {
-    Optional<List<PlanLine>> pLines =
-        plRepository.findByPreviousCodeAndPlanOrderByCodeDesc(previous, plan);
-    if (pLines.isPresent()) {
-      return pLines.get();
-    }
+  public List<PlanLine> findByPreviousCodeAndPlan(@NonNull String previous, @NonNull String plan) {
+    // Optional<List<PlanLine>> pLines =
+    // plRepository.findByPreviousCodeAndPlanOrderByCodeDesc(previous, plan);
+    // if (pLines.isPresent()) {
+    // return pLines.get();
+    // }
 
+    // FIXME
     return ListUtils.emptyIfNull(null);
   }
 
@@ -85,19 +86,20 @@ public class PlanLineServiceImpl implements PlanLineService {
     if (previous == null) {
       pLines = plRepository.findByLevelNameAndPlanOrderByCodeDesc(levelName, plan);
       if (pLines.isPresent() && CollectionUtils.isNotEmpty(pLines.get())) {
-        Integer newCode = pLines.get().get(0).getCode() + 1;
+        Integer newCode = Integer.parseInt(pLines.get().get(0).getCode()) + 1;
         return String.valueOf(newCode);
       }
       return new String("1");
     } else {
-      pLines = plRepository.findByPreviousOrderByCodeDesc(previous);
-      if (pLines.isPresent()) {
-        Integer newCode = pLines.get().get(0).getCode() + 1;
+      // FIXME à corriger
+      // pLines = plRepository.findByPreviousOrderByCodeDesc(previous);
+      if (false/* pLines.isPresent() */) {
+        Integer newCode = Integer.parseInt(pLines.get().get(0).getCode()) + 1;
         return String.valueOf(newCode);
       } else {
         // codePrevious * (10^tailleCode[level]) + 1
         double pow = Math.pow(10, levelCodeSize);
-        double newCode = pow * previous.getCode() + 1;
+        double newCode = pow * Integer.parseInt(previous.getCode()) + 1;
         return String.valueOf(newCode);
       }
     }

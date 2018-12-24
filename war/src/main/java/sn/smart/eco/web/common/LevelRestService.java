@@ -6,6 +6,7 @@ import sn.smart.eco.commonjpa.service.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +37,9 @@ public class LevelRestService {
     return service.addAllLevels(levels);
   }
 
-  @GetMapping("/findByPrevious")
-  public List<Level> findAllByPrevious(@RequestBody @NonNull Level previous) {
-    return service.findLevelsByPrevious(previous);
+  @GetMapping("/findByPrevious/{position}/{structuration}")
+  public Level findByPrevious(@PathVariable @NonNull Integer position,
+      @PathVariable @NonNull String structuration) {
+    return service.findByPositionAndIdentifierStructuration(position, structuration);
   }
 }

@@ -7,9 +7,6 @@ import { Plan } from 'app/models/plan';
 import { ConfigurationService } from '../configuation.service';
 
 
-
-
-
 @Component({
     selector: 'app-plan',
     templateUrl: './plan.component.html',
@@ -23,11 +20,12 @@ export class PlanComponent implements OnInit {
     levelForm: Level = new Level();
     //for input level in the form
     lev: Level = new Level();
-    strForm: Structuration = new Structuration();
+    structName: string;
+//    strForm: Structuration = new Structuration();
     lineForm: PlanLine = new PlanLine();
     parent: PlanLine[] = new Array();
     plans: Plan[] = new Array();
-    strs: Structuration[] = new Array();
+//    strs: Structuration[] = new Array();
     lines: PlanLine[] = new Array();
     levels: Level[] = new Array();
     levelsForm: Level[] = new Array();
@@ -38,33 +36,48 @@ export class PlanComponent implements OnInit {
 
     ngOnInit() {
          this.getPlans();
-     
-
     }
 
     addLevel() {
-
-        if (this.levels.length > 1) {
-            this.levelForm.previous = this.levels[this.levels.length - 1];
+//        if (this.levels.length > 1) {
+//            this.levels[this.levels.length - 1].children.push(this.levelForm);
+//            this.levelForm.previous = this.levels[this.levels.length - 1];
+//        }
+        if(this.levels.length == 0) {
+            this.levelForm.position=0;
+            this.levelForm.structuration=this.structName;
         }
-        this.levels.push(this.levelForm)
-        this.levelForm = { name: "", codeLength: 0, previous: this.levelForm }
-
-
-
+        this.levels.push(this.levelForm);
+        this.levelForm = { name: "", codeLength: 0,  structuration:this.structName, position:this.levelForm.position+1};
     }
+    
+    
     addLine() {
-        this.lines.push(this.lineForm)
-        this.lineForm = { label: "", code: 0, levelName: "", previous: this.lineForm, plan: this.planForm }
+        if(this.lineForm.code.length < this.getCodeLength(this.lineForm.levelName)) {
+            var dif = this.getCodeLength(this.lineForm.levelName) - this.lineForm.code.length;
+            for(var i = 0; i < dif; i++) {
+                this.lineForm.code = "0" + this.lineForm.code;
+            }
+        }
+        
+        if(this.lineForm.previous != null) {
+            this.lineForm.code = this.lineForm.previous.code + this.lineForm.code;
+        }
+        this.lines.push(this.lineForm);
+        // TODO pour le code, appeler getNextCode
+        this.lineForm = { label: "", code: "0", levelName: "", nature: this.lineForm.nature, previous: this.lineForm, plan: this.planForm.name };
         console.log(this.lines);
         this.getLevel();
         this.getParent();
     }
+    
+    
     addPlan() {
         this.form = 'un';
         this.getLevel();
     }
 
+    
     getLevel() {
         this.levelsForm = new Array();
         this.levelsForm.push(this.levels[0]);
@@ -77,10 +90,10 @@ export class PlanComponent implements OnInit {
                     break;
                 }
             }
-
         }
         console.log(this.levelsForm);
     }
+    
     getParent() {
         var lev;
         this.parent = new Array();
@@ -115,33 +128,31 @@ export class PlanComponent implements OnInit {
 
     page2() {
         this.form = 'trois';
-        this.strForm.levels = this.levels;
-        this.planForm.structuration = this.strForm;
+//        this.strForm.levels = this.levels;
+        //this.planForm.structuration = this.strForm;
+        this.planForm.structuration = this.levels;
         this.getLevel();
     }
-
-   
 
 
     fixplan(plans) {
         this.planForm = plans;
-        this.levels = this.planForm.structuration.levels;
+        this.levels = this.planForm.structuration;
         this.form = '';
 
     }
      
+    
     savePlan() {
         this.plans.push(this.planForm)
 
-        this.cs.savePlan(this.planForm)
+        var plEntity={plan:this.planForm, planLines:this.lines};
+        this.cs.savePlanWithLines(plEntity)
             .subscribe(data => {
-
                 console.log(data);
-
             });
-
-
     }
+    
     
     getPlans(){
         var ps:Plan[];
@@ -153,15 +164,15 @@ export class PlanComponent implements OnInit {
                     this.plans=ps;
                     console.log(this.plans);
                 }
-           
-
         });
-
     }
-
-
-
-
-
-
+    
+    getCodeLength(levelName) {
+        for(var i = 0; i < this.levels.length; i++) {
+            if(this.levels[i].name == levelName){
+                return this.levels[i].codeLength;    
+            }
+        }
+        return 0;
+    }
 }

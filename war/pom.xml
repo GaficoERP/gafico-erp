@@ -10,12 +10,6 @@
 	<packaging>war</packaging>
 	<name>gafico</name>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-	</properties>
-
 	<dependencies>
 		<!-- GaFiCo Projects -->
 		<dependency>
@@ -29,6 +23,10 @@
 		<dependency>
 			<groupId>sn.smart.eco</groupId>
 			<artifactId>clients</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>sn.smart.eco</groupId>
+			<artifactId>budget</artifactId>
 		</dependency>
 
 		<dependency>

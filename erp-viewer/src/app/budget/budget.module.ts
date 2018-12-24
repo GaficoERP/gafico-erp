@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatchHeightModule } from "../shared/directives/match-height.directive";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetComponent } from './saisie/budget.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { BudgetComponent } from './saisie/budget.component';
     ],
     exports: [],
     declarations: [
-        BudgetComponent
+        BudgetComponent,
+        ConfigurationComponent
     ],
     providers: []
 })

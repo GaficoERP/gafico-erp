@@ -1,9 +1,10 @@
 import {Plan} from './plan';
 export class PlanLine {
     label:string;
-    code:number;
+    code:string;
     levelName:string;
+    nature:string;
     previous:PlanLine;
-    plan:Plan;
+    plan:string;
 
 }

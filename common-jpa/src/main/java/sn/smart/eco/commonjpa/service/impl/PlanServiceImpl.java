@@ -14,9 +14,12 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
   @Autowired
   private PlanRepository planRepository;
+  // @Autowired
+  // private StructurationService structService;
 
   @Override
   public Plan addPlan(@NonNull Plan plan) {
+    // structService.addStructuration(plan.getStructuration());
     return planRepository.save(plan);
   }
 

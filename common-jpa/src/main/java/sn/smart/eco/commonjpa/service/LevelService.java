@@ -13,8 +13,8 @@ public interface LevelService {
 
   public List<Level> addAllLevels(Set<Level> levels);
 
-  public void deleteLevel(String levelName);
+  public void deleteLevel(Long id);
 
-  public List<Level> findLevelsByPrevious(Level previous);
+  public Level findByPositionAndIdentifierStructuration(Integer position, String structuration);
 
 }

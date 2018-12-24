@@ -5,7 +5,7 @@ import sn.smart.eco.commonjpa.model.Plan;
 
 import java.util.List;
 
-public class PlanResponse {
+public class PlanEntity {
 
   private Plan plan;
   private List<PlanLine> planLines;

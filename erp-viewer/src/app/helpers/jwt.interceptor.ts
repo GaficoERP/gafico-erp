@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-    tokenUser: string;
+    tokenUser: any;
     constructor(private inj: Injector, private router:Router) { }
     private isAuthError(error: any): boolean {
         return error instanceof HttpErrorResponse && error.status == 401;
@@ -17,15 +17,14 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         // add authorization header with jwt token if available
-        this.tokenUser = JSON.parse(localStorage.getItem('token'));
-        //console.log(this.tokenUser.token)
+        this.tokenUser = JSON.parse(localStorage.getItem('currentUser'));
         if (this.tokenUser) {
             req = req.clone({
                 setHeaders: {
-                  
-                    Authorization: 'Bearer '+this.tokenUser
+                    'Authorization': 'Bearer '+this.tokenUser.token,
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
                 }
-                
             });
         }
 

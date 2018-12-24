@@ -1,43 +1,25 @@
 package sn.smart.eco.budget.model;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import sn.smart.eco.common.model.GaficoNature;
 
-import java.util.Date;
-import java.util.Map;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("budget_line")
 public class BudgetLine {
-
-  private Date startDate;
-  private Date endDate;
-  private String account;
+  @Indexed(unique = true)
+  private String code;
   private String label;
-  private double amount;
-  private Map<String, Double> distributions;
-private Budget budget;
+  private GaficoNature nature;
+  private String budgetName;
+  private Double amount;
 
-  public Date getStartDate() {
-    return startDate;
+  public String getCode() {
+    return code;
   }
 
-  public void setStartDate(Date startDate) {
-    this.startDate = startDate;
-  }
-
-  public Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(Date endDate) {
-    this.endDate = endDate;
-  }
-
-  public String getAccount() {
-    return account;
-  }
-
-  public void setAccount(String account) {
-    this.account = account;
+  public void setCode(String code) {
+    this.code = code;
   }
 
   public String getLabel() {
@@ -48,50 +30,28 @@ private Budget budget;
     this.label = label;
   }
 
-  public double getAmount() {
+  public GaficoNature getNature() {
+    return nature;
+  }
+
+  public void setNature(GaficoNature nature) {
+    this.nature = nature;
+  }
+
+  public String getBudgetName() {
+    return budgetName;
+  }
+
+  public void setBudgetName(String budgetName) {
+    this.budgetName = budgetName;
+  }
+
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(double amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
-
-  public Map<String, Double> getDistributions() {
-    return distributions;
-  }
-
-  public void setDistributions(Map<String, Double> distributions) {
-    this.distributions = distributions;
-  }
-
-public Budget getBudget() {
-	return budget;
-}
-public void setBudget(Budget budget) {
-	this.budget = budget;
-}
-  
-public enum typeLigneBudgtaire {
-	recette_fonctionnement,
-	depense_fonctionnement,
-	recette_investissement,
-	depense_investissement;	
-	}
-
-public BudgetLine(Date startDate, Date endDate, String account, String label, double amount,
-		Map<String, Double> distributions, Budget budget) {
-	super();
-	this.startDate = startDate;
-	this.endDate = endDate;
-	this.account = account;
-	this.label = label;
-	this.amount = amount;
-	this.distributions = distributions;
-	this.budget = budget;
-}
-public BudgetLine() {
-	super();
-	
-}
 
 }

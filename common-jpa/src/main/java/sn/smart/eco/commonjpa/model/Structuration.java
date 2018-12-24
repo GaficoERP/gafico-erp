@@ -1,63 +1,70 @@
 package sn.smart.eco.commonjpa.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+// @Entity
+// @Table(name = "common_structuration")
+// @Embeddable
+public class Structuration implements Serializable {
+  private static final long serialVersionUID = 1L;
+  // @Id
+  // @Column(name = "struct_name")
+  private String structuration;
+  // @Id
+  private Long id;
+  // @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+  // private Set<Level> levels;
+  // private PlanType type;
 
-import org.apache.commons.collections4.CollectionUtils;
+  // public Structuration(String name, Set<Level> levels) {
+  // super();
+  // this.name = name;
+  // this.levels = levels;
+  // }
 
-import sn.smart.eco.common.utils.GaficoCommonUtils;
+  // public Structuration() {}
 
-@Entity
-@Table(name = "common_structuration")
-public class Structuration {
-	@Id
-	@Column(name = "struct_name")
-	private String name;
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Level> levels;
-	// private PlanType type;
+  // public String getName() {
+  // return name;
+  // }
+  //
+  // public void setName(String name) {
+  // this.name = name;
+  // }
 
-	public Structuration(String name, Set<Level> levels) {
-		super();
-		this.name = name;
-		this.levels = levels;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public Structuration() {
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getStructuration() {
+    return structuration;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setStructuration(String structuration) {
+    this.structuration = structuration;
+  }
 
-	public Set<Level> getLevels() {
-		if (CollectionUtils.isEmpty(levels)) {
-			levels = new HashSet<>();
-		}
-		return levels;
-	}
+  // public Set<Level> getLevels() {
+  // if (CollectionUtils.isEmpty(levels)) {
+  // levels = new HashSet<>();
+  // }
+  // return levels;
+  // }
+  //
+  // public void setLevels(Set<Level> levels) {
+  // this.levels = levels;
+  // }
+  //
+  // public void addLevel(Level level) {
+  // getLevels().add(level);
+  // }
 
-	public void setLevels(Set<Level> levels) {
-		this.levels = levels;
-	}
-
-	public void addLevel(Level level) {
-		getLevels().add(level);
-	}
-
-	@Override
-	public String toString() {
-		return GaficoCommonUtils.toJsonString(this);
-	}
+  // @Override
+  // public String toString() {
+  // return GaficoCommonUtils.toJsonString(this);
+  // }
 }

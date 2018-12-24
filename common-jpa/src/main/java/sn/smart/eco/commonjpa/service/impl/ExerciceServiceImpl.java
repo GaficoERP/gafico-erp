@@ -24,7 +24,7 @@ public class ExerciceServiceImpl implements ExerciceService {
 
   @Override
   public List<Exercice> findAll() {
-    return repository.findAll();
+    return repository.findAllByOrderByYearDesc();
   }
 
   @Override

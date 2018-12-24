@@ -2,8 +2,7 @@ package sn.smart.eco.commonjpa.model;
 
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 
-import java.util.Date;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,32 +10,34 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "common_exercice")
 public class Exercice {
-  private Date start;
-  private Date end;
+  @Column(name = "startDate")
+  private String start;
+  @Column(name = "endDate")
+  private String end;
   @Id
-  private int year;
+  private Integer year;
 
-  public Date getStart() {
+  public String getStart() {
     return start;
   }
 
-  public void setStart(Date start) {
+  public void setStart(String start) {
     this.start = start;
   }
 
-  public Date getEnd() {
+  public String getEnd() {
     return end;
   }
 
-  public void setEnd(Date end) {
+  public void setEnd(String end) {
     this.end = end;
   }
 
-  public int getYear() {
+  public Integer getYear() {
     return year;
   }
 
-  public void setYear(int year) {
+  public void setYear(Integer year) {
     this.year = year;
   }
 

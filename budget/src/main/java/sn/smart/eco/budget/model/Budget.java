@@ -1,55 +1,47 @@
 package sn.smart.eco.budget.model;
 
-import java.io.Serializable;
-import java.util.Date;
+import sn.smart.eco.commonjpa.model.Exercice;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import sn.smart.eco.clients.model.ClientEntity;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "budget")
 public class Budget implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@Id
-	private long id;
-	private Date dateDebut;
-	private Date dateFin;
-	private double montant;
-	private ClientEntity client;
-	
-	public Date getDateDebut() {
-		return dateDebut;
-	}
-	public void setDateDebut(Date dateDebut) {
-		this.dateDebut = dateDebut;
-	}
-	public Date getDateFin() {
-		return dateFin;
-	}
-	public void setDateFin(Date dateFin) {
-		this.dateFin = dateFin;
-	}
-	public double getMontant() {
-		return montant;
-	}
-	public void setMontant(double montant) {
-		this.montant = montant;
-	}
-	public ClientEntity getClient() {
-		return client;
-	}
-	public void setClient(ClientEntity client) {
-		this.client = client;
-	}
-	public long getId() {
-		return id;
-	}
-	
-		
+  private static final long serialVersionUID = 1L;
+  @Id
+  private Long id;
+  @Column(nullable = false, unique = true)
+  private String name;
+  @OneToOne
+  private Exercice exercice;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Exercice getExercice() {
+    return exercice;
+  }
+
+  public void setExercice(Exercice exercice) {
+    this.exercice = exercice;
+  }
 }

@@ -2,11 +2,11 @@ package sn.smart.eco.war.common;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import sn.smart.eco.common.model.PlanType;
 import sn.smart.eco.common.utils.GaficoCommonUtils;
 import sn.smart.eco.commonjpa.model.Level;
 import sn.smart.eco.war.AbstractRestTest;
@@ -45,8 +45,8 @@ public class LevelRestServiceTest extends AbstractRestTest {
 
   @Test
   public void addLevelTypeTest() throws Exception {
-    Level level0 = new Level("level0", 1, null);
-    Level level1 = new Level("level1", 3, level0);
+    Level level0 = new Level("structuration", "level0", 1, 0);
+    Level level1 = new Level("structuration", "level1", 1, 1);
     mockMvc
         .perform(post("/rest/common/level/addAll").contentType(MediaType.APPLICATION_JSON)
             .content(GaficoCommonUtils.toJsonString(new HashSet<>(Arrays.asList(level0, level1)))))
@@ -56,21 +56,25 @@ public class LevelRestServiceTest extends AbstractRestTest {
 
   @Test
   public void findByPreviousTest() throws Exception {
-    Level level0 = new Level("level0", 1, null);
+    Level level0 = new Level("structuration", "level0", 1, 0);
     // has result
     mockMvc
-        .perform(get("/rest/common/level/findByPrevious").contentType(MediaType.APPLICATION_JSON)
-            .content(level0.toString()).accept(MediaType.APPLICATION_JSON))
+        .perform(
+            get("/rest/common/level/findByPrevious/{position}/{structuration}", 0, "structuration")
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(jsonPath("$[0].name").value("LevelType0"));
+        .andExpect(jsonPath("$[0].name").value(level0.getName()));
 
     // Empty result
     mockMvc
-        .perform(get("/rest/common/level/findByPrevious", PlanType.BUDGET)
-            .accept(MediaType.APPLICATION_JSON))
+        .perform(
+            get("/rest/common/level/findByPrevious/{position}/{structuration}", 1, "structuration")
+                .accept(MediaType.APPLICATION_JSON))
+        .andDo(print())//
         .andExpect(status().isOk())//
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))//
-        .andExpect(content().string("[]"));
+        .andExpect(content().string(""));
   }
 }

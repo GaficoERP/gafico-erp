@@ -8,15 +8,15 @@ import java.util.List;
 public interface PlanLineService {
   public PlanLine addPlanLine(PlanLine pl);
 
-  public PlanLine findByCodeAndLabel(int code, String label);
+  public PlanLine findByCodeAndLabel(String code, String label);
 
-  public PlanLine findByCodeAndPlan(int code, String plan);
+  public PlanLine findByCodeAndPlan(String code, String plan);
 
   public List<PlanLine> findByPlan(String plan);
 
   public List<PlanLine> findByLevelNameAndPlan(String level, String plan);
 
-  public List<PlanLine> findByPreviousCodeAndPlan(Integer previousCode, String plan);
+  public List<PlanLine> findByPreviousCodeAndPlan(String previousCode, String plan);
 
   public GaficoResult deletePlanLine(PlanLine planLine);
 

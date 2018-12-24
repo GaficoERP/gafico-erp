@@ -54,6 +54,11 @@
 				<artifactId>gafico-user</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>sn.smart.eco</groupId>
+				<artifactId>budget</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- Spring dependencies -->
 			<dependency>
