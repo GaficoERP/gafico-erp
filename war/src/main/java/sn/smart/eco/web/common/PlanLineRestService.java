@@ -3,6 +3,7 @@ package sn.smart.eco.web.common;
 import sn.smart.eco.common.model.GaficoResult;
 import sn.smart.eco.common.mongo.model.PlanLine;
 import sn.smart.eco.common.mongo.services.PlanLineService;
+import sn.smart.eco.commonjpa.service.PlanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -21,6 +22,8 @@ import java.util.List;
 public class PlanLineRestService {
   @Autowired
   private PlanLineService plService;
+  @Autowired
+  private PlanService planService;
 
   @PostMapping("/add")
   public PlanLine addPlanLine(@RequestBody @NonNull PlanLine pl) {
@@ -42,6 +45,12 @@ public class PlanLineRestService {
   @GetMapping("/findByPlan/{plan}")
   public List<PlanLine> findByPlan(@PathVariable @NonNull String plan) {
     return plService.findByPlan(plan);
+  }
+
+  @GetMapping("/findDeepersByPlan/{plan}")
+  public List<PlanLine> findDeepersByPlan(@PathVariable @NonNull String plan) {
+    String levelName = planService.findDeeperLevelName(plan);
+    return plService.findByLevelNameAndPlan(levelName, plan);
   }
 
   @GetMapping("/findByLevelNameAndPlan/{level}/{plan}")

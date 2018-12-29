@@ -1,8 +1,10 @@
 package sn.smart.eco.web.budget;
 
 import sn.smart.eco.budget.model.Budget;
+import sn.smart.eco.budget.services.BudgetLineService;
 import sn.smart.eco.budget.services.BudgetService;
 import sn.smart.eco.commonjpa.model.Exercice;
+import sn.smart.eco.web.budget.model.BudgetEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,25 +24,39 @@ public class BudgetRestService {
 
   @Autowired
   private BudgetService service;
+  @Autowired
+  private BudgetLineService blService;
 
-  @GetMapping("/find/{client}")
+  @GetMapping("/find/{exercice}")
   public Budget findBudgetByExercice(@PathVariable @NonNull Exercice exercice) {
     return service.findBudgetByExercice(exercice);
 
   }
 
-  @PostMapping("/add")
-  public Budget addBudget(@RequestBody @NonNull Budget bt) {
-    return service.addBudget(bt);
+  @GetMapping("/find")
+  public Budget findBudget() {
+    return service.findCurrentBudget();
+
   }
 
-  @PutMapping("/bugdet")
+  @PostMapping("/save")
+  public Budget saveBudget(@RequestBody @NonNull BudgetEntity entity) {
+    Budget savedBudget = service.addBudget(entity.getBudget());
+    if (savedBudget != null) {
+      entity.getBudgetLines().forEach(bl -> bl.setBudgetName(savedBudget.getName()));
+      blService.saveAll(entity.getBudgetLines());
+    }
+
+    return savedBudget;
+  }
+
+  @PutMapping("/update")
   public Budget updateBudget(@RequestBody Budget budgetDetails) {
     return service.updateBudget(budgetDetails);
   }
 
   // Delete a Budget
-  @DeleteMapping("/bugdet/{name}")
+  @DeleteMapping("/delete/{name}")
   public ResponseEntity<?> deleteBudget(@PathVariable(value = "name") String budget) {
     return service.deleteBudget(budget);
   }

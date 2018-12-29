@@ -1,5 +1,8 @@
 package sn.smart.eco.web.common;
 
+import sn.smart.eco.commonjpa.model.ConfigParameter;
+import sn.smart.eco.commonjpa.utils.ConfigParameters;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import sn.smart.eco.commonjpa.model.ConfigParameter;
-import sn.smart.eco.commonjpa.utils.ConfigParameters;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest/common/config")
@@ -28,6 +30,11 @@ public class ConfigParameterRestService {
   @GetMapping("/find/{paramName}")
   public ConfigParameter find(@PathVariable @NonNull String paramName) {
     return configParams.getParameter(paramName);
+  }
+
+  @GetMapping("/findByComponent/{componentName}")
+  public List<ConfigParameter> findByComponentName(@PathVariable @NonNull String componentName) {
+    return configParams.getParametersByComponentName(componentName);
   }
 
   @DeleteMapping("/del/{paramName}")

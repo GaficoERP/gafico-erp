@@ -1,38 +1,43 @@
-<div class="row ">
+<div class="row">
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">
 				<h4 class="card-title">Nouvelle Exercice</h4>
 			</div>
 			<div class="card-body">
-				<form>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="year">Année</label> <input type="number"
-									class="form-control" id="year" name="year" [(ngModel)]="exercice.year">
+				<div class="card-block">
+					<form>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="year">Année</label> <input type="number"
+										class="form-control" id="year" name="year"
+										[(ngModel)]="exercice.year">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="start">Date de Début</label> <input type="date"
+										class="form-control" id="start" name="start"
+										[(ngModel)]="exercice.start">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="end">Date de Fin</label> <input type="date"
+										class="form-control" id="end" name="end"
+										[(ngModel)]="exercice.end">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<br />
+								<button type="button"
+									class="btn btn-success btn-raised col-lg-5"
+									(click)="addExercice()">Ajouter</button>
 							</div>
 						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="start">Date de Début</label> <input type="date"
-									class="form-control" id="start" name="start" [(ngModel)]="exercice.start">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label for="end">Date de Fin</label> <input type="date"
-									class="form-control" id="end" name="end" [(ngModel)]="exercice.end">
-							</div>
-						</div>
-						<div class="col-md-3">
-							<br />
-							<button type="button"
-								class="btn btn-success btn-raised col-lg-5"
-								(click)="addExercice()">Ajouter</button>
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 		<div class="card">

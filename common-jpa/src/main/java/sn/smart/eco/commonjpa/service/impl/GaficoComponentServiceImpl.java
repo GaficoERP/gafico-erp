@@ -38,4 +38,14 @@ public class GaficoComponentServiceImpl implements GaficoComponentService {
     return componentRepository.save(component);
   }
 
+  @Override
+  public GaficoComponent findByName(String name) {
+    Optional<GaficoComponent> component = componentRepository.findByName(name);
+    if (component.isPresent()) {
+      return component.get();
+    }
+
+    return null;
+  }
+
 }
