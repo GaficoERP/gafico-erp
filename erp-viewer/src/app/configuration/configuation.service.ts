@@ -12,6 +12,7 @@ export class ConfigurationService {
     private urlAddPlan = 'http://localhost:8080/war/rest/common/plan/add';
     private urlAddPlanWithLines = 'http://localhost:8080/war/rest/common/config/addPlanWithLines';
     private urlAddLines = 'http://localhost:8080/war/rest/common/planline/add';
+    private urlGetLines = 'http://localhost:8080/war/rest/common/planline/findByPlan/';
     private urlLongin = 'http://localhost:8080/war/api/auth/login';
     private urlAllPlan = 'http://localhost:8080/war/rest/common/plan/findAll';
 
@@ -25,6 +26,10 @@ export class ConfigurationService {
 
         return this.http.post<Plan>(this.urlAddPlan, object);
     }
+    getLinesOfPlan(object){
+        return this.http.get<PlanLine[]>(this.urlGetLines+object.name);
+    }
+
     saveLines(object) {
 
         return this.http.post<PlanLine>(this.urlAddLines, object);

@@ -12,6 +12,7 @@
                             Plan</button>
                     </div>
                     <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12 text-right">
+                        <b class="text-left">{{planForm.name}}</b>
                         <button type="button" class="btn btn-success btn-raised col-lg-2 " (click)="updatePlan() ">M-à-J</button>
                         <table class="table text-center">
                             <thead class="thead-default">
@@ -165,7 +166,8 @@
 
                 </div>
                 <div class="form-group text-right">
-                    <button type="button" class="btn btn-danger btn-raised" (click)="form='deux'">Precedent</button>
+                    <button type="button" *ngIf="isCreate" class="btn btn-danger btn-raised" (click)="form='un'">Precedent</button>
+                    <button type="button" *ngIf="!isCreate" class="btn btn-danger btn-raised" (click)="form=''">Annuler</button>
                     <button type="button" (click)="savePlan()" class="btn btn-success btn-raised">Terminer</button>
                 </div>
                 <div class="col-md-12 col-sm-12 col-lg-12">

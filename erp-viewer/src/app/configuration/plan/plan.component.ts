@@ -21,46 +21,47 @@ export class PlanComponent implements OnInit {
     //for input level in the form
     lev: Level = new Level();
     structName: string;
-//    strForm: Structuration = new Structuration();
+    //    strForm: Structuration = new Structuration();
     lineForm: PlanLine = new PlanLine();
     parent: PlanLine[] = new Array();
     plans: Plan[] = new Array();
-//    strs: Structuration[] = new Array();
+    //    strs: Structuration[] = new Array();
     lines: PlanLine[] = new Array();
     levels: Level[] = new Array();
     levelsForm: Level[] = new Array();
     hasParent = true;
+    isCreate = true;
 
 
     constructor(private cs: ConfigurationService) { }
 
     ngOnInit() {
-         this.getPlans();
+        this.getPlans();
     }
 
     addLevel() {
-//        if (this.levels.length > 1) {
-//            this.levels[this.levels.length - 1].children.push(this.levelForm);
-//            this.levelForm.previous = this.levels[this.levels.length - 1];
-//        }
-        if(this.levels.length == 0) {
-            this.levelForm.position=0;
-            this.levelForm.structuration=this.structName;
+        //        if (this.levels.length > 1) {
+        //            this.levels[this.levels.length - 1].children.push(this.levelForm);
+        //            this.levelForm.previous = this.levels[this.levels.length - 1];
+        //        }
+        if (this.levels.length == 0) {
+            this.levelForm.position = 0;
+            this.levelForm.structuration = this.structName;
         }
         this.levels.push(this.levelForm);
-        this.levelForm = { name: "", codeLength: 0,  structuration:this.structName, position:this.levelForm.position+1};
+        this.levelForm = { name: "", codeLength: 0, structuration: this.structName, position: this.levelForm.position + 1 };
     }
-    
-    
+
+
     addLine() {
-        if(this.lineForm.code.length < this.getCodeLength(this.lineForm.levelName)) {
+        if (this.lineForm.code.length < this.getCodeLength(this.lineForm.levelName)) {
             var dif = this.getCodeLength(this.lineForm.levelName) - this.lineForm.code.length;
-            for(var i = 0; i < dif; i++) {
+            for (var i = 0; i < dif; i++) {
                 this.lineForm.code = "0" + this.lineForm.code;
             }
         }
-        
-        if(this.lineForm.previous != null) {
+
+        if (this.lineForm.previous != null) {
             this.lineForm.code = this.lineForm.previous.code + this.lineForm.code;
         }
         this.lines.push(this.lineForm);
@@ -70,14 +71,14 @@ export class PlanComponent implements OnInit {
         this.getLevel();
         this.getParent();
     }
-    
-    
+
+
     addPlan() {
         this.form = 'un';
         this.getLevel();
     }
 
-    
+
     getLevel() {
         this.levelsForm = new Array();
         this.levelsForm.push(this.levels[0]);
@@ -93,7 +94,7 @@ export class PlanComponent implements OnInit {
         }
         console.log(this.levelsForm);
     }
-    
+
     getParent() {
         var lev;
         this.parent = new Array();
@@ -101,21 +102,22 @@ export class PlanComponent implements OnInit {
         for (var i = 0; i < this.levels.length; i++) {
             if (this.lineForm.levelName === this.levels[i].name) {
                 console.log(this.lineForm.levelName);
-                lev = this.levels[i];
+                if (i > 0)
+                    lev = this.levels[i - 1];
                 console.log(lev);
                 break;
             }
         }
         console.log(lev);
         if (lev) {
-            if (lev.previous) {
-                for (var i = 0; i < this.lines.length; i++) {
-                    if (lev.previous.name === this.lines[i].levelName) {
-                        this.parent.push(this.lines[i]);
 
-                    }
+            for (var i = 0; i < this.lines.length; i++) {
+                if (lev.name === this.lines[i].levelName) {
+                    this.parent.push(this.lines[i]);
+
                 }
             }
+
             console.log(this.parent);
         }
         if (this.parent.length > 0) {
@@ -128,7 +130,7 @@ export class PlanComponent implements OnInit {
 
     page2() {
         this.form = 'trois';
-//        this.strForm.levels = this.levels;
+        //        this.strForm.levels = this.levels;
         //this.planForm.structuration = this.strForm;
         this.planForm.structuration = this.levels;
         this.getLevel();
@@ -141,38 +143,53 @@ export class PlanComponent implements OnInit {
         this.form = '';
 
     }
-     
-    
+
+
     savePlan() {
         this.plans.push(this.planForm)
 
-        var plEntity={plan:this.planForm, planLines:this.lines};
+        var plEntity = { plan: this.planForm, planLines: this.lines };
         this.cs.savePlanWithLines(plEntity)
             .subscribe(data => {
                 console.log(data);
             });
     }
-    
-    
-    getPlans(){
-        var ps:Plan[];
+
+
+    getPlans() {
+        var ps: Plan[];
         this.cs.getPlans()
-        .subscribe(data => {
-            console.log(data);
-                ps=data;
-                if(ps){
-                    this.plans=ps;
+            .subscribe(data => {
+                console.log(data);
+                ps = data;
+                if (ps) {
+                    this.plans = ps;
                     console.log(this.plans);
                 }
-        });
+            });
     }
-    
+
     getCodeLength(levelName) {
-        for(var i = 0; i < this.levels.length; i++) {
-            if(this.levels[i].name == levelName){
-                return this.levels[i].codeLength;    
+        for (var i = 0; i < this.levels.length; i++) {
+            if (this.levels[i].name == levelName) {
+                return this.levels[i].codeLength;
             }
         }
         return 0;
     }
+
+    planLink(plan) {
+        this.planForm = plan;
+        this.levels = plan.structuration;
+        this.cs.getLinesOfPlan(plan)
+            .subscribe(data => {
+                this.lines = data;
+            });
+    }
+
+    updatePlan() {
+        this.isCreate=false;
+        this.form='trois'
+    }
 }
+
