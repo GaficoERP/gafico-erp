@@ -2,12 +2,10 @@ package sn.smart.eco.budget.model;
 
 import sn.smart.eco.common.model.GaficoNature;
 
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("budget_line")
 public class BudgetLine {
-  @Indexed(unique = true)
   private String code;
   private String label;
   private GaficoNature nature;

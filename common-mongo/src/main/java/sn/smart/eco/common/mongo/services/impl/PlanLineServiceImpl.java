@@ -52,7 +52,7 @@ public class PlanLineServiceImpl implements PlanLineService {
   @Override
   public List<PlanLine> findByLevelNameAndPlan(@NonNull String level, @NonNull String plan) {
     Optional<List<PlanLine>> pLines =
-        plRepository.findByLevelNameAndPlanOrderByCodeDesc(level, plan);
+        plRepository.findByLevelNameAndPlanOrderByCodeAsc(level, plan);
     if (pLines.isPresent()) {
       return pLines.get();
     }

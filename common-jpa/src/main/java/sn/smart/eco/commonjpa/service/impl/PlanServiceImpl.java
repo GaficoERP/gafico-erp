@@ -14,12 +14,9 @@ import java.util.List;
 public class PlanServiceImpl implements PlanService {
   @Autowired
   private PlanRepository planRepository;
-  // @Autowired
-  // private StructurationService structService;
 
   @Override
   public Plan addPlan(@NonNull Plan plan) {
-    // structService.addStructuration(plan.getStructuration());
     return planRepository.save(plan);
   }
 
@@ -36,6 +33,13 @@ public class PlanServiceImpl implements PlanService {
   @Override
   public List<Plan> findAll() {
     return planRepository.findAll();
+  }
+
+  @Override
+  public String findDeeperLevelName(String planName) {
+    Plan plan = findPlan(planName);
+    int last = plan.getStructuration().size() - 1;
+    return plan.getStructuration().get(last).getName();
   }
 
 }

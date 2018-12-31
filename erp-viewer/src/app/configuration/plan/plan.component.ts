@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Structuration } from 'app/models/structuration';
 import { Level } from 'app/models/level';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PlanLine } from 'app/models/planline';

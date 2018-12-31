@@ -14,4 +14,6 @@ public interface BudgetService {
   public Budget updateBudget(Budget budgetDetails);
 
   public ResponseEntity<?> deleteBudget(String budgetName);
+
+  public Budget findCurrentBudget();
 }

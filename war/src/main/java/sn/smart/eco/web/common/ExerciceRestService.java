@@ -32,6 +32,11 @@ public class ExerciceRestService {
     return exoService.findAll();
   }
 
+  @GetMapping("/findCurrent")
+  public Exercice findCurrent() {
+    return exoService.findCurrent();
+  }
+
   @DeleteMapping("/delete")
   public GaficoResult deleteExercice(@RequestBody @NonNull Exercice exo) {
     return exoService.deleteExercice(exo);

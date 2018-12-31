@@ -16,7 +16,9 @@ public interface PlanLineRepository extends MongoRepository<PlanLine, String> {
 
   Optional<List<PlanLine>> findByPlan(String plan);
 
-  Optional<List<PlanLine>> findByLevelNameAndPlanOrderByCodeDesc(String level, String plan);
+  Optional<List<PlanLine>> findByLevelNameAndPlanOrderByCodeAsc(String level, String plan);
+
+  Optional<List<PlanLine>> findByLevelNameAndPlanOrderByCodeDesc(String levelName, String plan);
 
   // Optional<List<PlanLine>> findByPreviousCodeAndPlanOrderByCodeDesc(String previousCode,
   // String plan);

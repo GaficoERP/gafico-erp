@@ -12,4 +12,6 @@ public interface ExerciceService {
   public List<Exercice> findAll();
 
   public GaficoResult deleteExercice(Exercice exo);
+
+  public Exercice findCurrent();
 }

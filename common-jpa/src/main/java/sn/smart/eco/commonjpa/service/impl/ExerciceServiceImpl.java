@@ -11,6 +11,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExerciceServiceImpl implements ExerciceService {
@@ -38,6 +39,15 @@ public class ExerciceServiceImpl implements ExerciceService {
       result.setError(e.getMessage());
     }
     return result;
+  }
+
+  @Override
+  public Exercice findCurrent() {
+    Optional<Exercice> exo = repository.findFirstByOrderByYearDesc();
+    if (exo.isPresent()) {
+      return exo.get();
+    }
+    return null;
   }
 
 }

@@ -13,4 +13,6 @@ public interface PlanService {
   public Plan updatePlan(Plan plan);
 
   public List<Plan> findAll();
+
+  public String findDeeperLevelName(String plan);
 }
