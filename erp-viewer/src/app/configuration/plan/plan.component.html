@@ -122,8 +122,6 @@
                                     <select name="levelName" class="form-control" (change)="getParent()" [(ngModel)]="lineForm.levelName">
                                         <option *ngFor="let level of levelsForm" [value]="level.name">{{level.name}}</option>
                                     </select>
-                                    <!-- <input type="text" (input)="getParent()" name="levelName" placeholder="Veillez saisir le titre"
-                                        class="form-control" [(ngModel)]="lineForm.levelName"> -->
                                 </div>
                                 <div class="form-group">
                                     <label for="previous">Parent</label>

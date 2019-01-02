@@ -74,6 +74,10 @@ export class PlanComponent implements OnInit {
 
     addPlan() {
         this.form = 'un';
+        this.planForm = new Plan();
+        this.lines = new Array();
+        this.levels = new Array();
+        this.isCreate = true;
         this.getLevel();
     }
 
@@ -91,7 +95,7 @@ export class PlanComponent implements OnInit {
                 }
             }
         }
-        console.log(this.levelsForm);
+
     }
 
     getParent() {
@@ -100,31 +104,23 @@ export class PlanComponent implements OnInit {
         console.log(this.lineForm.levelName);
         for (var i = 0; i < this.levels.length; i++) {
             if (this.lineForm.levelName === this.levels[i].name) {
-                console.log(this.lineForm.levelName);
                 if (i > 0)
                     lev = this.levels[i - 1];
-                console.log(lev);
                 break;
             }
         }
-        console.log(lev);
         if (lev) {
-
             for (var i = 0; i < this.lines.length; i++) {
                 if (lev.name === this.lines[i].levelName) {
                     this.parent.push(this.lines[i]);
-
                 }
             }
-
-            console.log(this.parent);
         }
         if (this.parent.length > 0) {
             this.hasParent = false;
         } else {
             this.hasParent = true;
         }
-
     }
 
     page2() {
@@ -187,8 +183,8 @@ export class PlanComponent implements OnInit {
     }
 
     updatePlan() {
-        this.isCreate=false;
-        this.form='trois'
+        this.isCreate = false;
+        this.form = 'trois'
     }
 }
 
