@@ -29,10 +29,10 @@ export class ExecutionBudgetComponent implements OnInit {
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
-      this.getExercice();
-      this.getPlan();
-      this.getBudget();
-      this.getMoneyRef();
+    //   this.getExercice();
+    //   this.getPlan();
+    //   this.getBudget();
+    //   this.getMoneyRef();
 //      this.getBudgetLines();
 //      this.getPlanLines();
   }

@@ -2,7 +2,7 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Saisie budget</h4>
+				<h4 class="card-title">Execution budget</h4>
 			</div>
 			<div class="card-body">
 				<div class="card-block">
@@ -10,113 +10,24 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="name">Nom</label> <input type="text"
-										class="form-control" id="name" name="name"
-										[(ngModel)]="budget.name">
+									<label for="name">ligne budget</label>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="exercice">Exercice</label> <input type="text"
-										class="form-control" id="exercice" name="exercice"
-										[(ngModel)]="exercice.year" disabled>
+									<label for="objet">Objet</label>
+									<textarea class="form-control" name="objet"></textarea>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label for="plan">Plan</label> <input type="text"
-										class="form-control" id="plan" name="plan"
-										[(ngModel)]="plan.value" disabled>
+									<label for="montant">Montant</label>
+									<input type="number" class="form-control" name="montant">
+									<input type="number" class="form-control" name="taxe">
 								</div>
 							</div>
 						</div>
 					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Saisie lignes budgétaires</h4>
-			</div>
-			<div class="card-body">
-				<div class="card-block">
-					<form>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbCode">Code</label> <select name="lbCode"
-										class="form-control" (change)="updateLineData()"
-										[(ngModel)]="selectedLine">
-										<option *ngFor="let line of planLines" [ngValue]="line">{{line.code}}</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbAmount">Montant ({{money.value}})</label> <input type="number"
-										class="form-control" id="lbAmount" name="lbAmount"
-										step="0.001" [(ngModel)]="budgetLine.amount">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbLabel">Libellé</label> <input type="text"
-										class="form-control" id="lbLabel" name="lbLabel"
-										[(ngModel)]="budgetLine.label" disabled>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbNature">Nature</label> <input type="text"
-										class="form-control" id="lbNature" name="lbNature"
-										[(ngModel)]="budgetLine.nature" disabled>
-								</div>
-							</div>
-							<div class="col-md-4 text-left">
-								<div class="form-group">
-									<button type="button"
-										class="btn btn-success btn-raised col-lg-5"
-										(click)="addBugetLine()">Ajouter</button>
-								</div>
-							</div>
-							<div class="col-md-4 text-right">
-								<div class="form-group">
-									<button type="button"
-										class="btn btn-primary btn-raised col-lg-5"
-										(click)="saveBudget()">Enregistrer</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Lignes budgétaires</h4>
-			</div>
-			<div class="card-body">
-				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
-					<table class="table">
-						<thead class="thead-default">
-							<tr>
-								<th>Code</th>
-								<th>Libellé</th>
-								<th>Nature</th>
-								<th>Montant ({{money.value}})</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let line of budgetLines">
-								<td>{{line.code}}</td>
-								<td>{{line.label}}</td>
-								<td>{{line.nature}}</td>
-								<td>{{line.amount}}</td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
