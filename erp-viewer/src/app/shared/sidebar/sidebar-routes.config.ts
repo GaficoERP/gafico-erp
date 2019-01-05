@@ -19,7 +19,6 @@ export const ROUTES: RouteInfo[] = [
         path: '', title: 'Budget', icon: 'icon-wallet', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
             { path: '/budget/config', title: 'Configuration', icon: 'fa fa-wrench', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
             { path: '/budget/saisie', title: 'Saisie Budget', icon: 'fa fa-th', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/budget/execution-budget', title: 'Execution Budget', icon: 'fa fa-th', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
     },
     { path: '/colorpalettes', title: 'Color Palette', icon: 'ft-droplet', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

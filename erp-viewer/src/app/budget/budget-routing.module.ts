@@ -21,15 +21,7 @@ const routes: Routes = [
         data: {
           title: 'Configuration'
         }
-      },
-      {
-        path: 'execution-budget',
-        component: ConfigurationComponent,
-        data: {
-          title: 'Execution'
-        }
       }
-    
     ]
   }
 ];

@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetComponent } from './saisie/budget.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { BudgetService } from './budget.service';
-import { ExecutionBudgetComponent } from './execution/execution-budget.component';
+//import { ExecutionBudgetComponent } from './execution/execution-budget.component';
 
 
 @NgModule({
@@ -24,8 +24,7 @@ import { ExecutionBudgetComponent } from './execution/execution-budget.component
     exports: [],
     declarations: [
         BudgetComponent,
-        ConfigurationComponent,
-        ExecutionBudgetComponent
+        ConfigurationComponent
     ],
     providers: [ BudgetService ]
 })
