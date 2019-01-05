@@ -1,3 +1,68 @@
-<p>
-  engagement works!
-</p>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Execution budget</h4>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<form>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">ligne budget</label>
+									<select name="budget"
+										class="form-control" >
+										<option></option>
+										<option *ngFor="let pl of plans" [value]="pl.name">{{pl.name}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="montant">Montant</label>
+									<input type="number" class="form-control" name="montant" placeholder="Hors taxe"><br>
+									<input type="number" class="form-control" name="taxe" placeholder="montant taxe">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="objet">Objet</label>
+									<textarea class="form-control round" rows="9" name="objet"></textarea>
+								</div>
+							</div>
+							
+						</div>
+					</form>
+					<div class="row">
+                   
+                        <div class="col-md-12 col-sm-12 col-lg-12">
+                            <table class="table">
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th >Code</th>                           
+										<th>Libellé</th>
+										<th >Montant prévu</th>                           
+										<th>Montant engagée</th>
+										<th >Montant restant</th>                           
+                                
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let e of lineExe">
+                            
+                                            <td>{{e.code}}</td>
+											<td >{{e.name}}</td>
+											<td >{{e.prev}}</td>
+											<td >{{e.eng}}</td>
+											<td >{{e.restant}}</td>                                                     
+                                       
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
