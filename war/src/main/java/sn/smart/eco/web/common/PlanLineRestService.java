@@ -4,6 +4,7 @@ import sn.smart.eco.common.model.GaficoResult;
 import sn.smart.eco.common.mongo.model.PlanLine;
 import sn.smart.eco.common.mongo.services.PlanLineService;
 import sn.smart.eco.commonjpa.service.PlanService;
+import sn.smart.eco.web.common.model.CodeEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -71,9 +72,11 @@ public class PlanLineRestService {
   }
 
   @GetMapping("/newCode/{levelName}/{levelCodeSize}/{plan}/{previous}")
-  public String getNewCode(@PathVariable @NonNull String levelName,
+  public CodeEntity getNewCode(@PathVariable @NonNull String levelName,
       @PathVariable @NonNull int levelCodeSize, @PathVariable @NonNull String plan,
       @PathVariable @NonNull String previous) {
-    return plService.getNewCode(levelName, levelCodeSize, plan, previous);
+    CodeEntity entity = new CodeEntity();
+    entity.setCode(plService.getNewCode(levelName, levelCodeSize, plan, previous));
+    return entity;
   }
 }

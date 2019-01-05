@@ -6,6 +6,7 @@ import { PlanLine } from 'app/models/planline';
 import { Plan } from 'app/models/plan';
 import { PlanEntity } from 'app/models/planentity';
 import { Exercice } from 'app/models/exercice';
+import { CodeEntity } from 'app/models/codeentity';
 
 @Injectable()
 export class ConfigurationService {
@@ -50,6 +51,6 @@ export class ConfigurationService {
     }
     
     getNextCode(levelName, levelCodeSize, plan, previous) {
-        return this.http.get(this.urlGetCode+levelName+'/'+levelCodeSize+'/'+plan+'/'+previous);
+        return this.http.get<CodeEntity>(this.urlGetCode+levelName+'/'+levelCodeSize+'/'+plan+'/'+previous);
     }
 }

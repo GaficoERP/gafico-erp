@@ -1,3 +1,84 @@
-<p>
-  ordonnancement works!
-</p>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Saisie Ordonnancement</h4>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<div class="card-text col-md-11">
+						<p class="card-text">
+							<span class="badge bg-primary float-right">{{rao}}</span>
+							Reste à Ordonnancer (Engagement n° {{order.engagement}})
+						</p>
+					</div>
+					<hr />
+
+					<form>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">Numéro Engagement</label> <select
+										name="engagement" class="form-control"
+										[(ngModel)]="order.engagement" (change)=getNextOrdonnancementReference(order.engagement)>
+										<option></option>
+										<option *ngFor="let eng of engagements" [value]="eng.code">{{eng.code}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="montant">Numéro Ordonnancement</label> <input
+										type="text" class="form-control" name="reference"
+										[(ngModel)]="order.reference"><br>
+								</div>
+								<div class="form-group">
+									<label for="montant">Montant</label> <input type="number"
+										class="form-control" name="amount" [(ngModel)]="order.amount"><br>
+								</div>
+								<div class="form-group col-md-9">
+									<button type="button"
+										class="btn btn-success btn-raised col-lg-4"
+										(click)="addOrder()">Ajouter</button>
+									<button type="button"
+										class="btn btn-primary btn-raised col-lg-5"
+										(click)="saveOrders()">Enregistrer</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Situation des Ordonnancements</h4>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-lg-12">
+						<table class="table">
+							<thead class="thead-default">
+								<tr>
+									<th>Ref. Engagement</th>
+									<th>Objet Dépense</th>
+									<th>Montant Engagement</th>
+									<th>Cumul Ordan.</th>
+									<th>Reste à Ordonnancer</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let line of orderLines">
+									<td>{{line.engagement}}</td>
+									<td>{{line.objet}}</td>
+									<td>{{line.engamount}}</td>
+									<td>{{line.cumul}}</td>
+									<td>{{line.rest}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -8,6 +8,7 @@ import sn.smart.eco.common.mongo.services.PlanLineService;
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -84,8 +85,8 @@ public class PlanLineServiceImpl implements PlanLineService {
     // Optional<PlanLine> pLine;
 
     // if (previous == null) {
-    Optional<PlanLine> pLine = plRepository
-        .findFirstByLevelNameAndPlanAndCodeStartsWithOrderByCodeDesc(levelName, plan, previous);
+    Optional<PlanLine> pLine = plRepository.findFirstByLevelNameAndPlanAndCodeStartsWith(levelName,
+        plan, previous, new Sort(Sort.Direction.DESC, "code"));
     if (pLine.isPresent()) {
       Integer newCode = Integer.parseInt(pLine.get().getCode()) + 1;
       return String.valueOf(newCode);

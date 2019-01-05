@@ -2,6 +2,7 @@ package sn.smart.eco.common.mongo.repositories;
 
 import sn.smart.eco.common.mongo.model.PlanLine;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +21,8 @@ public interface PlanLineRepository extends MongoRepository<PlanLine, String> {
 
   Optional<List<PlanLine>> findByLevelNameAndPlanOrderByCodeDesc(String levelName, String plan);
 
-  Optional<PlanLine> findFirstByLevelNameAndPlanAndCodeStartsWithOrderByCodeDesc(String levelName,
-      String plan, String previous);
+  Optional<PlanLine> findFirstByLevelNameAndPlanAndCodeStartsWith(String levelName, String plan,
+      String previous, Sort sort);
 
   // Optional<List<PlanLine>> findByPreviousCodeAndPlanOrderByCodeDesc(String previousCode,
   // String plan);
