@@ -20,7 +20,7 @@ public interface PlanLineService {
 
   public GaficoResult deletePlanLine(PlanLine planLine);
 
-  public String getNewCode(String levelName, int levelCodeSize, String plan, PlanLine previous);
+  public String getNewCode(String levelName, int levelCodeSize, String plan, String previous);
 
   public List<PlanLine> addAll(List<PlanLine> lines);
 }

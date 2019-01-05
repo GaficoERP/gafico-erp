@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetComponent } from './saisie/budget.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { BudgetService } from './budget.service';
-//import { ExecutionBudgetComponent } from './execution/execution-budget.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { OrdonnancementComponent } from './execution/ordonnancement/ordonnancement.component';
+import { EngagementComponent } from './execution/engagement/engagement.component';
 
 
 @NgModule({
@@ -19,12 +21,15 @@ import { BudgetService } from './budget.service';
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        MatchHeightModule
+        MatchHeightModule,
+        NgxDatatableModule
     ],
     exports: [],
     declarations: [
         BudgetComponent,
-        ConfigurationComponent
+        ConfigurationComponent,
+        OrdonnancementComponent,
+        EngagementComponent
     ],
     providers: [ BudgetService ]
 })

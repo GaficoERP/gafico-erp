@@ -70,10 +70,10 @@ public class PlanLineRestService {
     return plService.deletePlanLine(planLine);
   }
 
-  @GetMapping("/newCode/{levelName}/{levelCodeSize}/{plan}")
+  @GetMapping("/newCode/{levelName}/{levelCodeSize}/{plan}/{previous}")
   public String getNewCode(@PathVariable @NonNull String levelName,
       @PathVariable @NonNull int levelCodeSize, @PathVariable @NonNull String plan,
-      @RequestBody @NonNull PlanLine previous) {
+      @PathVariable @NonNull String previous) {
     return plService.getNewCode(levelName, levelCodeSize, plan, previous);
   }
 }

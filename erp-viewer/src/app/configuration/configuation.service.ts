@@ -1,3 +1,5 @@
+import 'rxjs/add/operator/map';
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PlanLine } from 'app/models/planline';
@@ -13,6 +15,7 @@ export class ConfigurationService {
     private urlAddPlanWithLines = 'http://localhost:8080/war/rest/common/config/addPlanWithLines';
     private urlAddLines = 'http://localhost:8080/war/rest/common/planline/add';
     private urlGetLines = 'http://localhost:8080/war/rest/common/planline/findByPlan/';
+    private urlGetCode = 'http://localhost:8080/war/rest/common/planline/rest/common/planline/newCode/';
     private urlLongin = 'http://localhost:8080/war/api/auth/login';
     private urlAllPlan = 'http://localhost:8080/war/rest/common/plan/findAll';
 
@@ -44,5 +47,9 @@ export class ConfigurationService {
     
     getExercices(url) {
         return this.http.get<Exercice[]>(url);
+    }
+    
+    getNextCode(levelName, levelCodeSize, plan, previous) {
+        return this.http.get(this.urlGetCode+levelName+'/'+levelCodeSize+'/'+plan+'/'+previous);
     }
 }

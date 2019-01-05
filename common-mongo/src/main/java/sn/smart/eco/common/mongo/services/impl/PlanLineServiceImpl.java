@@ -5,8 +5,8 @@ import sn.smart.eco.common.mongo.model.PlanLine;
 import sn.smart.eco.common.mongo.repositories.PlanLineRepository;
 import sn.smart.eco.common.mongo.services.PlanLineService;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.ListUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -80,29 +80,30 @@ public class PlanLineServiceImpl implements PlanLineService {
 
   @Override
   public String getNewCode(@NonNull String levelName, int levelCodeSize, String plan,
-      PlanLine previous) {
-    Optional<List<PlanLine>> pLines;
+      String previous) {
+    // Optional<PlanLine> pLine;
 
-    if (previous == null) {
-      pLines = plRepository.findByLevelNameAndPlanOrderByCodeDesc(levelName, plan);
-      if (pLines.isPresent() && CollectionUtils.isNotEmpty(pLines.get())) {
-        Integer newCode = Integer.parseInt(pLines.get().get(0).getCode()) + 1;
-        return String.valueOf(newCode);
-      }
-      return new String("1");
-    } else {
-      // FIXME à corriger
-      // pLines = plRepository.findByPreviousOrderByCodeDesc(previous);
-      if (false/* pLines.isPresent() */) {
-        Integer newCode = Integer.parseInt(pLines.get().get(0).getCode()) + 1;
-        return String.valueOf(newCode);
-      } else {
-        // codePrevious * (10^tailleCode[level]) + 1
-        double pow = Math.pow(10, levelCodeSize);
-        double newCode = pow * Integer.parseInt(previous.getCode()) + 1;
-        return String.valueOf(newCode);
-      }
+    // if (previous == null) {
+    Optional<PlanLine> pLine = plRepository
+        .findFirstByLevelNameAndPlanAndCodeStartsWithOrderByCodeDesc(levelName, plan, previous);
+    if (pLine.isPresent()) {
+      Integer newCode = Integer.parseInt(pLine.get().getCode()) + 1;
+      return String.valueOf(newCode);
     }
+    return StringUtils.leftPad("1", levelCodeSize - 1, "0");
+    // } else {
+    // // FIXME à corriger
+    // // pLines = plRepository.findByPreviousOrderByCodeDesc(previous);
+    // if (false/* pLines.isPresent() */) {
+    // Integer newCode = Integer.parseInt(pLines.get().get(0).getCode()) + 1;
+    // return String.valueOf(newCode);
+    // } else {
+    // // codePrevious * (10^tailleCode[level]) + 1
+    // double pow = Math.pow(10, levelCodeSize);
+    // double newCode = pow * Integer.parseInt(previous.getCode()) + 1;
+    // return String.valueOf(newCode);
+    // }
+    // }
   }
 
   @Override

@@ -20,6 +20,9 @@ public interface PlanLineRepository extends MongoRepository<PlanLine, String> {
 
   Optional<List<PlanLine>> findByLevelNameAndPlanOrderByCodeDesc(String levelName, String plan);
 
+  Optional<PlanLine> findFirstByLevelNameAndPlanAndCodeStartsWithOrderByCodeDesc(String levelName,
+      String plan, String previous);
+
   // Optional<List<PlanLine>> findByPreviousCodeAndPlanOrderByCodeDesc(String previousCode,
   // String plan);
   //

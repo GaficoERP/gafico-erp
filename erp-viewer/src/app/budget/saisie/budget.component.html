@@ -8,21 +8,21 @@
 				<div class="card-block">
 					<form>
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label for="name">Nom</label> <input type="text"
 										class="form-control" id="name" name="name"
-										[(ngModel)]="budget.name">
+										[(ngModel)]="budget.name" [disabled]="disableName">
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label for="exercice">Exercice</label> <input type="text"
 										class="form-control" id="exercice" name="exercice"
 										[(ngModel)]="exercice.year" disabled>
 								</div>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label for="plan">Plan</label> <input type="text"
 										class="form-control" id="plan" name="plan"
@@ -35,60 +35,120 @@
 			</div>
 		</div>
 
-		<div class="card">
-			<div class="card-header">
-				<h4 class="card-title">Saisie lignes budgétaires</h4>
-			</div>
-			<div class="card-body">
-				<div class="card-block">
-					<form>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbCode">Code</label> <select name="lbCode"
-										class="form-control" (change)="updateLineData()"
-										[(ngModel)]="selectedLine">
-										<option *ngFor="let line of planLines" [ngValue]="line">{{line.code}}</option>
-									</select>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Saisie ligne</h4>
+					</div>
+					<div class="card-body">
+						<div class="card-block">
+							<form>
+								<div class="col-md-11">
+									<div class="form-group">
+										<label for="lbCode">Code</label> <select name="lbCode"
+											class="form-control" (change)="updateLineData()"
+											[(ngModel)]="selectedLine">
+											<option *ngFor="let line of planLines" [ngValue]="line">{{line.code}}</option>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbAmount">Montant ({{money.value}})</label> <input type="number"
-										class="form-control" id="lbAmount" name="lbAmount"
-										step="0.001" [(ngModel)]="budgetLine.amount">
+								<div class="col-md-11">
+									<div class="form-group">
+										<label for="lbAmount">Montant ({{money.value}})</label> <input
+											type="number" class="form-control" id="lbAmount"
+											name="lbAmount" step="0.001" [(ngModel)]="budgetLine.amount">
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbLabel">Libellé</label> <input type="text"
-										class="form-control" id="lbLabel" name="lbLabel"
-										[(ngModel)]="budgetLine.label" disabled>
+								<div class="col-md-11">
+									<div class="form-group">
+										<label for="lbLabel">Libellé</label> <input type="text"
+											class="form-control" id="lbLabel" name="lbLabel"
+											[(ngModel)]="budgetLine.label" disabled>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="lbNature">Nature</label> <input type="text"
-										class="form-control" id="lbNature" name="lbNature"
-										[(ngModel)]="budgetLine.nature" disabled>
+								<div class="col-md-11">
+									<div class="form-group">
+										<label for="lbNature">Nature</label> <input type="text"
+											class="form-control" id="lbNature" name="lbNature"
+											[(ngModel)]="budgetLine.nature" disabled>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-4 text-left">
-								<div class="form-group">
+								<div class="form-group col-md-9">
 									<button type="button"
-										class="btn btn-success btn-raised col-lg-5"
+										class="btn btn-success btn-raised col-lg-4"
 										(click)="addBugetLine()">Ajouter</button>
-								</div>
-							</div>
-							<div class="col-md-4 text-right">
-								<div class="form-group">
 									<button type="button"
 										class="btn btn-primary btn-raised col-lg-5"
 										(click)="saveBudget()">Enregistrer</button>
 								</div>
-							</div>
+							</form>
 						</div>
-					</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title fonticon-classname">équilibre
+							budgétaire</h4>
+					</div>
+					<div class="card-body">
+						<div class="card-block">
+
+							<div class="card-text col-md-11">
+								<p class="card-text">
+									<span class="badge float-right"
+										[style.background]="balance.bal_color">{{balance.total}}</span>
+									{{budget.name}}
+								</p>
+							</div>
+							<hr/>
+
+							<div matchHeight="card">
+								<div class="col-md-11">
+									<div class="card">
+										<div class="card-body">
+											<div class="card-block">
+												<h4 class="card-title">Recettes ({{money.value}})</h4>
+											</div>
+											<ul class="list-group">
+												<li class="list-group-item"><span
+													class="badge float-right"
+													[style.background]="balance.rec_color">{{balance.rec_inv}}</span>
+													Investissement</li>
+												<li class="list-group-item"><span
+													class="badge float-right"
+													[style.background]="balance.rec_color">{{balance.rec_fonc}}</span>
+													Fonctionnement</li>
+											</ul>
+										</div>
+									</div>
+
+									<div class="card">
+										<div class="card-body">
+											<div class="card-block">
+												<h4 class="card-title">Dépenses ({{money.value}})</h4>
+											</div>
+											<ul class="list-group">
+												<li class="list-group-item"><span
+													class="badge float-right"
+													[style.background]="balance.dep_color">{{balance.dep_inv}}</span>
+													Investissement</li>
+												<li class="list-group-item"><span
+													class="badge float-right"
+													[style.background]="balance.dep_color">{{balance.dep_fonc}}</span>
+													Fonctionnement</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -99,24 +159,25 @@
 			</div>
 			<div class="card-body">
 				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
-					<table class="table">
-						<thead class="thead-default">
-							<tr>
-								<th>Code</th>
-								<th>Libellé</th>
-								<th>Nature</th>
-								<th>Montant ({{money.value}})</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let line of budgetLines">
-								<td>{{line.code}}</td>
-								<td>{{line.label}}</td>
-								<td>{{line.nature}}</td>
-								<td>{{line.amount}}</td>
-							</tr>
-						</tbody>
-					</table>
+					<input type='text'
+						style='padding: 8px; margin: 15px auto; width: 30%;'
+						placeholder='filtrez sur le code...'
+						(keyup)='updateFilter($event)' />
+					<ngx-datatable #table class='bootstrap table'
+						[columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+						[rowHeight]="'auto'" [limit]="10" [rows]='rows'> <ngx-datatable-column
+						class="tab-head" prop="code"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" prop="label" name="Libellé"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="nature"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="amount" name="Montant"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" name="id"
+						[resizeable]="false"> <ng-template
+						ngx-datatable-header-template> Action </ng-template> <ng-template
+						let-row="row" ngx-datatable-cell-template>
+					<button class="btn button-trans" (click)="delete(row)">
+						<i class="fa fa-trash"></i>
+					</button>
+					</ng-template> </ngx-datatable-column> </ngx-datatable>
 				</div>
 			</div>
 		</div>

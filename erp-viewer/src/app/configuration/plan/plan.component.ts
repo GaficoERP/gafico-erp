@@ -53,20 +53,19 @@ export class PlanComponent implements OnInit {
 
 
     addLine() {
-        if (this.lineForm.code.length < this.getCodeLength(this.lineForm.levelName)) {
-            var dif = this.getCodeLength(this.lineForm.levelName) - this.lineForm.code.length;
-            for (var i = 0; i < dif; i++) {
-                this.lineForm.code = "0" + this.lineForm.code;
-            }
-        }
-
-        if (this.lineForm.previous != null) {
-            this.lineForm.code = this.lineForm.previous.code + this.lineForm.code;
-        }
+//        if (this.lineForm.code.length < this.getCodeLength(this.lineForm.levelName)) {
+//            var dif = this.getCodeLength(this.lineForm.levelName) - this.lineForm.code.length;
+//            for (var i = 0; i < dif; i++) {
+//                this.lineForm.code = "0" + this.lineForm.code;
+//            }
+//        }
+//
+//        if (this.lineForm.previous != null) {
+//            this.lineForm.code = this.lineForm.previous.code + this.lineForm.code;
+//        }
         this.lines.push(this.lineForm);
-        // TODO pour le code, appeler getNextCode
-        this.lineForm = { label: "", code: "0", levelName: "", nature: this.lineForm.nature, previous: this.lineForm, plan: this.planForm.name };
-        console.log(this.lines);
+        this.lineForm = { label: "", code: "", levelName: "", nature: this.lineForm.nature, previous: null, plan: this.planForm.name };
+//        console.log(this.lines);
         this.getLevel();
         this.getParent();
     }
@@ -120,7 +119,18 @@ export class PlanComponent implements OnInit {
             this.hasParent = false;
         } else {
             this.hasParent = true;
+            this.calculateCode();
         }
+    }
+    
+    calculateCode() {
+        var codeSize = this.getCodeLength(this.lineForm.levelName);
+//        var data = {levelName:this.lineForm.levelName, levelCodeSize:codeSize, plan:this.planForm.name, previous:this.lineForm.previous};
+        this.cs.getNextCode(this.lineForm.levelName, codeSize, this.planForm.name, this.lineForm.previous.code)
+            .subscribe(data => {
+                console.log(data);
+                this.lineForm.code = JSON.stringify(data);
+             });
     }
 
     page2() {

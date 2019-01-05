@@ -15,6 +15,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import * as $ from 'jquery';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './services/authentication.service';
+//import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AuthenticationService } from './services/authentication.service';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBr5_picK8YJK7fFR2CPzTVMj6GG1TtRGo'
         }),
-        FormsModule
+        FormsModule,
+//        Ng2SmartTableModule,
     ],
     providers: [AuthenticationService,
         { provide: ToastOptions, useClass: CustomOption },{

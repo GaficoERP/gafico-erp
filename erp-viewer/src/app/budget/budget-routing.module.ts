@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BudgetComponent } from "./saisie/budget.component";
 import { ConfigurationComponent } from "./configuration/configuration.component";
+import { EngagementComponent } from "./execution/engagement/engagement.component";
+import { OrdonnancementComponent } from "./execution/ordonnancement/ordonnancement.component";
 
 
 const routes: Routes = [
@@ -12,7 +14,7 @@ const routes: Routes = [
         path: 'saisie',
         component: BudgetComponent,
         data: {
-          title: 'saisie'
+          title: 'Saisie'
         }
       },
       {
@@ -20,6 +22,20 @@ const routes: Routes = [
         component: ConfigurationComponent,
         data: {
           title: 'Configuration'
+        }
+      },
+      {
+        path: 'saisie/engagement',
+        component: EngagementComponent,
+        data: {
+          title: 'Saisie Engagement'
+        }
+      },
+      {
+        path: 'saisie/ordonnancement',
+        component: OrdonnancementComponent,
+        data: {
+          title: 'Saisie Ordonnancement'
         }
       }
     ]
