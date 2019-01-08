@@ -11,7 +11,7 @@ public interface OrdonnancementService {
 
   List<Ordonnancement> saveAll(List<Ordonnancement> orders);
 
-  List<Ordonnancement> findAllByGroupByEngagement();
+  // List<Ordonnancement> findAllByBudget(String budget);
 
   List<Ordonnancement> findByEngagement(Integer engagement);
 

@@ -65,8 +65,8 @@ export class BudgetService {
         return this.http.post<Budget>(this.urlWS + this.budgetWs + '/save', {budget:budget, budgetLines:lines});
     }
     
-    getOrdonnancements() {
-        return this.http.get<Ordonnancement[]>(this.urlWS + this.orderWs + '/findAll');
+    getOrdonnancements(reference) {
+        return this.http.get<Ordonnancement[]>(this.urlWS + this.orderWs + '/find/' + reference);
     }
     
     getNextOrdonnancementReference(engagement) {

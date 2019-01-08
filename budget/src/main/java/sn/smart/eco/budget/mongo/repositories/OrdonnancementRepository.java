@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface OrdonnancementRepository extends MongoRepository<Ordonnancement, Integer> {
 
-  Optional<List<Ordonnancement>> findAllGroupByEngagement();
+  // Optional<List<Ordonnancement>> findByBudget(String budget);
 
   Optional<List<Ordonnancement>> findByEngagement(Integer engagement);
 

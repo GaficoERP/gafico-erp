@@ -10,6 +10,7 @@ public class Ordonnancement {
   @Indexed(unique = true)
   private String reference;
   private Double amount;
+  // private String budget;
 
   public Integer getEngagement() {
     return engagement;
@@ -34,4 +35,12 @@ public class Ordonnancement {
   public void setAmount(Double amount) {
     this.amount = amount;
   }
+
+  // public String getBudget() {
+  // return budget;
+  // }
+  //
+  // public void setBudget(String budget) {
+  // this.budget = budget;
+  // }
 }

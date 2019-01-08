@@ -28,15 +28,15 @@ public class OrdonnancementServiceImpl implements OrdonnancementService {
     return repository.save(order);
   }
 
-  @Override
-  public List<Ordonnancement> findAllByGroupByEngagement() {
-    Optional<List<Ordonnancement>> orders = repository.findAllGroupByEngagement();
-    if (orders.isPresent()) {
-      return orders.get();
-    }
-
-    return new ArrayList<>();
-  }
+  // @Override
+  // public List<Ordonnancement> findAllByBudget(@NonNull String budget) {
+  // Optional<List<Ordonnancement>> orders = repository.findByBudget(budget);
+  // if (orders.isPresent()) {
+  // return orders.get();
+  // }
+  //
+  // return new ArrayList<>();
+  // }
 
   @Override
   public List<Ordonnancement> findByEngagement(@NonNull Integer engagement) {

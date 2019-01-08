@@ -34,11 +34,6 @@ public class OrdonnancementRestService {
     return service.saveAll(orders);
   }
 
-  @GetMapping("/findAll")
-  public List<Ordonnancement> findAll() {
-    return service.findAllByGroupByEngagement();
-  }
-
   @GetMapping("/find/{engagement}")
   public List<Ordonnancement> findByEngagement(@PathVariable @NonNull Integer engagement) {
     return service.findByEngagement(engagement);

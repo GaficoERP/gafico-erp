@@ -50,4 +50,13 @@ public class ExerciceServiceImpl implements ExerciceService {
     return null;
   }
 
+  @Override
+  public Exercice findByYear(@NonNull Integer year) {
+    Optional<Exercice> exo = repository.findByYear(year);
+    if (exo.isPresent()) {
+      return exo.get();
+    }
+    return null;
+  }
+
 }

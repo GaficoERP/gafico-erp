@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ConfigParam } from 'app/models/configparam';
 import { Engagement } from 'app/models/engagement';
 import { Ordonnancement } from 'app/models/ordonnancement';
-import { OrderLine } from 'app/models/ligne-ordonnancement';
 
 import { BudgetService } from '../../budget.service';
 
@@ -18,9 +17,10 @@ export class OrdonnancementComponent implements OnInit {
         
     order: Ordonnancement = new Ordonnancement();
     orders: Ordonnancement[] = new Array();
-    orderLines: OrderLine[] = new Array();
     engagements: Engagement[] = new Array();
+    engagement: Engagement = new Engagement();
     rao:number;
+    cumul:number;
 
   constructor(private budgetService: BudgetService) { }
 
@@ -57,40 +57,23 @@ export class OrdonnancementComponent implements OnInit {
     objet:"L'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle"
   }
 ]
-      this.getOrdonnancements();
-        this.buildOrderLines();
   }
     
     addOrder() {
         this.orders.push(this.order);
         this.order = new Ordonnancement();
-        this.buildOrderLines();
-        this.rao = 0;
     }
     
+    
     getOrdonnancements() {
-        this.budgetService.getOrdonnancements()
+        this.budgetService.getOrdonnancements(this.engagement.code)
         .subscribe(data => {
             if(data){
                 this.orders=data;
-                this.buildOrderLines();
             }
         });
     }
     
-    buildOrderLines() {
-        this.orderLines = new Array();
-        for(var i=0; i< this.engagements.length; i++) {
-            var eng = this.engagements[i];
-            let ordLine = new OrderLine();
-            ordLine.engagement = eng.code;
-            ordLine.objet = eng.objet;
-            ordLine.engamount=eng.montant+eng.taxe;
-            ordLine.cumul = this.calculateCumul(ordLine.engagement);
-            ordLine.rest = ordLine.engamount - ordLine.cumul;
-            this.orderLines.push(ordLine);
-        }
-    }
     
     findEngagement(ref) {
         for(var i=0; i< this.engagements.length; i++) {
@@ -101,32 +84,30 @@ export class OrdonnancementComponent implements OnInit {
         } 
     }
     
-    calculateCumul(engagement) {
-        let cumul = 0;
+    calculateCumul() {
+         this.cumul = 0;
         for(var i=0; i< this.orders.length; i++) {
             var ord = this.orders[i];
-            if(ord.engagement == engagement) {
-                cumul += ord.amount;
+            if(ord.engagement == this.engagement.code) {
+                this.cumul += ord.amount;
              }
         }
-        return cumul;
     }
     
-    calculateRao(engagement) {
-        let eng = this.findEngagement(engagement);
-        this.rao = (eng.montant+eng.taxe) - this.calculateCumul(engagement);
+    calculateRao() {
+        this.calculateCumul();
+        this.rao = this.engagement.montant - this.cumul;
     }
     
-    getNextOrdonnancementReference(engagement) {
-        this.budgetService.getNextOrdonnancementReference(engagement)
+    getNextOrdonnancementReference() {
+        // TODO calculer la ref ici au lieu d'appeler le back
+        this.budgetService.getNextOrdonnancementReference(this.engagement.code)
         .subscribe(data => {
             console.log(data);
             if(data){
                 this.order.reference=data.code;
             }
         });
-        
-        this.calculateRao(engagement);
     }
     
     saveOrders() {
@@ -136,6 +117,14 @@ export class OrdonnancementComponent implements OnInit {
                 this.orders=data;
             }
         });
+    }
+    
+    buildEngagementDetail() {
+        console.log(this.engagement);
+        this.order.engagement = this.engagement.code;
+        this.calculateRao();
+        this.getNextOrdonnancementReference();
+        this.getOrdonnancements();
     }
 
 }

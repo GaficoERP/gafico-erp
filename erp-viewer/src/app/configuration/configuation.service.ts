@@ -12,6 +12,8 @@ import { CodeEntity } from 'app/models/codeentity';
 export class ConfigurationService {
 
     constructor(private http: HttpClient) { }
+    
+    private urlExerciceWs = 'http://localhost:8080/war/rest/common/exercice';
     private urlAddPlan = 'http://localhost:8080/war/rest/common/plan/add';
     private urlAddPlanWithLines = 'http://localhost:8080/war/rest/common/config/addPlanWithLines';
     private urlAddLines = 'http://localhost:8080/war/rest/common/planline/add';
@@ -42,12 +44,12 @@ export class ConfigurationService {
         return this.http.get<Plan[]>(this.urlAllPlan);
     }
 
-    saveExercice(url, object) {
-        return this.http.post<Exercice>(url, object);
+    saveExercice(object) {
+        return this.http.post<Exercice>(this.urlExerciceWs+'/add', object);
     }
     
-    getExercices(url) {
-        return this.http.get<Exercice[]>(url);
+    getExercices() {
+        return this.http.get<Exercice[]>(this.urlExerciceWs+'/findAll');
     }
     
     getNextCode(levelName, levelCodeSize, plan, previous) {
