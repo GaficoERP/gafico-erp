@@ -1,8 +1,6 @@
 package sn.smart.eco.web.budget;
 
-import sn.smart.eco.budget.model.Ordonnancement;
-import sn.smart.eco.budget.services.OrdonnancementService;
-import sn.smart.eco.web.common.model.CodeEntity;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,39 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import sn.smart.eco.budget.model.Ordonnancement;
+import sn.smart.eco.budget.services.OrdonnancementService;
+import sn.smart.eco.web.common.model.CodeEntity;
 
 @RestController
 @RequestMapping("/rest/budget/order")
 public class OrdonnancementRestService {
 
-  @Autowired
-  private OrdonnancementService service;
+	@Autowired
+	private OrdonnancementService service;
 
-  @PostMapping("/save")
-  public Ordonnancement save(@RequestBody @NonNull Ordonnancement order) {
-    return service.save(order);
-  }
+	@PostMapping("/save")
+	public Ordonnancement save(@RequestBody @NonNull Ordonnancement order) {
+		return service.save(order);
+	}
 
-  @PostMapping("/saveAll")
-  public List<Ordonnancement> saveAll(@RequestBody @NonNull List<Ordonnancement> orders) {
-    return service.saveAll(orders);
-  }
+	@PostMapping("/saveAll")
+	public List<Ordonnancement> saveAll(@RequestBody @NonNull List<Ordonnancement> orders) {
+		return service.saveAll(orders);
+	}
 
-  @GetMapping("/find/{engagement}")
-  public List<Ordonnancement> findByEngagement(@PathVariable @NonNull Integer engagement) {
-    return service.findByEngagement(engagement);
-  }
+	@GetMapping("/find/{engagement}")
+	public List<Ordonnancement> findByEngagement(@PathVariable @NonNull Integer engagement) {
+		return service.findByEngagement(engagement);
+	}
 
-  @GetMapping("/newref/{engagement}")
-  public CodeEntity getNextReferenceCode(@PathVariable @NonNull Integer engagement) {
-    CodeEntity entity = new CodeEntity();
-    entity.setCode(service.getNextReferenceCode(engagement));
-    return entity;
-  }
+	@GetMapping("/newref/{engagement}")
+	public CodeEntity getNextReferenceCode(@PathVariable @NonNull Integer engagement) {
+		CodeEntity entity = new CodeEntity();
+		entity.setCode(service.getNextReferenceCode(engagement));
+		return entity;
+	}
 
-  @DeleteMapping("/delete")
-  public ResponseEntity<?> delete(@RequestBody @NonNull Ordonnancement order) {
-    return service.delete(order);
-  }
+	@DeleteMapping("/delete")
+	public ResponseEntity<?> delete(@RequestBody @NonNull Ordonnancement order) {
+		return service.delete(order);
+	}
 }

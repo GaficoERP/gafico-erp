@@ -25,38 +25,38 @@ export class OrdonnancementComponent implements OnInit {
   constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
-      this.engagements = [
-  {
-    code:1,
-    montant:24000,
-    taxe:3200,
-    objet:"Le Lorem Ipsum est simplement du faux texte employé"
-  },
-  {
-    code:2,
-    montant:14000,
-    taxe:1200,
-    objet:"On sait depuis longtemps que travailler avec du texte lisible"
-  },
-  {
-    code:3,
-    montant:4000,
-    taxe:620,
-    objet:"Contrairement à une opinion répandue, le Lorem Ipsum n'est pas"
-  },
-  {
-    code:4,
-    montant:11700,
-    taxe:1050,
-    objet:"Plusieurs variations de Lorem Ipsum peuvent être trouvées ici"
-  },
-  {
-    code:5,
-    montant:7650,
-    taxe:567,
-    objet:"L'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle"
-  }
-]
+//       this.engagements = [
+//   {
+//     code:1,
+//     montant:24000,
+//     taxe:3200,
+//     objet:"Le Lorem Ipsum est simplement du faux texte employé"
+//   },
+//   {
+//     code:2,
+//     montant:14000,
+//     taxe:1200,
+//     objet:"On sait depuis longtemps que travailler avec du texte lisible"
+//   },
+//   {
+//     code:3,
+//     montant:4000,
+//     taxe:620,
+//     objet:"Contrairement à une opinion répandue, le Lorem Ipsum n'est pas"
+//   },
+//   {
+//     code:4,
+//     montant:11700,
+//     taxe:1050,
+//     objet:"Plusieurs variations de Lorem Ipsum peuvent être trouvées ici"
+//   },
+//   {
+//     code:5,
+//     montant:7650,
+//     taxe:567,
+//     objet:"L'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle"
+//   }
+// ]
   }
     
     addOrder() {
@@ -66,7 +66,7 @@ export class OrdonnancementComponent implements OnInit {
     
     
     getOrdonnancements() {
-        this.budgetService.getOrdonnancements(this.engagement.code)
+        this.budgetService.getOrdonnancements(this.engagement.reference)
         .subscribe(data => {
             if(data){
                 this.orders=data;
@@ -78,7 +78,7 @@ export class OrdonnancementComponent implements OnInit {
     findEngagement(ref) {
         for(var i=0; i< this.engagements.length; i++) {
             var eng = this.engagements[i];
-            if(eng.code == ref) {
+            if(eng.reference == ref) {
                 return eng;
             }
         } 
@@ -88,7 +88,7 @@ export class OrdonnancementComponent implements OnInit {
          this.cumul = 0;
         for(var i=0; i< this.orders.length; i++) {
             var ord = this.orders[i];
-            if(ord.engagement == this.engagement.code) {
+            if(ord.engagement == this.engagement.reference) {
                 this.cumul += ord.amount;
              }
         }
@@ -96,12 +96,12 @@ export class OrdonnancementComponent implements OnInit {
     
     calculateRao() {
         this.calculateCumul();
-        this.rao = this.engagement.montant - this.cumul;
+        this.rao = this.engagement.amount - this.cumul;
     }
     
     getNextOrdonnancementReference() {
         // TODO calculer la ref ici au lieu d'appeler le back
-        this.budgetService.getNextOrdonnancementReference(this.engagement.code)
+        this.budgetService.getNextOrdonnancementReference(this.engagement.reference)
         .subscribe(data => {
             console.log(data);
             if(data){
@@ -121,7 +121,7 @@ export class OrdonnancementComponent implements OnInit {
     
     buildEngagementDetail() {
         console.log(this.engagement);
-        this.order.engagement = this.engagement.code;
+        this.order.engagement = this.engagement.reference;
         this.calculateRao();
         this.getNextOrdonnancementReference();
         this.getOrdonnancements();
