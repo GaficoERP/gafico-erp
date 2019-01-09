@@ -1,7 +1,9 @@
 export class Engagement {
-    code:number;
-    montant:number;
-    taxe:number;
+    reference:any;
+    budgetLine:number;
     objet:string;
+    amount:number;
+    tax:number;
+    budget:string;
     }
     

@@ -14,7 +14,7 @@
                     <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12 text-right">
                         <b class="text-left">{{planForm.name}}</b>
                         <button type="button" class="btn btn-success btn-raised col-lg-2 " (click)="updatePlan() ">M-à-J</button>
-                        <table class="table text-center">
+                        <table class="table text-center" *ngIf="levels.length>0">
                             <thead class="thead-default">
                                 <tr>
                                     <th *ngFor="let level of levels">{{level.name}}</th>

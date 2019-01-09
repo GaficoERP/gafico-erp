@@ -7,6 +7,7 @@ import { Budget } from 'app/models/budget';
 import { BudgetLine } from 'app/models/budgetline';
 import { PlanLine } from 'app/models/planline';
 import { Exercice } from 'app/models/exercice';
+import { LigneEngagement } from 'app/models/ligne-engagement';
 
 @Injectable()
 export class BudgetService {
@@ -60,5 +61,8 @@ export class BudgetService {
     
     saveBudget(budget, lines) {
         return this.http.post<Budget>(this.urlWS + this.budgetWs + '/save', {budget:budget, budgetLines:lines});
+    }
+    saveEngagement(object) {
+        return this.http.post<LigneEngagement>(this.urlWS + this.budgetWs + '/engagement/save',object);
     }
 }
