@@ -40,7 +40,7 @@ public class OrdonnancementServiceImpl implements OrdonnancementService {
 
   @Override
   public List<Ordonnancement> findByEngagement(@NonNull Integer engagement) {
-    Optional<List<Ordonnancement>> orders = repository.findByEngagement(engagement);
+    Optional<List<Ordonnancement>> orders = repository.findByEngagementOrderByReferenceDesc(engagement);
     if (orders.isPresent()) {
       return orders.get();
     }

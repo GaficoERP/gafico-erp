@@ -4,7 +4,7 @@ export class Balancing {
     dep_inv:number;
     dep_fonc:number;
     total:number;
-    rec_color:string;
-    dep_color:string;
+    inv_color:string;
+    fonc_color:string;
     bal_color:string;
 }

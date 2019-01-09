@@ -14,7 +14,7 @@ public interface OrdonnancementRepository extends MongoRepository<Ordonnancement
 
   // Optional<List<Ordonnancement>> findByBudget(String budget);
 
-  Optional<List<Ordonnancement>> findByEngagement(Integer engagement);
+  Optional<List<Ordonnancement>> findByEngagementOrderByReferenceDesc(Integer engagement);
 
   Optional<Ordonnancement> findByReference(String reference);
 

@@ -159,8 +159,8 @@ export class BudgetComponent implements OnInit {
             }
         }
         
-        this.balance.rec_color = this.balance.rec_inv == this.balance.rec_fonc ? 'green' : 'red';
-        this.balance.dep_color = this.balance.dep_inv == this.balance.dep_fonc ? 'green' : 'red';
+        this.balance.inv_color = this.balance.rec_inv == this.balance.dep_inv ? 'green' : 'red';
+        this.balance.fonc_color = this.balance.rec_fonc == this.balance.dep_fonc ? 'green' : 'red';
         this.balance.bal_color = (this.balance.rec_inv + this.balance.rec_fonc) == (this.balance.dep_inv + this.balance.dep_fonc) ? 'green' : 'red';
         this.balance.total = this.balance.rec_inv + this.balance.rec_fonc;
     }

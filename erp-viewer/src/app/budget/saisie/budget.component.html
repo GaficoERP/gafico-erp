@@ -108,21 +108,21 @@
 							<hr/>
 
 							<div matchHeight="card">
-								<div class="col-md-11">
+								<div class="col-md-12">
 									<div class="card">
 										<div class="card-body">
 											<div class="card-block">
-												<h4 class="card-title">Recettes ({{money.value}})</h4>
+												<h4 class="card-title">Fonctionnement ({{money.value}})</h4>
 											</div>
 											<ul class="list-group">
 												<li class="list-group-item"><span
 													class="badge float-right"
-													[style.background]="balance.rec_color">{{balance.rec_inv}}</span>
-													Investissement</li>
+													[style.background]="balance.fonc_color">{{balance.rec_fonc}}</span>
+													Recettes</li>
 												<li class="list-group-item"><span
 													class="badge float-right"
-													[style.background]="balance.rec_color">{{balance.rec_fonc}}</span>
-													Fonctionnement</li>
+													[style.background]="balance.fonc_color">{{balance.dep_fonc}}</span>
+													Dépenses</li>
 											</ul>
 										</div>
 									</div>
@@ -130,17 +130,17 @@
 									<div class="card">
 										<div class="card-body">
 											<div class="card-block">
-												<h4 class="card-title">Dépenses ({{money.value}})</h4>
+												<h4 class="card-title">Investissement ({{money.value}})</h4>
 											</div>
 											<ul class="list-group">
 												<li class="list-group-item"><span
 													class="badge float-right"
-													[style.background]="balance.dep_color">{{balance.dep_inv}}</span>
-													Investissement</li>
+													[style.background]="balance.inv_color">{{balance.rec_inv}}</span>
+													Recettes</li>
 												<li class="list-group-item"><span
 													class="badge float-right"
-													[style.background]="balance.dep_color">{{balance.dep_fonc}}</span>
-													Fonctionnement</li>
+													[style.background]="balance.inv_color">{{balance.dep_inv}}</span>
+													Dépenses</li>
 											</ul>
 										</div>
 									</div>
