@@ -129,7 +129,7 @@ export class PlanComponent implements OnInit {
         this.cs.getNextCode(this.lineForm.levelName, codeSize, this.planForm.name, this.lineForm.previous.code)
             .subscribe(data => {
                 console.log(data);
-                this.lineForm.code = JSON.stringify(data);
+                this.lineForm.code = data.code;
              });
     }
 

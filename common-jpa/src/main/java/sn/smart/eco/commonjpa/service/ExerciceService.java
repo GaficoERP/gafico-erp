@@ -14,4 +14,6 @@ public interface ExerciceService {
   public GaficoResult deleteExercice(Exercice exo);
 
   public Exercice findCurrent();
+
+  public Exercice findByYear(Integer year);
 }

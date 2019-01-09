@@ -8,6 +8,8 @@ import { BudgetLine } from 'app/models/budgetline';
 import { PlanLine } from 'app/models/planline';
 import { Exercice } from 'app/models/exercice';
 import { LigneEngagement } from 'app/models/ligne-engagement';
+import { Ordonnancement } from 'app/models/ordonnancement';
+import { CodeEntity } from 'app/models/codeentity';
 
 @Injectable()
 export class BudgetService {
@@ -18,6 +20,7 @@ export class BudgetService {
     private urlGetComponent = this.urlWS + '/common/component/findByName/';
     private configWs = '/common/config';
     private budgetWs = '/budget';
+    private orderWs = this.budgetWs + '/order';
     
     
     ngOnInit() {
@@ -64,5 +67,17 @@ export class BudgetService {
     }
     saveEngagement(object) {
         return this.http.post<LigneEngagement>(this.urlWS + this.budgetWs + '/engagement/save',object);
+    }
+    
+    getOrdonnancements(reference) {
+        return this.http.get<Ordonnancement[]>(this.urlWS + this.orderWs + '/find/' + reference);
+    }
+    
+    getNextOrdonnancementReference(engagement) {
+        return this.http.get<CodeEntity>(this.urlWS + this.orderWs + '/newref/' + engagement);
+    }
+    
+    saveOrders(orders) {
+        return this.http.post<Ordonnancement[]>(this.urlWS + this.orderWs + '/saveAll', orders);
     }
 }

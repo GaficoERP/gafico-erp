@@ -11,7 +11,6 @@ export class ExerciceComponent implements OnInit {
         
     exercice: Exercice = new Exercice();
     exercices: Exercice[] = new Array();
-    private urlExerciceWs = 'http://localhost:8080/war/rest/common/exercice';
 
   constructor(private confService: ConfigurationService) { }
 
@@ -20,7 +19,7 @@ export class ExerciceComponent implements OnInit {
   }
     
     addExercice(){
-        this.confService.saveExercice(this.urlExerciceWs+'/add', JSON.stringify(this.exercice))
+        this.confService.saveExercice(JSON.stringify(this.exercice))
             .subscribe(data => {
                 this.exercices.push(data);
                 this.exercice = new Exercice();
@@ -28,7 +27,7 @@ export class ExerciceComponent implements OnInit {
     }
     
     getExercices() {
-        this.confService.getExercices(this.urlExerciceWs+'/findAll')
+        this.confService.getExercices()
             .subscribe(data => {
                 this.exercices=data;
             });

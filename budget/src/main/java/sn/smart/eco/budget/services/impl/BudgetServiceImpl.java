@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class BudgetServiceImpl implements BudgetService {
 
   @Autowired

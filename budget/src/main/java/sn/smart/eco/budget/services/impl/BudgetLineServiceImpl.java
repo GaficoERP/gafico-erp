@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class BudgetLineServiceImpl implements BudgetLineService {
   @Autowired
   private BudgetLineRepository repository;

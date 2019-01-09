@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BudgetComponent } from './saisie/budget.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { BudgetService } from './budget.service';
+import { ConfigurationService } from '../configuration/configuation.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OrdonnancementComponent } from './execution/ordonnancement/ordonnancement.component';
 import { EngagementComponent } from './execution/engagement/engagement.component';
@@ -31,6 +32,6 @@ import { EngagementComponent } from './execution/engagement/engagement.component
         OrdonnancementComponent,
         EngagementComponent
     ],
-    providers: [ BudgetService ]
+    providers: [ BudgetService, ConfigurationService ]
 })
 export class BudgetModule { }

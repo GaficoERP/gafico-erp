@@ -14,4 +14,6 @@ public interface ExerciceRepository extends JpaRepository<Exercice, Integer> {
   List<Exercice> findAllByOrderByYearDesc();
 
   Optional<Exercice> findFirstByOrderByYearDesc();
+
+  Optional<Exercice> findByYear(Integer year);
 }

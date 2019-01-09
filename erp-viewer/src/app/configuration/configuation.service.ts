@@ -6,11 +6,14 @@ import { PlanLine } from 'app/models/planline';
 import { Plan } from 'app/models/plan';
 import { PlanEntity } from 'app/models/planentity';
 import { Exercice } from 'app/models/exercice';
+import { CodeEntity } from 'app/models/codeentity';
 
 @Injectable()
 export class ConfigurationService {
 
     constructor(private http: HttpClient) { }
+    
+    private urlExerciceWs = 'http://localhost:8080/war/rest/common/exercice';
     private urlAddPlan = 'http://localhost:8080/war/rest/common/plan/add';
     private urlAddPlanWithLines = 'http://localhost:8080/war/rest/common/config/addPlanWithLines';
     private urlAddLines = 'http://localhost:8080/war/rest/common/planline/add';
@@ -41,15 +44,15 @@ export class ConfigurationService {
         return this.http.get<Plan[]>(this.urlAllPlan);
     }
 
-    saveExercice(url, object) {
-        return this.http.post<Exercice>(url, object);
+    saveExercice(object) {
+        return this.http.post<Exercice>(this.urlExerciceWs+'/add', object);
     }
     
-    getExercices(url) {
-        return this.http.get<Exercice[]>(url);
+    getExercices() {
+        return this.http.get<Exercice[]>(this.urlExerciceWs+'/findAll');
     }
     
     getNextCode(levelName, levelCodeSize, plan, previous) {
-        return this.http.get(this.urlGetCode+levelName+'/'+levelCodeSize+'/'+plan+'/'+previous);
+        return this.http.get<CodeEntity>(this.urlGetCode+levelName+'/'+levelCodeSize+'/'+plan+'/'+previous);
     }
 }

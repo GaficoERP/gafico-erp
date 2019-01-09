@@ -3,7 +3,10 @@ package sn.smart.eco.web.budget;
 import sn.smart.eco.budget.model.Budget;
 import sn.smart.eco.budget.services.BudgetLineService;
 import sn.smart.eco.budget.services.BudgetService;
+import sn.smart.eco.commonjpa.model.ConfigParameter;
 import sn.smart.eco.commonjpa.model.Exercice;
+import sn.smart.eco.commonjpa.service.ExerciceService;
+import sn.smart.eco.commonjpa.utils.ConfigParameters;
 import sn.smart.eco.web.budget.model.BudgetEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +29,21 @@ public class BudgetRestService {
   private BudgetService service;
   @Autowired
   private BudgetLineService blService;
+  @Autowired
+  private ConfigParameters configParams;
+  @Autowired
+  private ExerciceService exoService;
 
   @GetMapping("/find/{exercice}")
   public Budget findBudgetByExercice(@PathVariable @NonNull Exercice exercice) {
     return service.findBudgetByExercice(exercice);
-
   }
 
   @GetMapping("/find")
-  public Budget findBudget() {
-    return service.findCurrentBudget();
-
+  public Budget findCurrentBudget() {
+    ConfigParameter param = configParams.getParameter("config.budget.current.exercice");
+    Exercice exo = exoService.findByYear(Integer.parseInt(param.getValue()));
+    return service.findBudgetByExercice(exo);
   }
 
   @PostMapping("/save")

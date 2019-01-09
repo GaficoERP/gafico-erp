@@ -1,3 +1,125 @@
-<p>
-  ordonnancement works!
-</p>
+<div class="row">
+	<div class="col-sm-12">
+
+
+		<!-- Start -->
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Saisie Ordonnancement</h4>
+					</div>
+					<div class="card-body">
+						<div class="card-block">
+							<form>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="name">Numéro Engagement</label> <select
+												name="engagement" class="form-control"
+												[(ngModel)]="engagement" (change)=buildEngagementDetail()>
+												<option></option>
+												<option *ngFor="let eng of engagements" [ngValue]="eng">{{eng.code}}</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="montant">Numéro Ordonnancement</label> <input
+												type="text" class="form-control" name="reference"
+												[(ngModel)]="order.reference"><br>
+										</div>
+										<div class="form-group">
+											<label for="montant">Montant Ordonnancement</label> <input
+												type="number" class="form-control" name="amount"
+												[(ngModel)]="order.amount"><br>
+										</div>
+										<div class="form-group">
+											<button type="button"
+												class="btn btn-success btn-raised col-lg-4"
+												(click)="addOrder()">Ajouter</button>
+											<button type="button"
+												class="btn btn-primary btn-raised col-lg-5"
+												(click)="saveOrders()">Enregistrer</button>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h4 class="card-title">Détail Engagement n°
+							{{engagement.code}}</h4>
+					</div>
+					<div class="card-body">
+						<div class="card-block">
+							<div>
+								<h4 class="card-title">Objet:</h4>
+							</div>
+							<div class="card-text col-md-12">
+								<p class="card-text">{{engagement.objet}}</p>
+							</div>
+							<hr />
+
+							<div matchHeight="card">
+								<div class="col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="card-block">
+												<h4 class="card-title">Situation des Ordonnancements</h4>
+											</div>
+											<ul class="list-group">
+												<li class="list-group-item"><span
+													class="badge bg-primary float-right">{{engagement.montant}}</span>
+													Montant de l'Engagement (HT)</li>
+												<li class="list-group-item"><span
+													class="badge bg-primary float-right">{{engagement.taxe}}</span>
+													Taxe de l'Engagement</li>
+												<li class="list-group-item"><span
+													class="badge float-right bg-primary">{{cumul}}</span> Cumul
+													des Ordann.</li>
+												<li class="list-group-item"><span
+													class="badge float-right bg-primary">{{rao}}</span> Reste à
+													Ordonnancer</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End -->
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Ordonnancements de l'Engagement n°{{engagement.code}} </h4>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-lg-12">
+						<table class="table">
+							<thead class="thead-default">
+								<tr>
+									<th>Référence de l'Ordonnancement</th>
+									<th>Montant de l'Ordonnancement</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let line of orders">
+									<td>{{line.reference}}</td>
+									<td>{{line.amount}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

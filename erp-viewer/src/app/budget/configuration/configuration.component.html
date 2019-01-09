@@ -2,6 +2,41 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">
+				<h4 class="card-title">Exercice en Cours</h4>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<form>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>Exercice Sélectionné :</label> <br/> <b><i>{{currentExo.value}}</i></b>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="form-group">
+									<label>Sélectionnez un exercice :</label> <select name="exercice"
+										class="form-control" (change)="display()"
+										[(ngModel)]="currentExo.value">
+										<option></option>
+										<option *ngFor="let exo of exercices" [value]="exo.year">{{exo.year}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<br />
+								<div class="form-group">
+									<button type="button" class="btn btn-success btn-raised"
+										(click)="updateCurrentExo()">Appliquer</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-header">
 				<h4 class="card-title">Plan Budgétaire Actif</h4>
 			</div>
 			<div class="card-body">
@@ -50,8 +85,9 @@
 							</div>
 							<div class="col-md-5">
 								<div class="form-group">
-									<label>Définissez une Devise :</label>
-									<input name="moneyRef" type="text" class="form-control" [(ngModel)]="selectedMoney.value">
+									<label>Définissez une Devise :</label> <input name="moneyRef"
+										type="text" class="form-control"
+										[(ngModel)]="selectedMoney.value">
 								</div>
 							</div>
 							<div class="col-md-3">
@@ -73,22 +109,24 @@
 			<div class="card-body">
 				<div class="card-block">
 					<div class="row">
-						<label>Conversion : </label>
-						<b><label>1 {{selectedMoney.value}} = </label>
-						<label>{{reportMoneyRate.value}} {{reportMoney.value}}</label></b>
+						<label>Conversion : </label> <b><label>1
+								{{selectedMoney.value}} = </label> <label>{{reportMoneyRate.value}}
+								{{reportMoney.value}}</label></b>
 					</div>
 					<form>
 						<div class="row">
 							<div class="col-md-5">
 								<div class="form-group">
-									<label>Définissez une Devise :</label>
-									<input name="reportMoney" type="text" class="form-control" [(ngModel)]="reportMoney.value">
+									<label>Définissez une Devise :</label> <input
+										name="reportMoney" type="text" class="form-control"
+										[(ngModel)]="reportMoney.value">
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Taux / {{selectedMoney.value}} :</label>
-									<input name="reportMoneyRate" type="number" step="0.001" class="form-control" [(ngModel)]="reportMoneyRate.value">
+									<label>Taux / {{selectedMoney.value}} :</label> <input
+										name="reportMoneyRate" type="number" step="0.001"
+										class="form-control" [(ngModel)]="reportMoneyRate.value">
 								</div>
 							</div>
 							<div class="col-md-3">
