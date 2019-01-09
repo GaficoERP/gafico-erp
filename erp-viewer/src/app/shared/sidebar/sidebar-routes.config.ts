@@ -17,11 +17,16 @@ export const ROUTES: RouteInfo[] = [
     },
     {
         path: '', title: 'Budget', icon: 'icon-wallet', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
-            { path: '/budget/config', title: 'Configuration', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/budget/saisie', title: 'Saisie Budget', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '', title: 'Exécution Budget', icon: '', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+            { path: '/budget/config', title: 'Configuration', icon: 'fa fa-wrench', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/budget/saisie', title: 'Saisie Budget', icon: 'ft-list', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '', title: 'Exécution Budget', icon: 'ft-play-circle', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
                 { path: '/budget/saisie/engagement', title: 'Saisie Engagement', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
                 { path: '/budget/saisie/ordonnancement', title: 'Saisie Ordonnancement', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+            ] },
+            { path: '', title: 'Suivi Exécution Budget', icon: 'ft-play-circle', class: 'has-sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
+                { path: '/budget/suivi/engagement', title: 'Situation Engagements', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+                { path: '/budget/suivi/ordonnancement', title: 'Situation Ordonnancements', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+                { path: '/budget/suivi/exec-budget', title: 'Situation Exécution Budget', icon: '', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
             ] }
         ]
     },

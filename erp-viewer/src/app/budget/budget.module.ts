@@ -12,6 +12,9 @@ import { ConfigurationService } from '../configuration/configuation.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OrdonnancementComponent } from './execution/ordonnancement/ordonnancement.component';
 import { EngagementComponent } from './execution/engagement/engagement.component';
+import { SuiviEngagementComponent } from './suivi/engagement/suivi-engagement.component';
+import { SuiviOrdonnancementComponent } from './suivi/ordonnancement/suivi-ordonnancement.component';
+import { ExecBudgetComponent } from './suivi/exec-budget/exec-budget.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { EngagementComponent } from './execution/engagement/engagement.component
         BudgetComponent,
         ConfigurationComponent,
         OrdonnancementComponent,
-        EngagementComponent
+        EngagementComponent,
+        SuiviOrdonnancementComponent,
+        SuiviEngagementComponent,
+        ExecBudgetComponent
     ],
     providers: [ BudgetService, ConfigurationService ]
 })

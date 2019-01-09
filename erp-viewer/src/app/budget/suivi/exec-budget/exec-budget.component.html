@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Divers</h4>
+			</div>
+			<div class="card-body">
+				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+					<input type='text'
+						style='padding: 8px; margin: 15px auto; width: 30%;'
+						placeholder='filtrez sur le code...'
+						(keyup)='updateFilter($event)' />
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Fonctionnement</h4>
+			</div>
+			<div class="card-body">
+				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+					<ngx-datatable #table class='bootstrap table selection-cell'
+						[columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+						[rowHeight]="'auto'" [limit]="10" [rows]='rows'> <ngx-datatable-column
+						class="tab-head" prop="code" name="ligne budgetaire" [width]="120"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="label" name="Libellé"
+						[width]="430"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="amount" name="Montant"
+						[width]="150"></ngx-datatable-column> </ngx-datatable>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Investissement</h4>
+			</div>
+			<div class="card-body">
+				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+					<ngx-datatable #table class='bootstrap table selection-cell'
+						[columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+						[rowHeight]="'auto'" [limit]="10" [rows]='rows'> <ngx-datatable-column
+						class="tab-head" prop="code" name="ligne budgetaire" [width]="120"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="label" name="Libellé"
+						[width]="430"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="amount" name="Montant"
+						[width]="150"></ngx-datatable-column> </ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

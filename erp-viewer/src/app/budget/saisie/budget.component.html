@@ -166,12 +166,12 @@
 					<ngx-datatable #table class='bootstrap table'
 						[columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
 						[rowHeight]="'auto'" [limit]="10" [rows]='rows'> <ngx-datatable-column
-						class="tab-head" prop="code"></ngx-datatable-column> <ngx-datatable-column
-						class="tab-head" prop="label" name="Libellé"></ngx-datatable-column>
-					<ngx-datatable-column class="tab-head" prop="nature"></ngx-datatable-column>
-					<ngx-datatable-column class="tab-head" prop="amount" name="Montant"></ngx-datatable-column>
+						class="tab-head" prop="code" [width]="80"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" prop="label" name="Libellé" [width]="300"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="nature" [width]="200"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="amount" name="Montant" [width]="130"></ngx-datatable-column>
 					<ngx-datatable-column class="tab-head" name="id"
-						[resizeable]="false"> <ng-template
+						[resizeable]="false" [width]="30"> <ng-template
 						ngx-datatable-header-template> Action </ng-template> <ng-template
 						let-row="row" ngx-datatable-cell-template>
 					<button class="btn button-trans" (click)="delete(row)">

@@ -28,34 +28,44 @@ export class OrdonnancementComponent implements OnInit {
   ngOnInit() {
       this.engagements = [
   {
-    code:1,
-    montant:24000,
-    taxe:3200,
-    objet:"Le Lorem Ipsum est simplement du faux texte employé"
+    reference:1,
+    amount:24000,
+    tax:3200,
+    objet:"Le Lorem Ipsum est simplement du faux texte employé",
+    budget:"Budget 2017",
+    budgetLine:111000
   },
   {
-    code:2,
-    montant:14000,
-    taxe:1200,
-    objet:"On sait depuis longtemps que travailler avec du texte lisible"
+    reference:2,
+    amount:14000,
+    tax:1200,
+    objet:"On sait depuis longtemps que travailler avec du texte lisible",
+    budget:"Budget 2017",
+    budgetLine:111000
   },
   {
-    code:3,
-    montant:4000,
-    taxe:620,
-    objet:"Contrairement à une opinion répandue, le Lorem Ipsum n'est pas"
+    reference:3,
+    amount:4000,
+    tax:620,
+    objet:"Contrairement à une opinion répandue, le Lorem Ipsum n'est pas",
+    budget:"Budget 2017",
+    budgetLine:111000
   },
   {
-    code:4,
-    montant:11700,
-    taxe:1050,
-    objet:"Plusieurs variations de Lorem Ipsum peuvent être trouvées ici"
+    reference:4,
+    amount:11700,
+    tax:1050,
+    objet:"Plusieurs variations de Lorem Ipsum peuvent être trouvées ici",
+    budget:"Budget 2017",
+    budgetLine:111000
   },
   {
-    code:5,
-    montant:7650,
-    taxe:567,
-    objet:"L'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle"
+    reference:5,
+    amount:7650,
+    tax:567,
+    objet:"L'extrait standard de Lorem Ipsum utilisé depuis le XVIè siècle",
+    budget:"Budget 2017",
+    budgetLine:111000
   }
 ]
   }
@@ -70,7 +80,7 @@ export class OrdonnancementComponent implements OnInit {
     
     
     getOrdonnancements() {
-        this.budgetService.getOrdonnancements(this.engagement.code)
+        this.budgetService.getOrdonnancements(this.engagement.reference)
         .subscribe(data => {
             if(data){
                 this.orders=data;
@@ -84,7 +94,7 @@ export class OrdonnancementComponent implements OnInit {
     findEngagement(ref) {
         for(var i=0; i< this.engagements.length; i++) {
             var eng = this.engagements[i];
-            if(eng.code == ref) {
+            if(eng.reference == ref) {
                 return eng;
             }
         } 
@@ -94,7 +104,7 @@ export class OrdonnancementComponent implements OnInit {
          this.cumul = 0;
         for(var i=0; i< this.orders.length; i++) {
             var ord = this.orders[i];
-            if(ord.engagement == this.engagement.code) {
+            if(ord.engagement == this.engagement.reference) {
                 this.cumul += ord.amount;
              }
         }
@@ -102,21 +112,21 @@ export class OrdonnancementComponent implements OnInit {
     
     calculateRao() {
         this.calculateCumul();
-        this.rao = this.engagement.montant - this.cumul;
+        this.rao = this.engagement.amount - this.cumul;
     }
     
     getNextOrdonnancementReference() {
         if(this.orders.length == 0) {
-            this.order.reference = this.engagement.code + '-' + 1;
+            this.order.reference = this.engagement.reference + '-' + 1;
         } else {
             this.orders.sort((a,b)=>b.reference.localeCompare(a.reference));
             
             var lastCode = this.orders[0].reference;
             var code = +lastCode.substring(lastCode.indexOf('-') + 1);
             
-            this.order.reference = this.engagement.code + '-' + (code + 1);
+            this.order.reference = this.engagement.reference + '-' + (code + 1);
         }
-//        this.budgetService.getNextOrdonnancementReference(this.engagement.code)
+//        this.budgetService.getNextOrdonnancementReference(this.engagement.reference)
 //        .subscribe(data => {
 //            console.log(data);
 //            if(data){
@@ -135,7 +145,7 @@ export class OrdonnancementComponent implements OnInit {
     }
     
     buildEngagementDetail() {
-        this.order.engagement = this.engagement.code;
+        this.order.engagement = this.engagement.reference;
         this.getOrdonnancements();
     }
 
