@@ -20,6 +20,7 @@ export class BudgetComponent implements OnInit {
   
   budget: Budget = new Budget();
   budgetLines: BudgetLine[] = new Array();
+  addedBudgetLines: BudgetLine[] = new Array();
   temp: BudgetLine[] = new Array();
   budgetLine: BudgetLine = new BudgetLine();
   planLines: PlanLine[] = new Array();
@@ -28,6 +29,7 @@ export class BudgetComponent implements OnInit {
   plan: ConfigParam = new ConfigParam();
   money: ConfigParam = new ConfigParam();
   balance: Balancing = new Balancing();
+    // TODO: fixer ce probleme de suppression des infos du key
   planKey: string = 'config.budget.plan.plan';
   moneyKey: string = 'config.budget.money.ref.ref';
   disableName:boolean = false;
@@ -114,17 +116,20 @@ export class BudgetComponent implements OnInit {
         this.budgetLine.nature = this.selectedLine.nature;
     }
     
-    addBugetLine() {
+    addBudgetLine() {
         this.budgetLines.push(this.budgetLine);
+        this.addedBudgetLines.push(this.budgetLine);
+        this.updateBalance(this.budgetLine);
         this.budgetLine = new BudgetLine();
         this.budgetLine.budgetName = this.budget.name;
     }
     
     saveBudget() {
-        this.budgetService.saveBudget(this.budget, this.budgetLines)
+        this.budgetService.saveBudget(this.budget, this.addedBudgetLines)
         .subscribe(data => {
             if(data){
                 console.log(data);
+                this.addedBudgetLines = new Array();
             }
         });
     }
@@ -136,33 +141,47 @@ export class BudgetComponent implements OnInit {
         this.balance.dep_fonc = 0;
         
         for(let line of this.budgetLines) {
-            switch(line.nature) {
-                case "RECETTE_INVESTISSEMENT": {
-                    this.balance.rec_inv += line.amount;
-                    break;
-                }
-                case "RECETTE_FONCTIONNEMENT": {
-                    this.balance.rec_fonc += line.amount;
-                    break;
-                }
-                case "DEPENSE_INVESTISSEMENT": {
-                    this.balance.dep_inv += line.amount;
-                    break;
-                }
-                case "DEPENSE_FONCTIONNEMENT": {
-                    this.balance.dep_fonc += line.amount;
-                    break;
-                }
-                default: {
-                    break;
-                }
+            this.updateBalance(line);
+        }
+        
+        this.updateColors();
+    }
+    
+    updateBalance(line) {
+        switch(line.nature) {
+            case "RECETTE_INVESTISSEMENT": {
+                this.balance.rec_inv += line.amount;
+                break;
+            }
+            case "RECETTE_FONCTIONNEMENT": {
+                this.balance.rec_fonc += line.amount;
+                break;
+            }
+            case "DEPENSE_INVESTISSEMENT": {
+                this.balance.dep_inv += line.amount;
+                break;
+            }
+            case "DEPENSE_FONCTIONNEMENT": {
+                this.balance.dep_fonc += line.amount;
+                break;
+            }
+            default: {
+                break;
             }
         }
         
+        this.updateColors();
+    }
+    
+    updateColors() {
+        let balanced:boolean = (this.balance.rec_inv + this.balance.rec_fonc) == (this.balance.dep_inv + this.balance.dep_fonc);
         this.balance.inv_color = this.balance.rec_inv == this.balance.dep_inv ? 'green' : 'red';
         this.balance.fonc_color = this.balance.rec_fonc == this.balance.dep_fonc ? 'green' : 'red';
-        this.balance.bal_color = (this.balance.rec_inv + this.balance.rec_fonc) == (this.balance.dep_inv + this.balance.dep_fonc) ? 'green' : 'red';
+        this.balance.bal_color = balanced ? 'green' : 'red';
+        this.balance.bal_text = balanced ? 'Budget équilibré' : 'Budget déséquilibré';
         this.balance.total = this.balance.rec_inv + this.balance.rec_fonc;
+        this.balance.rec = this.balance.rec_inv + this.balance.rec_fonc;
+        this.balance.dep = this.balance.dep_inv + this.balance.dep_fonc;
     }
     
     updateFilter(event) {

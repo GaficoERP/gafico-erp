@@ -1,7 +1,9 @@
 package sn.smart.eco.web.common;
 
+import sn.smart.eco.commonjpa.model.ConfigParameter;
 import sn.smart.eco.commonjpa.model.Plan;
 import sn.smart.eco.commonjpa.service.PlanService;
+import sn.smart.eco.commonjpa.utils.ConfigParameters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
@@ -21,6 +23,8 @@ public class PlanRestService {
 
   @Autowired
   private PlanService planService;
+  @Autowired
+  private ConfigParameters configParams;
 
   @PostMapping("/add")
   public Plan addPlan(@RequestBody @NonNull Plan plan) {
@@ -30,6 +34,12 @@ public class PlanRestService {
   @GetMapping("/findPlan/{name}")
   public Plan findPlan(@PathVariable @NonNull String name) {
     return planService.findPlan(name);
+  }
+
+  @GetMapping("/find")
+  public Plan findCurrent() {
+    ConfigParameter plan = configParams.getParameter("config.budget.plan");
+    return planService.findPlan(plan.getValue());
   }
 
   @PostMapping("/update")

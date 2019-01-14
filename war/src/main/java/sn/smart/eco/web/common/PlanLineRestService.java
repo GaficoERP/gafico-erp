@@ -3,7 +3,9 @@ package sn.smart.eco.web.common;
 import sn.smart.eco.common.model.GaficoResult;
 import sn.smart.eco.common.mongo.model.PlanLine;
 import sn.smart.eco.common.mongo.services.PlanLineService;
+import sn.smart.eco.commonjpa.model.ConfigParameter;
 import sn.smart.eco.commonjpa.service.PlanService;
+import sn.smart.eco.commonjpa.utils.ConfigParameters;
 import sn.smart.eco.web.common.model.CodeEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class PlanLineRestService {
   private PlanLineService plService;
   @Autowired
   private PlanService planService;
+  @Autowired
+  private ConfigParameters configParams;
 
   @PostMapping("/add")
   public PlanLine addPlanLine(@RequestBody @NonNull PlanLine pl) {
@@ -46,6 +50,12 @@ public class PlanLineRestService {
   @GetMapping("/findByPlan/{plan}")
   public List<PlanLine> findByPlan(@PathVariable @NonNull String plan) {
     return plService.findByPlan(plan);
+  }
+
+  @GetMapping("/find")
+  public List<PlanLine> findCurrent() {
+    ConfigParameter plan = configParams.getParameter("config.budget.plan");
+    return plService.findByPlan(plan.getValue());
   }
 
   @GetMapping("/findDeepersByPlan/{plan}")

@@ -16,7 +16,7 @@ export class BudgetService {
         
     constructor(private http: HttpClient) { }
     private urlWS = 'http://localhost:8080/war/rest';
-    private urlGetPlan = this.urlWS + '/common/plan/findAll';
+    private urlPlan = this.urlWS + '/common/plan';
     private urlGetComponent = this.urlWS + '/common/component/findByName/';
     private configWs = '/common/config';
     private budgetWs = '/budget';
@@ -27,7 +27,11 @@ export class BudgetService {
     }
     
     getPlans() {
-        return this.http.get<Plan[]>(this.urlGetPlan);
+        return this.http.get<Plan[]>(this.urlPlan + '/findAll');
+    }
+    
+    getCurrentPlan() {
+        return this.http.get<Plan>(this.urlPlan + '/find');
     }
     
     getComponent(name) {
@@ -56,6 +60,10 @@ export class BudgetService {
     
     getPlanLines(planName) {
         return this.http.get<PlanLine[]>(this.urlWS + '/common/planline/findDeepersByPlan/' + planName);
+    }
+    
+    getCurrentPlanLines() {
+        return this.http.get<PlanLine[]>(this.urlWS + '/common/planline/find');
     }
     
     getExercice() {

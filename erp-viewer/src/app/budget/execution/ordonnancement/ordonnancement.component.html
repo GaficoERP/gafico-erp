@@ -19,18 +19,18 @@
 												name="engagement" class="form-control"
 												[(ngModel)]="engagement" (change)=buildEngagementDetail()>
 												<option></option>
-												<option *ngFor="let eng of engagements" [ngValue]="eng">{{eng.code}}</option>
+												<option *ngFor="let eng of engagements" [ngValue]="eng">{{eng.reference}}</option>
 											</select>
-										</div>
-										<div class="form-group">
-											<label for="montant">Numéro Ordonnancement</label> <input
-												type="text" class="form-control" name="reference" disabled
-												[(ngModel)]="order.reference"><br>
 										</div>
 										<div class="form-group">
 											<label for="montant">Montant Ordonnancement</label> <input
 												type="number" class="form-control" name="amount"
 												[(ngModel)]="order.amount"><br>
+										</div>
+										<div class="form-group">
+											<label for="montant">Numéro Ordonnancement</label> <input
+												type="text" class="form-control" name="reference" disabled
+												[(ngModel)]="order.reference"><br>
 										</div>
 										<div class="form-group">
 											<button type="button"
@@ -52,7 +52,7 @@
 				<div class="card">
 					<div class="card-header">
 						<h4 class="card-title">Détail Engagement n°
-							{{engagement.code}}</h4>
+							{{engagement.reference}}</h4>
 					</div>
 					<div class="card-body">
 						<div class="card-block">
@@ -73,10 +73,10 @@
 											</div>
 											<ul class="list-group">
 												<li class="list-group-item"><span
-													class="badge bg-primary float-right">{{engagement.montant}}</span>
+													class="badge bg-primary float-right">{{engagement.amount}}</span>
 													Montant de l'Engagement (HT)</li>
 												<li class="list-group-item"><span
-													class="badge bg-primary float-right">{{engagement.taxe}}</span>
+													class="badge bg-primary float-right">{{engagement.tax}}</span>
 													Taxe de l'Engagement</li>
 												<li class="list-group-item"><span
 													class="badge float-right bg-primary">{{cumul}}</span> Cumul
@@ -98,7 +98,7 @@
 
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Ordonnancements de l'Engagement n°{{engagement.code}} </h4>
+				<h4 class="card-title">Ordonnancements de l'Engagement n°{{engagement.reference}} </h4>
 			</div>
 			<div class="card-body">
 				<div class="row">
