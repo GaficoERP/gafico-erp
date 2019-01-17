@@ -8,6 +8,8 @@ import { PlanComponent } from "./plan/plan.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigurationService } from './configuation.service';
 import { ExerciceComponent } from './exercice/exercice.component';
+import { ProviderComponent } from './provider/provider.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -19,12 +21,14 @@ import { ExerciceComponent } from './exercice/exercice.component';
         NgbModule,
         FormsModule,
         ReactiveFormsModule,
-        MatchHeightModule
+        MatchHeightModule,
+        NgxDatatableModule
     ],
     exports: [],
     declarations: [
         PlanComponent,
         ExerciceComponent,
+        ProviderComponent,
      
     ],
     providers: [ConfigurationService],

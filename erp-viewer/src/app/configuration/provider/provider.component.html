@@ -1,0 +1,129 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Enregistrement d'un Fournisseur</h4>
+			</div>
+			<div class="card-body">
+				<div class="card-block">
+					<form>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">Nom</label> <input type="text"
+										class="form-control" id="name" name="name"
+										[(ngModel)]="provider.name" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exercice">Ninea</label> <input type="text"
+										class="form-control" id="ninea" name="ninea"
+										[(ngModel)]="provider.ninea" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="plan">Numéro de Compte</label> <input type="text"
+										class="form-control" id="accountNumber" name="accountNumber"
+										[(ngModel)]="provider.accountNumber" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">Libellé de Compte</label> <input type="text"
+										class="form-control" id="accountLabel" name="accountLabel"
+										[(ngModel)]="provider.accountLabel" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exercice">Compte Bancaire</label> <input
+										type="text" class="form-control" id="bankAccount"
+										name="bankAccount" [(ngModel)]="provider.bankAccount" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="plan">Email</label> <input type="email"
+										class="form-control" id="email" name="email"
+										[(ngModel)]="provider.email" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="name">Téléphone</label> <input type="tel"
+										class="form-control" id="phoneNumber" name="phoneNumber"
+										[(ngModel)]="provider.phoneNumber" required>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="exercice">Téléphone 2</label> <input type="tel"
+										class="form-control" id="phoneNumber2" name="phoneNumber2"
+										[(ngModel)]="provider.phoneNumber2">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="plan">Fax</label> <input type="tel"
+										class="form-control" id="faxNumber" name="faxNumber"
+										[(ngModel)]="provider.faxNumber">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="plan">Adresse</label>
+									<textarea rows="4" class="form-control" id="address"
+										name="address" [(ngModel)]="provider.address" required></textarea>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<br /> <br />
+								<div class="form-group text-left">
+									<button type="button" class="btn btn-success btn-raised"
+										(click)="save()">Enregister</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Tous les fournisseurs</h4>
+			</div>
+			<!-- 			name:string; ninea:string; accountNumber:string; accountLabel:string; -->
+			<!-- 			bankAccount:string; phoneNumber:string; phoneNumber2:string; -->
+			<!-- 			email:string; address:string; faxNumber:string -->
+			<div class="card-body">
+				<div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+					<input type='text'
+						style='padding: 8px; margin: 15px auto; width: 30%;'
+						placeholder='filtrez sur le code...'
+						(keyup)='updateFilter($event)' />
+					<ngx-datatable #table class='bootstrap table'
+						[columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+						[rowHeight]="'auto'" [limit]="10" [rows]='rows'> <ngx-datatable-column
+						class="tab-head" prop="name" name="Nom"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" prop="ninea"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" prop="accountNumber" name="Numéro du Compte"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="accountLabel"
+						name="Libellé du Compte"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" prop="phoneNumber" name="Téléphone"></ngx-datatable-column>
+					<ngx-datatable-column class="tab-head" prop="address"
+						name="Adresse"></ngx-datatable-column> <ngx-datatable-column
+						class="tab-head" name="id" [resizeable]="false">
+					<ng-template ngx-datatable-header-template> Action </ng-template> <ng-template
+						let-row="row" ngx-datatable-cell-template>
+					<button class="btn button-trans" (click)="edit(row)">
+						<i class="ft-edit-3"></i>
+					</button>
+					</ng-template> </ngx-datatable-column> </ngx-datatable>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

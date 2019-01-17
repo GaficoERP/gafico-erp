@@ -12,7 +12,8 @@ export const ROUTES: RouteInfo[] = [
     {
         path: '', title: 'Configuration', icon: 'ft-settings', class: 'has-sub', badge: '', badgeClass: 'badge badge-pill badge-danger float-right mr-1 mt-1', isExternalLink: false, submenu: [
             { path: '/configuration/plan', title: 'Plan', icon: 'ft-list', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
-            { path: '/configuration/exercice', title: 'Exercice', icon: 'ft-briefcase', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
+            { path: '/configuration/exercice', title: 'Exercice', icon: 'ft-briefcase', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+            { path: '/configuration/provider', title: 'Fournisseur', icon: 'ft-users', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] }
         ]
     },
     {
