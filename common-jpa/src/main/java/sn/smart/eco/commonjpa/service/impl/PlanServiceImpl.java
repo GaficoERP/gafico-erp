@@ -22,7 +22,7 @@ public class PlanServiceImpl implements PlanService {
 
   @Override
   public Plan findPlan(@NonNull String name) {
-    return planRepository.getOne(name);
+    return planRepository.findById(name).orElse(null);
   }
 
   @Override

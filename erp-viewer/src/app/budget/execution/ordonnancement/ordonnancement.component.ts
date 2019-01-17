@@ -71,6 +71,7 @@ export class OrdonnancementComponent implements OnInit {
   }
     
     addOrder() {
+        this.order.engagement = this.engagement.reference;
         this.orders.push(this.order);
         this.newOrders.push(this.order);
         this.cumul += this.order.amount;
