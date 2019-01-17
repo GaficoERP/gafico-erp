@@ -7,7 +7,7 @@ import { Budget } from 'app/models/budget';
 import { BudgetLine } from 'app/models/budgetline';
 import { PlanLine } from 'app/models/planline';
 import { Exercice } from 'app/models/exercice';
-import { LigneEngagement } from 'app/models/ligne-engagement';
+import { Engagement } from 'app/models/engagement';
 import { Ordonnancement } from 'app/models/ordonnancement';
 import { CodeEntity } from 'app/models/codeentity';
 
@@ -66,7 +66,10 @@ export class BudgetService {
         return this.http.post<Budget>(this.urlWS + this.budgetWs + '/save', {budget:budget, budgetLines:lines});
     }
     saveEngagement(object) {
-        return this.http.post<LigneEngagement>(this.urlWS + this.budgetWs + '/engagement/save',object);
+        return this.http.post<Engagement>(this.urlWS + this.budgetWs + '/engagement/save',object);
+    }
+    getEngagements(object) {
+        return this.http.get<Engagement[]>(this.urlWS + this.budgetWs + '/engagement/engamentsbybugetline?budgetLine='+object);
     }
     
     getOrdonnancements(reference) {

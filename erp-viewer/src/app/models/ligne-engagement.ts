@@ -1,6 +1,6 @@
 export class LigneEngagement {
     budget:string;
-    budgetLine:number;
+    budgetLine:string;
     libelle:string;
     prevu:number;
     engagee:number;

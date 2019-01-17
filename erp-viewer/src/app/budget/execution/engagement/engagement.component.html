@@ -1,47 +1,86 @@
 <div class="row">
-  <div class="card col-md-12 col-sm-12 col-lg-12">
-    <div class="card-header">
-      <h4 class="card-title">Execution budget</h4>
-    </div>
-    <div class="card-body">
-      <div class="card-block">
-        <div class="row ">
-          <div class="col-md-6 col-sm-6 col-lg-6">
-            <form>
-
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="name">ligne budget</label>
-                  <select name="code" class="form-control" [(ngModel)]="engagementForm.code">
-                    <option></option>
-                    <option *ngFor="let b of  budgetLines" [value]="b.code">{{b.name}}</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="montant">Montant</label>
-                  <input type="number" class="form-control" name="montant" placeholder="Hors taxe" [(ngModel)]="engagementForm.montant"><br>
-                  <input type="number" class="form-control" name="taxe" placeholder="montant taxe" [(ngModel)]="engagementForm.taxe">
-                </div>
-                <div class="form-group">
-                  <label for="objet">Objet</label>
-                  <textarea class="form-control round" rows="4" name="objet" [(ngModel)]="engagementForm.objet"></textarea>
-                </div>
-              </div>
-              <div class="form-group text-right">
-                <button type="button" class="btn btn-success btn-raised" (click)="enregistrer()">Enregister</button>
-              </div>
-            </form>
+  <div class="col-md-12 col-sm-12 col-lg-12">
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">saisie engagement</h4>
           </div>
-          <div class="col-md-6 col-sm-6 col-lg-6">
-            <div>code:&nbsp;{{ligneEngagement.budgetLine}}</div>
-            <div>Libellé:&nbsp;{{ligneEngagement.libelle}}</div>
-            <div>Montant prévu:&nbsp;{{ligneEngagement.prevu}}</div>
-            <div>Montant engagé:&nbsp;{{ligneEngagement.engagee}}</div>
-            <div>Restant:&nbsp;{{ligneEngagement.restant}}</div>
-            <!-- libelle:string;
-              prevu:number;
-              engagee:number;
-              restant:number; -->
+          <div class="card-body">
+            <div class="card-block">
+              <form>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="name">ligne budget</label>
+                    <select name="code" class="form-control" (change)="getEngagements()" [(ngModel)]="engagementForm.code">
+                      <option></option>
+                      <option *ngFor="let b of  budgetLines" [value]="b.code">{{b.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6 col-lg-6">
+                        <label for="montant">Montant</label>
+                        <input type="number" class="form-control" name="montant" placeholder="Hors taxe" [(ngModel)]="engagementForm.montant"><br>
+                        <input type="number" class="form-control" name="taxe" placeholder="montant taxe" [(ngModel)]="engagementForm.taxe">
+                      </div>
+                      <div class="col-md-6 col-sm-6 col-lg-6">
+                          <label for="montant">Montant diponible</label>
+                          <label for="montant">{{ligneEngagement.restant}}</label>
+                          
+                        </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="objet">Objet</label>
+                    <textarea class="form-control round" rows="4" name="objet" [(ngModel)]="engagementForm.objet"></textarea>
+                  </div>
+                  <div class="form-group">
+                      <label for="objet">Justificatif</label>
+                      <select name="choice" class="form-control" (change)="choice()" [(ngModel)]="engagementForm.choice">
+                          <option value="">Justificatif de l'engagement</option>
+                           <option value="Réference marché">Réference marché</option>
+                          <option value="DRP">DRP</option>
+                          <option value="Cotation">Cotation</option>
+                          <option value="Bon de commande">Bon de commande</option>
+                          <option value="autre">Autre</option>
+                         
+                        
+                        </select>
+                        <input *ngIf="choix" type="text" class="form-control" name="choice" placeholder="Justificatif" [(ngModel)]="engagementForm.choice">     
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                  <button type="button" class="btn btn-success btn-raised" (click)="enregistrer()">Enregister</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Details ligne budgetaire{{ligneEngagement.budgetLine}}</h4>
+          </div>
+          <hr />
+          <div class="card-body">
+            <div class="card-block">
+              <ul class="list-group">
+                <li class="list-group-item">Engagement:{{ligneEngagement.libelle}}<span class="badge bg-primary float-right">{{ligneEngagement.montant}}</span>
+                </li>
+                <li class="list-group-item"> Montant de l'Engagement (HT):<span class="badge bg-primary float-right">{{ligneEngagement.montant}}</span>
+                </li>
+                <li class="list-group-item">Montant prévu<span class="badge bg-primary float-right">{{ligneEngagement.prevu}}</span>
+                </li>
+                <li class="list-group-item">Montant engagé:<span class="badge float-right bg-primary">{{ligneEngagement.engagee}}</span></li>
+                <li class="list-group-item">Reste à
+                  engager:<span class="badge float-right bg-primary">{{ligneEngagement.restant}}</span> </li>
+              </ul>
+
+
+            </div>
           </div>
         </div>
       </div>

@@ -11,9 +11,10 @@
                         <button type="button" class="btn btn-success btn-raised col-lg-12" (click)="addPlan() ">Nouveau
                             Plan</button>
                     </div>
-                    <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12 text-right">
+                    <div class="col-md-8 col-sm-8 col-lg-8 col-xs-12">
+                        <button type="button" class="btn btn-success btn-raised col-lg-2 " (click)="updatePlan() "
+                            *ngIf="levels.length>0">M-à-J</button>
                         <b class="text-left">{{planForm.name}}</b>
-                        <button type="button" class="btn btn-success btn-raised col-lg-2 " (click)="updatePlan() ">M-à-J</button>
                         <table class="table text-center" *ngIf="levels.length>0">
                             <thead class="thead-default">
                                 <tr>
@@ -117,24 +118,27 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6 col-lg-6">
 
-                                <div class="form-group" *ngIf="levelsForm.length>0">
+                                <div class="form-group">
                                     <label for="levelName">Niveau</label>
                                     <select name="levelName" class="form-control" (change)="getParent()" [(ngModel)]="lineForm.levelName">
                                         <option *ngFor="let level of levelsForm" [value]="level.name">{{level.name}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="previous">Parent</label>
-                                    <select name="previous" class="form-control" [disabled]="hasParent" (change)="calculateCode()" [(ngModel)]="lineForm.previous">
-                                        <option *ngFor="let line of parent" [ngValue]="line">{{line.label}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6 col-lg-6">
-                                <div class="form-group">
                                     <label for="code">Code</label>
                                     <input name="code" type="text" class="form-control" [(ngModel)]="lineForm.code">
                                     <!-- <small class="form-text text-muted danger">Please enter a valid email!</small> -->
+                                </div>
+
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-lg-6">
+                                <div class="form-group">
+                                    <label for="previous">Parent</label>
+                                    <select name="previous" class="form-control" [disabled]="hasParent" (input)="calculateCode()"
+                                        (change)="calculateCode()" [(ngModel)]="lineForm.previous">
+                                        <option></option>
+                                        <option *ngFor="let line of parent" [ngValue]="line">{{line.label}}</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="label">Libellé</label>

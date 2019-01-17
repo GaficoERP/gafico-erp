@@ -1,7 +1,8 @@
 export class Engagement {
     reference:any;
-    budgetLine:number;
+    budgetLine:string;
     objet:string;
+    choice:string;
     amount:number;
     tax:number;
     budget:string;

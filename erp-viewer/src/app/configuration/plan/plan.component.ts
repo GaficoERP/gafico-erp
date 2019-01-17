@@ -157,6 +157,7 @@ export class PlanComponent implements OnInit {
         this.cs.savePlanWithLines(plEntity)
             .subscribe(data => {
                 console.log(data);
+                this.form='un'
             });
     }
 
@@ -195,6 +196,8 @@ export class PlanComponent implements OnInit {
     updatePlan() {
         this.isCreate = false;
         this.form = 'trois'
+        this.lineForm=new PlanLine();
+        this.getLevel();
     }
 }
 

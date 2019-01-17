@@ -18,7 +18,7 @@ export class ConfigurationService {
     private urlAddPlanWithLines = 'http://localhost:8080/war/rest/common/config/addPlanWithLines';
     private urlAddLines = 'http://localhost:8080/war/rest/common/planline/add';
     private urlGetLines = 'http://localhost:8080/war/rest/common/planline/findByPlan/';
-    private urlGetCode = 'http://localhost:8080/war/rest/common/planline/rest/common/planline/newCode/';
+    private urlGetCode = 'http://localhost:8080/war/rest/common/planline/newCode/';
     private urlLongin = 'http://localhost:8080/war/api/auth/login';
     private urlAllPlan = 'http://localhost:8080/war/rest/common/plan/findAll';
 
