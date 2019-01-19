@@ -35,7 +35,7 @@ export class ProviderComponent implements OnInit {
     }
     
     getProviders() {
-        this.cs.getProviders(this.provider)
+        this.cs.getProviders()
             .subscribe(data => {
                 this.providers=data;
                 this.rows=data;
