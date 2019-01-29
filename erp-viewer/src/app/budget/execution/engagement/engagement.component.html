@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="name">ligne budget</label>
-                    <select name="code" class="form-control" (change)="getEngagements()" [(ngModel)]="engagementForm.code">
+                    <select name="budgetLine" class="form-control" (change)="getEngagements()" [(ngModel)]="engagementForm.budgetLine">
                       <option></option>
                       <option *ngFor="let b of  budgetLines" [value]="b.code">{{b.name}}</option>
                     </select>
@@ -25,10 +25,10 @@
                         <input type="number" class="form-control" name="taxe" placeholder="montant taxe" [(ngModel)]="engagementForm.taxe">
                       </div>
                       <div class="col-md-6 col-sm-6 col-lg-6">
-                          <label for="montant">Montant diponible</label>
-                          <label for="montant">{{ligneEngagement.restant}}</label>
-                          
-                        </div>
+                        <label for="montant">Montant diponible</label>
+                        <label for="montant">{{ligneEngagement.restant}}</label>
+
+                      </div>
                     </div>
                   </div>
                   <div class="form-group">
@@ -36,19 +36,28 @@
                     <textarea class="form-control round" rows="4" name="objet" [(ngModel)]="engagementForm.objet"></textarea>
                   </div>
                   <div class="form-group">
-                      <label for="objet">Justificatif</label>
-                      <select name="choice" class="form-control" (change)="choice()" [(ngModel)]="engagementForm.choice">
-                          <option value="">Justificatif de l'engagement</option>
-                           <option value="Réference marché">Réference marché</option>
-                          <option value="DRP">DRP</option>
-                          <option value="Cotation">Cotation</option>
-                          <option value="Bon de commande">Bon de commande</option>
-                          <option value="autre">Autre</option>
-                         
-                        
-                        </select>
-                        <input *ngIf="choix" type="text" class="form-control" name="choice" placeholder="Justificatif" [(ngModel)]="engagementForm.choice">     
-                    </div>
+                    <label for="objet">Justificatif</label>
+                    <select name="choice" class="form-control" (change)="choice()" [(ngModel)]="engagementForm.choice">
+                      <option value="">Justificatif de l'engagement</option>
+                      <option value="Réference marché">Réference marché</option>
+                      <option value="DRP">DRP</option>
+                      <option value="Cotation">Cotation</option>
+                      <option value="Bon de commande">Bon de commande</option>
+                      <option value="autre">Autre</option>
+
+
+                    </select>
+                    <input *ngIf="choix" type="text" class="form-control" name="choice" placeholder="Justificatif"
+                      [(ngModel)]="engagementForm.choice">
+                  </div>
+                  <div class="form-group">
+                    <label for="objet">Fournisseur</label>
+                    <select name="choice" class="form-control" (change)="provider()" [(ngModel)]="engagementForm.provider">
+                      <option >Choisir un fourniseur</option>
+                      <option *ngFor="let provider of providers" [ngValue]="provider.name">{{provider.name}}</option>
+                      <option (input)="goToProvider()">Créer un fournisseur</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="form-group text-right">
                   <button type="button" class="btn btn-success btn-raised" (click)="enregistrer()">Enregister</button>

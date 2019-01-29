@@ -6,5 +6,6 @@ export class Engagement {
     amount:number;
     tax:number;
     budget:string;
+    provider:string;
     }
     

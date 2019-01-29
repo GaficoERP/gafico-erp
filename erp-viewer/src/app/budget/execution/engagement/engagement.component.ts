@@ -3,8 +3,11 @@ import { Budget } from 'app/models/budget';
 import { BudgetLine } from 'app/models/budgetline';
 import { Exercice } from 'app/models/exercice';
 import { BudgetService } from '../../budget.service';
+import { ConfigurationService } from 'app/configuration/configuation.service';
 import { Engagement } from 'app/models/engagement';
 import { LigneEngagement } from 'app/models/ligne-engagement';
+import { Router } from '@angular/router';
+import { Provider } from '@angular/compiler/src/core';
 
 @Component({
     selector: 'app-engagement',
@@ -18,10 +21,11 @@ export class EngagementComponent implements OnInit {
     budgetLine: BudgetLine = new BudgetLine();
     engagementForm: Engagement = new Engagement();
     engagements: Engagement[] = new Array();
+    providers:Provider[]=new Array();
     ligneEngagement: LigneEngagement = new LigneEngagement();
     exercice: Exercice = new Exercice();
     choix=false;
-    constructor(private budgetService: BudgetService) { }
+    constructor(private router: Router,private budgetService: BudgetService,private cs: ConfigurationService) { }
 
     ngOnInit() {
         this.getExercice();
@@ -63,13 +67,21 @@ export class EngagementComponent implements OnInit {
                 }
             });
     }
+    getProvider(){
+        this.cs.getProviders()
+        .subscribe(data => {
+            this.providers=data;
+
+        });
+
+    }
     enregistrer() {
         this.budgetService.saveEngagement(this.engagementForm)
             .subscribe(data => {
                 if (data) {
                     this.engagements.push(this.engagementForm);
-
-                    this.engagementForm = { reference: this.engagementForm.reference, budget: this.engagementForm.budget, budgetLine: this.engagementForm.budgetLine, amount: 0, tax: 0, objet: "",choice:"" };
+                    this.engagementForm = { reference: this.engagementForm.reference, budget: this.engagementForm.budget, budgetLine: this.engagementForm.budgetLine, amount: 0, tax: 0, objet: "",choice:"",provider:"" };
+                    this.calculateCumul();
                 }
             });
     }
@@ -77,10 +89,10 @@ export class EngagementComponent implements OnInit {
     initEngagement() {
         this.ligneEngagement = { budgetLine: "", budget: this.budget.name, libelle: "", prevu: 0, engagee: 0, restant: 0 }
     }
-    calculateRao() {
-        this.calculateCumul();
-        this.ligneEngagement.restant = this.ligneEngagement.prevu - this.ligneEngagement.engagee;
-    }
+    // calculateRao() {
+    //     this.calculateCumul();
+    //     this.ligneEngagement.restant = this.ligneEngagement.prevu - this.ligneEngagement.engagee;
+    // }
     calculateCumul() {
         this.ligneEngagement.engagee = 0;
         for (var i = 0; i < this.engagements.length; i++) {
@@ -89,6 +101,7 @@ export class EngagementComponent implements OnInit {
             this.ligneEngagement.engagee += ord.amount;
 
         }
+        this.ligneEngagement.restant = this.ligneEngagement.prevu - this.ligneEngagement.engagee;
     }
     getEngagements() {
         for (var i = 0; i < this.budgetLines.length; i++) {
@@ -102,7 +115,11 @@ export class EngagementComponent implements OnInit {
             .subscribe(data => {
                 if (data) {
                     this.engagements = data;
-                    this.calculateRao();
+                    this.calculateCumul();
+                    if(this.engagements){
+                        this.engagementForm.reference=this.engagementForm.budgetLine+""+this.engagements.length+1;
+                        this.engagementForm.reference=+this.engagementForm.reference;
+                    }
                 }
             });
     }
@@ -114,6 +131,9 @@ export class EngagementComponent implements OnInit {
         }else{
             this.choix=false;
         }
+    }
+    goToProvider(){
+        this.router.navigate(['provider']);
     }
 
 }
