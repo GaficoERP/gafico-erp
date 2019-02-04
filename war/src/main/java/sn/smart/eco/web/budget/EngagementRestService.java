@@ -38,6 +38,11 @@ public class EngagementRestService {
 		return service.findByBudgetLine(budgetLine);
 	}
 
+	@GetMapping("/findAll")
+	public List<Engagement> findAll() {
+		return service.findAll();
+	}
+
 	@DeleteMapping("/delete")
 	public ResponseEntity<?> delete(@RequestBody @NonNull Engagement order) {
 		return service.delete(order);

@@ -79,6 +79,9 @@ export class BudgetService {
     getEngagements(object) {
         return this.http.get<Engagement[]>(this.urlWS + this.budgetWs + '/engagement/engamentsbybugetline?budgetLine='+object);
     }
+    getAllEngagements() {
+        return this.http.get<Engagement[]>(this.urlWS + this.budgetWs + '/engagement/findAll');
+    }
     
     getOrdonnancements(reference) {
         return this.http.get<Ordonnancement[]>(this.urlWS + this.orderWs + '/find/' + reference);

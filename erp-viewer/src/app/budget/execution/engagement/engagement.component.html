@@ -55,7 +55,7 @@
                     <select name="choice" class="form-control" (change)="provider()" [(ngModel)]="engagementForm.provider">
                       <option >Choisir un fourniseur</option>
                       <option *ngFor="let provider of providers" [ngValue]="provider.name">{{provider.name}}</option>
-                      <option (input)="goToProvider()">Créer un fournisseur</option>
+                      <option value="unset">Créer un fournisseur</option>
                     </select>
                   </div>
                 </div>

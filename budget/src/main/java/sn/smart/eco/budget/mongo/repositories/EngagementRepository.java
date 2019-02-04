@@ -16,6 +16,8 @@ public interface EngagementRepository extends MongoRepository<Engagement, Intege
 
 	Optional<Engagement> findByReference(String reference);
 
+	List<Engagement> findAll();
+
 	Optional<Engagement> findFirstByBudgetLine(Integer engagement, Sort sort);
 
 }

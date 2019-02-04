@@ -10,6 +10,8 @@ public interface EngagementService {
 
 	Engagement save(Engagement engagement);
 
+	List<Engagement> findAll();
+
 	List<Engagement> saveAll(List<Engagement> engagements);
 
 	List<Engagement> findByBudgetLine(Integer budgetLine);

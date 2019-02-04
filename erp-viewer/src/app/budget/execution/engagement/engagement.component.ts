@@ -132,8 +132,10 @@ export class EngagementComponent implements OnInit {
             this.choix=false;
         }
     }
-    goToProvider(){
-        this.router.navigate(['provider']);
+    provider(){
+        console.log("configuration/provider");
+        if(this.engagementForm.provider==="unset")
+        this.router.navigate(['configuration/provider']);
     }
 
 }

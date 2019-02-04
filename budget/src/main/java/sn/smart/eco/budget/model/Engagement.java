@@ -9,9 +9,11 @@ public class Engagement {
 	private String reference;
 	private Integer budgetLine;
 	private String objet;
+	private String choice;
 	private Double amount;
 	private Double tax;
 	private String budget;
+	private String provider;
 
 	public String getReference() {
 		return reference;
@@ -59,6 +61,22 @@ public class Engagement {
 
 	public void setBudget(String budget) {
 		this.budget = budget;
+	}
+
+	public String getProvider() {
+		return provider;
+	}
+
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
+	public String getChoice() {
+		return choice;
+	}
+
+	public void setChoice(String choice) {
+		this.choice = choice;
 	}
 
 }

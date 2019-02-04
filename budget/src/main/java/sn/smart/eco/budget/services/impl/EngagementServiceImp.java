@@ -28,6 +28,11 @@ public class EngagementServiceImp implements EngagementService {
 	}
 
 	@Override
+	public List<Engagement> findAll() {
+		return repository.findAll();
+	}
+
+	@Override
 	public List<Engagement> findByBudgetLine(@NonNull Integer budgetLine) {
 		Optional<List<Engagement>> engagements = repository.findByBudgetLine(budgetLine);
 		if (engagements.isPresent()) {
